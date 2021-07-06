@@ -1,5 +1,5 @@
 # stdlib
-from operator import itemgetter
+from operator import attrgetter, itemgetter
 from textwrap import dedent
 from typing import Dict, Iterator, List
 
@@ -222,13 +222,13 @@ def test_entry_point_class_malformed(value):
 		ep.load()
 
 	with pytest.raises(ValueError, match="Malformed entry point '.*'"):
-		ep.extras
+		attrgetter("extras")(ep)
 
 	with pytest.raises(ValueError, match="Malformed entry point '.*'"):
-		ep.module
+		attrgetter("module")(ep)
 
 	with pytest.raises(ValueError, match="Malformed entry point '.*'"):
-		ep.attr
+		attrgetter("attr")(ep)
 
 
 def test_get_entry_points(

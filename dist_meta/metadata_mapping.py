@@ -214,9 +214,9 @@ class MetadataMapping(MutableMapping[str, str]):
 
 		name = k.lower()
 
-		for k, v in self._fields:
-			if k.lower() == name:
-				return v
+		for key, val in self._fields:
+			if key.lower() == name:
+				return val
 
 		return default
 
@@ -247,9 +247,9 @@ class MetadataMapping(MutableMapping[str, str]):
 		values = []
 		name = k.lower()
 
-		for k, v in self._fields:
-			if k.lower() == name:
-				values.append(v)
+		for key, val in self._fields:
+			if key.lower() == name:
+				values.append(val)
 
 		if not values:
 			return default
