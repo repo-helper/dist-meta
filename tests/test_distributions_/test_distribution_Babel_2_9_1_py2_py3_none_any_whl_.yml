@@ -1,0 +1,94 @@
+entry_points:
+  babel.checkers:
+    num_plurals: babel.messages.checkers:num_plurals
+    python_format: babel.messages.checkers:python_format
+  babel.extractors:
+    ignore: babel.messages.extract:extract_nothing
+    javascript: babel.messages.extract:extract_javascript
+    python: babel.messages.extract:extract_python
+  console_scripts:
+    pybabel: babel.messages.frontend:main
+  distutils.commands:
+    compile_catalog: babel.messages.frontend:compile_catalog
+    extract_messages: babel.messages.frontend:extract_messages
+    init_catalog: babel.messages.frontend:init_catalog
+    update_catalog: babel.messages.frontend:update_catalog
+  distutils.setup_keywords:
+    message_extractors: babel.messages.frontend:check_message_extractors
+filename: Babel-2.9.1-py2.py3-none-any.whl
+has_license: true
+metadata:
+- - Metadata-Version
+  - '2.1'
+- - Name
+  - Babel
+- - Version
+  - 2.9.1
+- - Summary
+  - Internationalization utilities
+- - Home-page
+  - http://babel.pocoo.org/
+- - Author
+  - Armin Ronacher
+- - Author-email
+  - armin.ronacher@active-4.com
+- - License
+  - BSD
+- - Platform
+  - UNKNOWN
+- - Classifier
+  - 'Development Status :: 5 - Production/Stable'
+- - Classifier
+  - 'Environment :: Web Environment'
+- - Classifier
+  - 'Intended Audience :: Developers'
+- - Classifier
+  - 'License :: OSI Approved :: BSD License'
+- - Classifier
+  - 'Operating System :: OS Independent'
+- - Classifier
+  - 'Programming Language :: Python'
+- - Classifier
+  - 'Programming Language :: Python :: 2'
+- - Classifier
+  - 'Programming Language :: Python :: 2.7'
+- - Classifier
+  - 'Programming Language :: Python :: 3'
+- - Classifier
+  - 'Programming Language :: Python :: 3.4'
+- - Classifier
+  - 'Programming Language :: Python :: 3.5'
+- - Classifier
+  - 'Programming Language :: Python :: 3.6'
+- - Classifier
+  - 'Programming Language :: Python :: 3.7'
+- - Classifier
+  - 'Programming Language :: Python :: Implementation :: CPython'
+- - Classifier
+  - 'Programming Language :: Python :: Implementation :: PyPy'
+- - Classifier
+  - 'Topic :: Software Development :: Libraries :: Python Modules'
+- - Requires-Python
+  - '>=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*'
+- - Requires-Dist
+  - pytz (>=2015.7)
+- - Description
+  - 'A collection of tools for internationalizing Python applications.
+
+    '
+name: Babel
+top_level: 'babel
+
+  '
+version: 2.9.1
+wheel:
+- - Wheel-Version
+  - '1.0'
+- - Generator
+  - bdist_wheel (0.36.2)
+- - Root-Is-Purelib
+  - 'true'
+- - Tag
+  - py2-none-any
+- - Tag
+  - py3-none-any

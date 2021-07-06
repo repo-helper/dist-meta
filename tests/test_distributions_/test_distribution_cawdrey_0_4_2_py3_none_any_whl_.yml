@@ -1,0 +1,167 @@
+entry_points: {}
+filename: cawdrey-0.4.2-py3-none-any.whl
+has_license: true
+metadata:
+- - Metadata-Version
+  - '2.1'
+- - Name
+  - cawdrey
+- - Version
+  - 0.4.2
+- - Summary
+  - Several useful custom dictionaries for Python 📖 🐍
+- - Home-page
+  - https://github.com/domdfcoding/cawdrey
+- - Author
+  - Dominic Davis-Foster
+- - Author-email
+  - dominic@davis-foster.co.uk
+- - License
+  - GNU Lesser General Public License v3 or later (LGPLv3+)
+- - Project-URL
+  - Documentation, https://cawdrey.readthedocs.io/en/latest
+- - Project-URL
+  - Issue Tracker, https://github.com/domdfcoding/cawdrey/issues
+- - Project-URL
+  - Source Code, https://github.com/domdfcoding/cawdrey
+- - Keywords
+  - frozenordereddict,orderedfrozendict,frozen,immutable,frozendict,dict,dictionary,map,Mapping,MappingProxyType,Counter
+- - Platform
+  - Windows
+- - Platform
+  - macOS
+- - Platform
+  - Linux
+- - Classifier
+  - 'Development Status :: 4 - Beta'
+- - Classifier
+  - 'Intended Audience :: Developers'
+- - Classifier
+  - 'License :: OSI Approved :: GNU Lesser General Public License v3 or later (LGPLv3+)'
+- - Classifier
+  - 'Operating System :: OS Independent'
+- - Classifier
+  - 'Programming Language :: Python'
+- - Classifier
+  - 'Programming Language :: Python :: 3 :: Only'
+- - Classifier
+  - 'Programming Language :: Python :: 3.6'
+- - Classifier
+  - 'Programming Language :: Python :: 3.7'
+- - Classifier
+  - 'Programming Language :: Python :: 3.8'
+- - Classifier
+  - 'Programming Language :: Python :: 3.9'
+- - Classifier
+  - 'Programming Language :: Python :: Implementation :: CPython'
+- - Classifier
+  - 'Programming Language :: Python :: Implementation :: PyPy'
+- - Classifier
+  - 'Topic :: Software Development :: Libraries :: Python Modules'
+- - Classifier
+  - 'Topic :: Utilities'
+- - Classifier
+  - 'Typing :: Typed'
+- - Requires-Python
+  - '>=3.6.1'
+- - Description-Content-Type
+  - text/x-rst
+- - Requires-Dist
+  - domdf-python-tools (>=1.1.0)
+- - Requires-Dist
+  - typing-extensions (>=3.7.4.3)
+- - Provides-Extra
+  - all
+- - Description
+  - "==========\nCawdrey\n==========\n\n.. start short_desc\n\n**Several useful custom\
+    \ dictionaries for Python \U0001F4D6 \U0001F40D**\n\n.. end short_desc\n\n.. start\
+    \ shields\n\n.. list-table::\n\t:stub-columns: 1\n\t:widths: 10 90\n\n\t* - Docs\n\
+    \t  - |docs| |docs_check|\n\t* - Tests\n\t  - |actions_linux| |actions_windows|\
+    \ |actions_macos| |coveralls|\n\t* - PyPI\n\t  - |pypi-version| |supported-versions|\
+    \ |supported-implementations| |wheel|\n\t* - Anaconda\n\t  - |conda-version| |conda-platform|\n\
+    \t* - Activity\n\t  - |commits-latest| |commits-since| |maintained| |pypi-downloads|\n\
+    \t* - QA\n\t  - |codefactor| |actions_flake8| |actions_mypy| |pre_commit_ci|\n\
+    \t* - Other\n\t  - |license| |language| |requires|\n\n.. |docs| image:: https://img.shields.io/readthedocs/cawdrey/latest?logo=read-the-docs\n\
+    \t:target: https://cawdrey.readthedocs.io/en/latest\n\t:alt: Documentation Build\
+    \ Status\n\n.. |docs_check| image:: https://github.com/domdfcoding/cawdrey/workflows/Docs%20Check/badge.svg\n\
+    \t:target: https://github.com/domdfcoding/cawdrey/actions?query=workflow%3A%22Docs+Check%22\n\
+    \t:alt: Docs Check Status\n\n.. |actions_linux| image:: https://github.com/domdfcoding/cawdrey/workflows/Linux/badge.svg\n\
+    \t:target: https://github.com/domdfcoding/cawdrey/actions?query=workflow%3A%22Linux%22\n\
+    \t:alt: Linux Test Status\n\n.. |actions_windows| image:: https://github.com/domdfcoding/cawdrey/workflows/Windows/badge.svg\n\
+    \t:target: https://github.com/domdfcoding/cawdrey/actions?query=workflow%3A%22Windows%22\n\
+    \t:alt: Windows Test Status\n\n.. |actions_macos| image:: https://github.com/domdfcoding/cawdrey/workflows/macOS/badge.svg\n\
+    \t:target: https://github.com/domdfcoding/cawdrey/actions?query=workflow%3A%22macOS%22\n\
+    \t:alt: macOS Test Status\n\n.. |actions_flake8| image:: https://github.com/domdfcoding/cawdrey/workflows/Flake8/badge.svg\n\
+    \t:target: https://github.com/domdfcoding/cawdrey/actions?query=workflow%3A%22Flake8%22\n\
+    \t:alt: Flake8 Status\n\n.. |actions_mypy| image:: https://github.com/domdfcoding/cawdrey/workflows/mypy/badge.svg\n\
+    \t:target: https://github.com/domdfcoding/cawdrey/actions?query=workflow%3A%22mypy%22\n\
+    \t:alt: mypy status\n\n.. |requires| image:: https://requires.io/github/domdfcoding/cawdrey/requirements.svg?branch=master\n\
+    \t:target: https://requires.io/github/domdfcoding/cawdrey/requirements/?branch=master\n\
+    \t:alt: Requirements Status\n\n.. |coveralls| image:: https://img.shields.io/coveralls/github/domdfcoding/cawdrey/master?logo=coveralls\n\
+    \t:target: https://coveralls.io/github/domdfcoding/cawdrey?branch=master\n\t:alt:\
+    \ Coverage\n\n.. |codefactor| image:: https://img.shields.io/codefactor/grade/github/domdfcoding/cawdrey?logo=codefactor\n\
+    \t:target: https://www.codefactor.io/repository/github/domdfcoding/cawdrey\n\t\
+    :alt: CodeFactor Grade\n\n.. |pypi-version| image:: https://img.shields.io/pypi/v/cawdrey\n\
+    \t:target: https://pypi.org/project/cawdrey/\n\t:alt: PyPI - Package Version\n\
+    \n.. |supported-versions| image:: https://img.shields.io/pypi/pyversions/cawdrey?logo=python&logoColor=white\n\
+    \t:target: https://pypi.org/project/cawdrey/\n\t:alt: PyPI - Supported Python\
+    \ Versions\n\n.. |supported-implementations| image:: https://img.shields.io/pypi/implementation/cawdrey\n\
+    \t:target: https://pypi.org/project/cawdrey/\n\t:alt: PyPI - Supported Implementations\n\
+    \n.. |wheel| image:: https://img.shields.io/pypi/wheel/cawdrey\n\t:target: https://pypi.org/project/cawdrey/\n\
+    \t:alt: PyPI - Wheel\n\n.. |conda-version| image:: https://img.shields.io/conda/v/domdfcoding/cawdrey?logo=anaconda\n\
+    \t:target: https://anaconda.org/domdfcoding/cawdrey\n\t:alt: Conda - Package Version\n\
+    \n.. |conda-platform| image:: https://img.shields.io/conda/pn/domdfcoding/cawdrey?label=conda%7Cplatform\n\
+    \t:target: https://anaconda.org/domdfcoding/cawdrey\n\t:alt: Conda - Platform\n\
+    \n.. |license| image:: https://img.shields.io/github/license/domdfcoding/cawdrey\n\
+    \t:target: https://github.com/domdfcoding/cawdrey/blob/master/LICENSE\n\t:alt:\
+    \ License\n\n.. |language| image:: https://img.shields.io/github/languages/top/domdfcoding/cawdrey\n\
+    \t:alt: GitHub top language\n\n.. |commits-since| image:: https://img.shields.io/github/commits-since/domdfcoding/cawdrey/v0.4.2\n\
+    \t:target: https://github.com/domdfcoding/cawdrey/pulse\n\t:alt: GitHub commits\
+    \ since tagged version\n\n.. |commits-latest| image:: https://img.shields.io/github/last-commit/domdfcoding/cawdrey\n\
+    \t:target: https://github.com/domdfcoding/cawdrey/commit/master\n\t:alt: GitHub\
+    \ last commit\n\n.. |maintained| image:: https://img.shields.io/maintenance/yes/2021\n\
+    \t:alt: Maintenance\n\n.. |pypi-downloads| image:: https://img.shields.io/pypi/dm/cawdrey\n\
+    \t:target: https://pypi.org/project/cawdrey/\n\t:alt: PyPI - Downloads\n\n.. |pre_commit_ci|\
+    \ image:: https://results.pre-commit.ci/badge/github/domdfcoding/cawdrey/master.svg\n\
+    \t:target: https://results.pre-commit.ci/latest/github/domdfcoding/cawdrey/master\n\
+    \t:alt: pre-commit.ci status\n\n.. end shields\n\nContents\n=============\n\n\
+    * ``frozendict``: An immutable dictionary that cannot be changed after creation.\n\
+    * ``FrozenOrderedDict``: An immutable ``OrderedDict`` where the order of keys\
+    \ is preserved, but that cannot be changed after creation.\n* ``AlphaDict``: A\
+    \ ``FrozenOrderedDict`` where the keys are stored in alphabetical order.\n* ``bdict``:\
+    \ A dictionary where ``key, value`` pairs are stored both ways round.\n\nThis\
+    \ package also provides two base classes for creating your own custom dictionaries:\n\
+    \n* ``FrozenBase``: An Abstract Base Class for Frozen dictionaries.\n\n* ``MutableBase``:\
+    \ An Abstract Base Class for mutable dictionaries.\n\n|\n\nOther Dictionary Packages\n\
+    ===========================\n\nIf you're looking to unflatten a dictionary, such\
+    \ as to go from this:\n\n.. code-block:: python\n\n\t{'foo.bar': 'val'}\n\nto\
+    \ this:\n\n.. code-block:: python\n\n\t{'foo': {'bar': 'val'}}\n\ncheck out `unflatten`_,\
+    \ `flattery`_ or `morph`_  to accomplish that.\n\n.. _unflatten: https://github.com/dairiki/unflatten\n\
+    .. _morph: https://github.com/metagriffin/morph\n.. _flattery: https://github.com/acg/python-flattery\n\
+    \n\n`indexed`_ provides an OrederedDict where the values can be accessed by their\
+    \ index as well as by their keys.\n\n.. _indexed: https://github.com/niklasf/indexed.py\n\
+    \nThere's also `python-benedict`_, which provides a custom dictionary with **keylist/keypath**\
+    \ support, **I/O** shortcuts (``Base64``, ``CSV``, ``JSON``, ``TOML``, ``XML``,\
+    \ ``YAML``, ``pickle``, ``query-string``) and many **utilities**.\n\n.. _python-benedict:\
+    \ https://github.com/fabiocaccamo/python-benedict\n\nInstallation\n===========================\n\
+    \n.. start installation\n\n``Cawdrey`` can be installed from PyPI or Anaconda.\n\
+    \nTo install with ``pip``:\n\n.. code-block:: bash\n\n\t$ python -m pip install\
+    \ cawdrey\n\nTo install with ``conda``:\n\n\t* First add the required channels\n\
+    \n\t.. code-block:: bash\n\n\t\t$ conda config --add channels http://conda.anaconda.org/conda-forge\n\
+    \t\t$ conda config --add channels http://conda.anaconda.org/domdfcoding\n\n\t\
+    * Then install\n\n\t.. code-block:: bash\n\n\t\t$ conda install cawdrey\n\n..\
+    \ end installation\n\n\n\nAnd Finally:\n==============\n\n`Why \"Cawdrey\"? <https://en.wikipedia.org/wiki/Robert_Cawdrey>`_\n"
+name: cawdrey
+top_level: 'cawdrey
+
+  '
+version: 0.4.2
+wheel:
+- - Wheel-Version
+  - '1.0'
+- - Generator
+  - bdist_wheel (0.36.2)
+- - Root-Is-Purelib
+  - 'true'
+- - Tag
+  - py3-none-any

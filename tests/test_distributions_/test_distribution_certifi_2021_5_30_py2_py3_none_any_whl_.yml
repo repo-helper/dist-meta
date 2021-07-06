@@ -1,0 +1,93 @@
+entry_points: {}
+filename: certifi-2021.5.30-py2.py3-none-any.whl
+has_license: true
+metadata:
+- - Metadata-Version
+  - '2.1'
+- - Name
+  - certifi
+- - Version
+  - 2021.5.30
+- - Summary
+  - Python package for providing Mozilla's CA Bundle.
+- - Home-page
+  - https://certifiio.readthedocs.io/en/latest/
+- - Author
+  - Kenneth Reitz
+- - Author-email
+  - me@kennethreitz.com
+- - License
+  - MPL-2.0
+- - Project-URL
+  - Documentation, https://certifiio.readthedocs.io/en/latest/
+- - Project-URL
+  - Source, https://github.com/certifi/python-certifi
+- - Platform
+  - UNKNOWN
+- - Classifier
+  - 'Development Status :: 5 - Production/Stable'
+- - Classifier
+  - 'Intended Audience :: Developers'
+- - Classifier
+  - 'License :: OSI Approved :: Mozilla Public License 2.0 (MPL 2.0)'
+- - Classifier
+  - 'Natural Language :: English'
+- - Classifier
+  - 'Programming Language :: Python'
+- - Classifier
+  - 'Programming Language :: Python :: 3'
+- - Classifier
+  - 'Programming Language :: Python :: 3.3'
+- - Classifier
+  - 'Programming Language :: Python :: 3.4'
+- - Classifier
+  - 'Programming Language :: Python :: 3.5'
+- - Classifier
+  - 'Programming Language :: Python :: 3.6'
+- - Classifier
+  - 'Programming Language :: Python :: 3.7'
+- - Classifier
+  - 'Programming Language :: Python :: 3.8'
+- - Classifier
+  - 'Programming Language :: Python :: 3.9'
+- - Description
+  - "Certifi: Python SSL Certificates\n================================\n\n`Certifi`_\
+    \ provides Mozilla's carefully curated collection of Root Certificates for\nvalidating\
+    \ the trustworthiness of SSL certificates while verifying the identity\nof TLS\
+    \ hosts. It has been extracted from the `Requests`_ project.\n\nInstallation\n\
+    ------------\n\n``certifi`` is available on PyPI. Simply install it with ``pip``::\n\
+    \n    $ pip install certifi\n\nUsage\n-----\n\nTo reference the installed certificate\
+    \ authority (CA) bundle, you can use the\nbuilt-in function::\n\n    >>> import\
+    \ certifi\n\n    >>> certifi.where()\n    '/usr/local/lib/python3.7/site-packages/certifi/cacert.pem'\n\
+    \nOr from the command line::\n\n    $ python -m certifi\n    /usr/local/lib/python3.7/site-packages/certifi/cacert.pem\n\
+    \nEnjoy!\n\n1024-bit Root Certificates\n~~~~~~~~~~~~~~~~~~~~~~~~~~\n\nBrowsers\
+    \ and certificate authorities have concluded that 1024-bit keys are\nunacceptably\
+    \ weak for certificates, particularly root certificates. For this\nreason, Mozilla\
+    \ has removed any weak (i.e. 1024-bit key) certificate from its\nbundle, replacing\
+    \ it with an equivalent strong (i.e. 2048-bit or greater key)\ncertificate from\
+    \ the same CA. Because Mozilla removed these certificates from\nits bundle, ``certifi``\
+    \ removed them as well.\n\nIn previous versions, ``certifi`` provided the ``certifi.old_where()``\
+    \ function\nto intentionally re-add the 1024-bit roots back into your bundle.\
+    \ This was not\nrecommended in production and therefore was removed at the end\
+    \ of 2018.\n\n.. _`Certifi`: https://certifiio.readthedocs.io/en/latest/\n.. _`Requests`:\
+    \ https://requests.readthedocs.io/en/master/\n\nAddition/Removal of Certificates\n\
+    --------------------------------\n\nCertifi does not support any addition/removal\
+    \ or other modification of the\nCA trust store content. This project is intended\
+    \ to provide a reliable and\nhighly portable root of trust to python deployments.\
+    \ Look to upstream projects\nfor methods to use alternate trust.\n"
+name: certifi
+top_level: 'certifi
+
+  '
+version: 2021.5.30
+wheel:
+- - Wheel-Version
+  - '1.0'
+- - Generator
+  - bdist_wheel (0.35.1)
+- - Root-Is-Purelib
+  - 'true'
+- - Tag
+  - py2-none-any
+- - Tag
+  - py3-none-any

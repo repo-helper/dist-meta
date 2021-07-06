@@ -24,60 +24,68 @@ if "wheel" not in shutil._UNPACK_FORMATS:  # type: ignore
 			)
 
 
-def test_distribution(
-		example_wheel,
-		tmp_pathplus: PathPlus,
-		advanced_file_regression: AdvancedFileRegressionFixture,
-		advanced_data_regression: AdvancedDataRegressionFixture,
-		):
+class TestDistribution:
 
-	(tmp_pathplus / "site-packages").mkdir()
-	shutil.unpack_archive(example_wheel, tmp_pathplus / "site-packages")
+	def test_distribution(
+			self,
+			example_wheel,
+			tmp_pathplus: PathPlus,
+			advanced_file_regression: AdvancedFileRegressionFixture,
+			advanced_data_regression: AdvancedDataRegressionFixture,
+			):
 
-	filename: Optional[PathPlus] = first((tmp_pathplus / "site-packages").glob("*.dist-info"))
-	assert filename is not None
+		(tmp_pathplus / "site-packages").mkdir()
+		shutil.unpack_archive(example_wheel, tmp_pathplus / "site-packages")
 
-	distro = distributions.Distribution.from_path(filename)
+		filename: Optional[PathPlus] = first((tmp_pathplus / "site-packages").glob("*.dist-info"))
+		assert filename is not None
 
-	advanced_data_regression.check({
-			"filename": PathPlus(example_wheel).name,
-			"name": distro.name,
-			"version": str(distro.version),
-			"path": distro.path.name,
-			"wheel": list(distro.get_wheel().items()),  # type: ignore
-			"metadata": list(distro.get_metadata().items()),
-			"entry_points": distro.get_entry_points(),
-			"has_license": distro.has_file("LICENSE"),
-			"top_level": distro.read_file("top_level.txt"),
-			"repr": repr(distro),
-			})
+		distro = distributions.Distribution.from_path(filename)
 
-	(filename / "WHEEL").unlink()
-	assert distro.get_wheel() is None
+		advanced_data_regression.check({
+				"filename": PathPlus(example_wheel).name,
+				"name": distro.name,
+				"version": str(distro.version),
+				"wheel": list(distro.get_wheel().items()),  # type: ignore
+				"metadata": list(distro.get_metadata().items()),
+				"entry_points": distro.get_entry_points(),
+				"has_license": distro.has_file("LICENSE"),
+				"top_level": distro.read_file("top_level.txt"),
+				})
+
+		advanced_file_regression.check(repr(distro), extension="_distro.repr")
+		advanced_file_regression.check(distro.path.name, extension="_distro.path")
+
+		(filename / "WHEEL").unlink()
+		assert distro.get_wheel() is None
 
 
-def test_wheel_distribution(
-		example_wheel,
-		advanced_file_regression: AdvancedFileRegressionFixture,
-		advanced_data_regression: AdvancedDataRegressionFixture,
-		):
-	wd = distributions.WheelDistribution.from_path(example_wheel)
+class TestWheelDistribution:
 
-	advanced_data_regression.check({
-			"filename": PathPlus(example_wheel).name,
-			"name": wd.name,
-			"version": str(wd.version),
-			"path": wd.path.name,
-			"wheel": list(wd.get_wheel().items()),
-			"metadata": list(wd.get_metadata().items()),
-			"entry_points": wd.get_entry_points(),
-			"has_license": wd.has_file("LICENSE"),
-			"top_level": wd.read_file("top_level.txt"),
-			"repr": repr(wd),
-			})
+	def test_distribution(
+			self,
+			example_wheel,
+			advanced_file_regression: AdvancedFileRegressionFixture,
+			advanced_data_regression: AdvancedDataRegressionFixture,
+			):
+		wd = distributions.WheelDistribution.from_path(example_wheel)
 
-	assert isinstance(wd.wheel_zip, zipfile.ZipFile)
-	assert isinstance(wd.wheel_zip, handy_archives.ZipFile)
+		advanced_data_regression.check({
+				"filename": PathPlus(example_wheel).name,
+				"name": wd.name,
+				"version": str(wd.version),
+				"wheel": list(wd.get_wheel().items()),
+				"metadata": list(wd.get_metadata().items()),
+				"entry_points": wd.get_entry_points(),
+				"has_license": wd.has_file("LICENSE"),
+				"top_level": wd.read_file("top_level.txt"),
+				})
+
+		advanced_file_regression.check(repr(wd), extension="_wd.repr")
+		advanced_file_regression.check(wd.path.name, extension="_wd.path")
+
+		assert isinstance(wd.wheel_zip, zipfile.ZipFile)
+		assert isinstance(wd.wheel_zip, handy_archives.ZipFile)
 
 
 def test_wheel_distribution_zip(

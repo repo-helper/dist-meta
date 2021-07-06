@@ -1,0 +1,114 @@
+entry_points: {}
+filename: wheel_filename-1.3.0-py3-none-any.whl
+has_license: true
+metadata:
+- - Metadata-Version
+  - '2.1'
+- - Name
+  - wheel-filename
+- - Version
+  - 1.3.0
+- - Summary
+  - Parse wheel filenames
+- - Home-page
+  - https://github.com/jwodder/wheel-filename
+- - Author
+  - John Thorvald Wodder II
+- - Author-email
+  - wheel-filename@varonathe.org
+- - License
+  - MIT
+- - Project-URL
+  - Source Code, https://github.com/jwodder/wheel-filename
+- - Project-URL
+  - Bug Tracker, https://github.com/jwodder/wheel-filename/issues
+- - Keywords
+  - filename,pep427,wheel
+- - Platform
+  - UNKNOWN
+- - Classifier
+  - 'Development Status :: 5 - Production/Stable'
+- - Classifier
+  - 'Programming Language :: Python :: 3 :: Only'
+- - Classifier
+  - 'Programming Language :: Python :: 3'
+- - Classifier
+  - 'Programming Language :: Python :: 3.6'
+- - Classifier
+  - 'Programming Language :: Python :: 3.7'
+- - Classifier
+  - 'Programming Language :: Python :: 3.8'
+- - Classifier
+  - 'Programming Language :: Python :: 3.9'
+- - Classifier
+  - 'Programming Language :: Python :: Implementation :: CPython'
+- - Classifier
+  - 'Programming Language :: Python :: Implementation :: PyPy'
+- - Classifier
+  - 'License :: OSI Approved :: MIT License'
+- - Classifier
+  - 'Topic :: System :: Software Distribution'
+- - Classifier
+  - 'Typing :: Typed'
+- - Requires-Python
+  - ~=3.6
+- - Description-Content-Type
+  - text/x-rst
+- - Description
+  - ".. image:: http://www.repostatus.org/badges/latest/active.svg\n    :target: http://www.repostatus.org/#active\n\
+    \    :alt: Project Status: Active — The project has reached a stable, usable\n\
+    \          state and is being actively developed.\n\n.. image:: https://github.com/jwodder/wheel-filename/workflows/Test/badge.svg?branch=master\n\
+    \    :target: https://github.com/jwodder/wheel-filename/actions?workflow=Test\n\
+    \    :alt: CI Status\n\n.. image:: https://codecov.io/gh/jwodder/wheel-filename/branch/master/graph/badge.svg\n\
+    \    :target: https://codecov.io/gh/jwodder/wheel-filename\n\n.. image:: https://img.shields.io/pypi/pyversions/wheel-filename.svg\n\
+    \    :target: https://pypi.org/project/wheel-filename/\n\n.. image:: https://img.shields.io/github/license/jwodder/wheel-filename.svg\n\
+    \    :target: https://opensource.org/licenses/MIT\n    :alt: MIT License\n\n`GitHub\
+    \ <https://github.com/jwodder/wheel-filename>`_\n| `PyPI <https://pypi.org/project/wheel-filename/>`_\n\
+    | `Issues <https://github.com/jwodder/wheel-filename/issues>`_\n| `Changelog <https://github.com/jwodder/wheel-filename/blob/master/CHANGELOG.md>`_\n\
+    \n``wheel-filename`` lets you verify `wheel\n<https://www.python.org/dev/peps/pep-0427/>`_\
+    \ filenames and parse them into\ntheir component fields.\n\nThis package adheres\
+    \ strictly to the relevant PEPs, with the following\nexceptions:\n\n- Unlike other\
+    \ filename components, version components may contain the\n  characters ``!``\
+    \ and ``+`` for full PEP 440 support.\n\n- Version components may be any sequence\
+    \ of the relevant set of characters;\n  they are not verified for PEP 440 compliance.\n\
+    \n- The ``.whl`` file extension is matched case-insensitively.\n\n\nInstallation\n\
+    ============\n``wheel-filename`` requires Python 3.6 or higher.  Just use `pip\n\
+    <https://pip.pypa.io>`_ for Python 3 (You have pip, right?) to install\n``wheel-filename``::\n\
+    \n    python3 -m pip install wheel-filename\n\n\nExample\n=======\n\n>>> from\
+    \ wheel_filename import parse_wheel_filename\n>>> pwf = parse_wheel_filename('pip-18.0-py2.py3-none-any.whl')\n\
+    >>> str(pwf)\n'pip-18.0-py2.py3-none-any.whl'\n>>> pwf.project\n'pip'\n>>> pwf.version\n\
+    '18.0'\n>>> pwf.build is None\nTrue\n>>> pwf.python_tags\n['py2', 'py3']\n>>>\
+    \ pwf.abi_tags\n['none']\n>>> pwf.platform_tags\n['any']\n>>> list(pwf.tag_triples())\n\
+    ['py2-none-any', 'py3-none-any']\n\n\nAPI\n===\n\n``parse_wheel_filename(filename)``\n\
+    \   Parses a wheel filename (a ``str``, ``bytes``, or ``os.PathLike``) and\n \
+    \  returns a ``ParsedWheelFilename`` instance.  Any leading directory\n   components\
+    \ are stripped from the argument before processing.  If the\n   filename is not\
+    \ a valid wheel filename, raises an ``InvalidFilenameError``.\n\n``ParsedWheelFilename``\n\
+    \   A namedtuple representing the components of a wheel filename.  It has the\n\
+    \   following attributes and methods:\n\n   ``project: str``\n      The name of\
+    \ the project distributed by the wheel\n\n   ``version: str``\n      The version\
+    \ of the project distributed by the wheel\n\n   ``build: Optional[str]``\n   \
+    \   The wheel's build tag (``None`` if not defined)\n\n   ``python_tags: List[str]``\n\
+    \      A list of Python tags for the wheel\n\n   ``abi_tags: List[str]``\n   \
+    \   A list of ABI tags for the wheel\n\n   ``platform_tags: List[str]``\n    \
+    \  A list of platform tags for the wheel\n\n   ``str(pwf)``\n      Stringifying\
+    \ a ``ParsedWheelFilename`` returns the original filename\n\n   ``tag_triples()\
+    \ -> Iterator[str]``\n      Returns an iterator of all simple tag triples formed\
+    \ from the\n      compatibility tags in the filename\n\n``InvalidFilenameError``\n\
+    \   A subclass of ``ValueError`` raised when an invalid wheel filename is passed\n\
+    \   to ``parse_wheel_filename()``.  It has a ``filename`` attribute containing\n\
+    \   the basename of the invalid filename.\n"
+name: wheel_filename
+top_level: 'wheel_filename
+
+  '
+version: 1.3.0
+wheel:
+- - Wheel-Version
+  - '1.0'
+- - Generator
+  - bdist_wheel (0.36.2)
+- - Root-Is-Purelib
+  - 'true'
+- - Tag
+  - py3-none-any
