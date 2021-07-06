@@ -1,0 +1,113 @@
+entry_points:
+  babel.extractors:
+    jinja2: jinja2.ext:babel_extract [i18n]
+filename: Jinja2-3.0.1-py3-none-any.whl
+has_license: false
+metadata:
+- - Metadata-Version
+  - '2.1'
+- - Name
+  - Jinja2
+- - Version
+  - 3.0.1
+- - Summary
+  - A very fast and expressive template engine.
+- - Home-page
+  - https://palletsprojects.com/p/jinja/
+- - Author
+  - Armin Ronacher
+- - Author-email
+  - armin.ronacher@active-4.com
+- - Maintainer
+  - Pallets
+- - Maintainer-email
+  - contact@palletsprojects.com
+- - License
+  - BSD-3-Clause
+- - Project-URL
+  - Donate, https://palletsprojects.com/donate
+- - Project-URL
+  - Documentation, https://jinja.palletsprojects.com/
+- - Project-URL
+  - Changes, https://jinja.palletsprojects.com/changes/
+- - Project-URL
+  - Source Code, https://github.com/pallets/jinja/
+- - Project-URL
+  - Issue Tracker, https://github.com/pallets/jinja/issues/
+- - Project-URL
+  - Twitter, https://twitter.com/PalletsTeam
+- - Project-URL
+  - Chat, https://discord.gg/pallets
+- - Platform
+  - UNKNOWN
+- - Classifier
+  - 'Development Status :: 5 - Production/Stable'
+- - Classifier
+  - 'Environment :: Web Environment'
+- - Classifier
+  - 'Intended Audience :: Developers'
+- - Classifier
+  - 'License :: OSI Approved :: BSD License'
+- - Classifier
+  - 'Operating System :: OS Independent'
+- - Classifier
+  - 'Programming Language :: Python'
+- - Classifier
+  - 'Topic :: Internet :: WWW/HTTP :: Dynamic Content'
+- - Classifier
+  - 'Topic :: Text Processing :: Markup :: HTML'
+- - Requires-Python
+  - '>=3.6'
+- - Description-Content-Type
+  - text/x-rst
+- - Requires-Dist
+  - MarkupSafe (>=2.0)
+- - Provides-Extra
+  - i18n
+- - Requires-Dist
+  - Babel (>=2.7) ; extra == 'i18n'
+- - Description
+  - "Jinja\n=====\n\nJinja is a fast, expressive, extensible templating engine. Special\n\
+    placeholders in the template allow writing code similar to Python\nsyntax. Then\
+    \ the template is passed data to render the final document.\n\nIt includes:\n\n\
+    -   Template inheritance and inclusion.\n-   Define and import macros within templates.\n\
+    -   HTML templates can use autoescaping to prevent XSS from untrusted\n    user\
+    \ input.\n-   A sandboxed environment can safely render untrusted templates.\n\
+    -   AsyncIO support for generating templates and calling async\n    functions.\n\
+    -   I18N support with Babel.\n-   Templates are compiled to optimized Python code\
+    \ just-in-time and\n    cached, or can be compiled ahead-of-time.\n-   Exceptions\
+    \ point to the correct line in templates to make debugging\n    easier.\n-   Extensible\
+    \ filters, tests, functions, and even syntax.\n\nJinja's philosophy is that while\
+    \ application logic belongs in Python if\npossible, it shouldn't make the template\
+    \ designer's job difficult by\nrestricting functionality too much.\n\n\nInstalling\n\
+    ----------\n\nInstall and update using `pip`_:\n\n.. code-block:: text\n\n   \
+    \ $ pip install -U Jinja2\n\n.. _pip: https://pip.pypa.io/en/stable/quickstart/\n\
+    \n\nIn A Nutshell\n-------------\n\n.. code-block:: jinja\n\n    {% extends \"\
+    base.html\" %}\n    {% block title %}Members{% endblock %}\n    {% block content\
+    \ %}\n      <ul>\n      {% for user in users %}\n        <li><a href=\"{{ user.url\
+    \ }}\">{{ user.username }}</a></li>\n      {% endfor %}\n      </ul>\n    {% endblock\
+    \ %}\n\n\nDonate\n------\n\nThe Pallets organization develops and supports Jinja\
+    \ and other popular\npackages. In order to grow the community of contributors\
+    \ and users, and\nallow the maintainers to devote more time to the projects, `please\n\
+    donate today`_.\n\n.. _please donate today: https://palletsprojects.com/donate\n\
+    \n\nLinks\n-----\n\n-   Documentation: https://jinja.palletsprojects.com/\n- \
+    \  Changes: https://jinja.palletsprojects.com/changes/\n-   PyPI Releases: https://pypi.org/project/Jinja2/\n\
+    -   Source Code: https://github.com/pallets/jinja/\n-   Issue Tracker: https://github.com/pallets/jinja/issues/\n\
+    -   Website: https://palletsprojects.com/p/jinja/\n-   Twitter: https://twitter.com/PalletsTeam\n\
+    -   Chat: https://discord.gg/pallets\n"
+name: Jinja2
+path: Jinja2-3.0.1-py3-none-any.whl
+repr: <WheelDistribution('Jinja2', <Version('3.0.1')>)>
+top_level: 'jinja2
+
+  '
+version: 3.0.1
+wheel:
+- - Wheel-Version
+  - '1.0'
+- - Generator
+  - bdist_wheel (0.36.2)
+- - Root-Is-Purelib
+  - 'true'
+- - Tag
+  - py3-none-any

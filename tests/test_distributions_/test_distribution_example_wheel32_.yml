@@ -1,0 +1,154 @@
+entry_points: {}
+filename: default_values-0.5.0-py3-none-any.whl
+has_license: true
+metadata:
+- - Metadata-Version
+  - '2.1'
+- - Name
+  - default-values
+- - Version
+  - 0.5.0
+- - Summary
+  - Sphinx extension to show default values in documentation.
+- - Author-email
+  - Dominic Davis-Foster <dominic@davis-foster.co.uk>
+- - License
+  - MIT
+- - Keywords
+  - documentation,sphinx
+- - Home-page
+  - https://github.com/sphinx-toolbox/default_values
+- - Project-URL
+  - Issue Tracker, https://github.com/sphinx-toolbox/default_values/issues
+- - Project-URL
+  - Source Code, https://github.com/sphinx-toolbox/default_values
+- - Project-URL
+  - Documentation, https://default_values.readthedocs.io/en/latest
+- - Platform
+  - Windows
+- - Platform
+  - macOS
+- - Platform
+  - Linux
+- - Classifier
+  - 'Development Status :: 4 - Beta'
+- - Classifier
+  - 'Framework :: Sphinx :: Extension'
+- - Classifier
+  - 'Intended Audience :: Developers'
+- - Classifier
+  - 'License :: OSI Approved :: MIT License'
+- - Classifier
+  - 'Operating System :: OS Independent'
+- - Classifier
+  - 'Programming Language :: Python'
+- - Classifier
+  - 'Programming Language :: Python :: 3 :: Only'
+- - Classifier
+  - 'Programming Language :: Python :: 3.6'
+- - Classifier
+  - 'Programming Language :: Python :: 3.7'
+- - Classifier
+  - 'Programming Language :: Python :: 3.8'
+- - Classifier
+  - 'Programming Language :: Python :: 3.9'
+- - Classifier
+  - 'Programming Language :: Python :: Implementation :: CPython'
+- - Classifier
+  - 'Programming Language :: Python :: Implementation :: PyPy'
+- - Classifier
+  - 'Topic :: Documentation'
+- - Classifier
+  - 'Topic :: Documentation :: Sphinx'
+- - Classifier
+  - 'Topic :: Software Development :: Documentation'
+- - Classifier
+  - 'Typing :: Typed'
+- - Requires-Python
+  - '>=3.6'
+- - Requires-Dist
+  - docutils==0.16
+- - Requires-Dist
+  - sphinx<3.6.0,>=3.2.0
+- - Description-Content-Type
+  - text/x-rst
+- - Description
+  - "###############\ndefault_values\n###############\n\n.. start short_desc\n\n**Sphinx\
+    \ extension to show default values in documentation.**\n\n.. end short_desc\n\n\
+    For example:\n\n\t.. code-block:: python\n\n\t\tdef namedlist(name: str = \"NamedList\"\
+    ) -> Callable:\n\t\t\t\"\"\"\n\t\t\tA factory function to return a custom list\
+    \ subclass with a name.\n\n\t\t\t:param name: The name of the list.\n\n\t\t\t\
+    :return:\n\t\t\t\"\"\"\n\n\t.. image:: https://default-values.readthedocs.io/en/latest/_images/after.png\n\
+    \nFor more information see `the documentation <https://default-values.readthedocs.io/en/latest/usage.html>`_.\n\
+    \n.. start shields\n\n.. list-table::\n\t:stub-columns: 1\n\t:widths: 10 90\n\n\
+    \t* - Docs\n\t  - |docs| |docs_check|\n\t* - Tests\n\t  - |actions_linux| |actions_windows|\
+    \ |actions_macos| |coveralls|\n\t* - PyPI\n\t  - |pypi-version| |supported-versions|\
+    \ |supported-implementations| |wheel|\n\t* - Anaconda\n\t  - |conda-version| |conda-platform|\n\
+    \t* - Activity\n\t  - |commits-latest| |commits-since| |maintained| |pypi-downloads|\n\
+    \t* - QA\n\t  - |codefactor| |actions_flake8| |actions_mypy|\n\t* - Other\n\t\
+    \  - |license| |language| |requires|\n\n.. |docs| image:: https://img.shields.io/readthedocs/default_values/latest?logo=read-the-docs\n\
+    \t:target: https://default_values.readthedocs.io/en/latest\n\t:alt: Documentation\
+    \ Build Status\n\n.. |docs_check| image:: https://github.com/sphinx-toolbox/default_values/workflows/Docs%20Check/badge.svg\n\
+    \t:target: https://github.com/sphinx-toolbox/default_values/actions?query=workflow%3A%22Docs+Check%22\n\
+    \t:alt: Docs Check Status\n\n.. |actions_linux| image:: https://github.com/sphinx-toolbox/default_values/workflows/Linux/badge.svg\n\
+    \t:target: https://github.com/sphinx-toolbox/default_values/actions?query=workflow%3A%22Linux%22\n\
+    \t:alt: Linux Test Status\n\n.. |actions_windows| image:: https://github.com/sphinx-toolbox/default_values/workflows/Windows/badge.svg\n\
+    \t:target: https://github.com/sphinx-toolbox/default_values/actions?query=workflow%3A%22Windows%22\n\
+    \t:alt: Windows Test Status\n\n.. |actions_macos| image:: https://github.com/sphinx-toolbox/default_values/workflows/macOS/badge.svg\n\
+    \t:target: https://github.com/sphinx-toolbox/default_values/actions?query=workflow%3A%22macOS%22\n\
+    \t:alt: macOS Test Status\n\n.. |actions_flake8| image:: https://github.com/sphinx-toolbox/default_values/workflows/Flake8/badge.svg\n\
+    \t:target: https://github.com/sphinx-toolbox/default_values/actions?query=workflow%3A%22Flake8%22\n\
+    \t:alt: Flake8 Status\n\n.. |actions_mypy| image:: https://github.com/sphinx-toolbox/default_values/workflows/mypy/badge.svg\n\
+    \t:target: https://github.com/sphinx-toolbox/default_values/actions?query=workflow%3A%22mypy%22\n\
+    \t:alt: mypy status\n\n.. |requires| image:: https://requires.io/github/sphinx-toolbox/default_values/requirements.svg?branch=master\n\
+    \t:target: https://requires.io/github/sphinx-toolbox/default_values/requirements/?branch=master\n\
+    \t:alt: Requirements Status\n\n.. |coveralls| image:: https://img.shields.io/coveralls/github/sphinx-toolbox/default_values/master?logo=coveralls\n\
+    \t:target: https://coveralls.io/github/sphinx-toolbox/default_values?branch=master\n\
+    \t:alt: Coverage\n\n.. |codefactor| image:: https://img.shields.io/codefactor/grade/github/sphinx-toolbox/default_values?logo=codefactor\n\
+    \t:target: https://www.codefactor.io/repository/github/sphinx-toolbox/default_values\n\
+    \t:alt: CodeFactor Grade\n\n.. |pypi-version| image:: https://img.shields.io/pypi/v/default_values\n\
+    \t:target: https://pypi.org/project/default_values/\n\t:alt: PyPI - Package Version\n\
+    \n.. |supported-versions| image:: https://img.shields.io/pypi/pyversions/default_values?logo=python&logoColor=white\n\
+    \t:target: https://pypi.org/project/default_values/\n\t:alt: PyPI - Supported\
+    \ Python Versions\n\n.. |supported-implementations| image:: https://img.shields.io/pypi/implementation/default_values\n\
+    \t:target: https://pypi.org/project/default_values/\n\t:alt: PyPI - Supported\
+    \ Implementations\n\n.. |wheel| image:: https://img.shields.io/pypi/wheel/default_values\n\
+    \t:target: https://pypi.org/project/default_values/\n\t:alt: PyPI - Wheel\n\n\
+    .. |conda-version| image:: https://img.shields.io/conda/v/domdfcoding/default_values?logo=anaconda\n\
+    \t:target: https://anaconda.org/domdfcoding/default_values\n\t:alt: Conda - Package\
+    \ Version\n\n.. |conda-platform| image:: https://img.shields.io/conda/pn/domdfcoding/default_values?label=conda%7Cplatform\n\
+    \t:target: https://anaconda.org/domdfcoding/default_values\n\t:alt: Conda - Platform\n\
+    \n.. |license| image:: https://img.shields.io/github/license/sphinx-toolbox/default_values\n\
+    \t:target: https://github.com/sphinx-toolbox/default_values/blob/master/LICENSE\n\
+    \t:alt: License\n\n.. |language| image:: https://img.shields.io/github/languages/top/sphinx-toolbox/default_values\n\
+    \t:alt: GitHub top language\n\n.. |commits-since| image:: https://img.shields.io/github/commits-since/sphinx-toolbox/default_values/v0.5.0\n\
+    \t:target: https://github.com/sphinx-toolbox/default_values/pulse\n\t:alt: GitHub\
+    \ commits since tagged version\n\n.. |commits-latest| image:: https://img.shields.io/github/last-commit/sphinx-toolbox/default_values\n\
+    \t:target: https://github.com/sphinx-toolbox/default_values/commit/master\n\t\
+    :alt: GitHub last commit\n\n.. |maintained| image:: https://img.shields.io/maintenance/yes/2021\n\
+    \t:alt: Maintenance\n\n.. |pypi-downloads| image:: https://img.shields.io/pypi/dm/default_values\n\
+    \t:target: https://pypi.org/project/default_values/\n\t:alt: PyPI - Downloads\n\
+    \n.. end shields\n\n|\n\nInstallation\n--------------\n\n.. start installation\n\
+    \n``default_values`` can be installed from PyPI or Anaconda.\n\nTo install with\
+    \ ``pip``:\n\n.. code-block:: bash\n\n\t$ python -m pip install default_values\n\
+    \nTo install with ``conda``:\n\n\t* First add the required channels\n\n\t.. code-block::\
+    \ bash\n\n\t\t$ conda config --add channels https://conda.anaconda.org/conda-forge\n\
+    \t\t$ conda config --add channels https://conda.anaconda.org/domdfcoding\n\n\t\
+    * Then install\n\n\t.. code-block:: bash\n\n\t\t$ conda install default_values\n\
+    \n.. end installation\n"
+name: default_values
+path: default_values-0.5.0.dist-info
+repr: <Distribution('default_values', <Version('0.5.0')>)>
+top_level: 'sphinxcontrib
+
+  '
+version: 0.5.0
+wheel:
+- - Wheel-Version
+  - '1.0'
+- - Generator
+  - whey (0.0.16)
+- - Root-Is-Purelib
+  - 'true'
+- - Tag
+  - py3-none-any

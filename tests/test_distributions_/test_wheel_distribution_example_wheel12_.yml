@@ -1,0 +1,244 @@
+entry_points:
+  console_scripts:
+    sphinx-apidoc: sphinx.ext.apidoc:main
+    sphinx-autogen: sphinx.ext.autosummary.generate:main
+    sphinx-build: sphinx.cmd.build:main
+    sphinx-quickstart: sphinx.cmd.quickstart:main
+  distutils.commands:
+    build_sphinx: sphinx.setup_command:BuildDoc
+filename: Sphinx-3.5.4-py3-none-any.whl
+has_license: true
+metadata:
+- - Metadata-Version
+  - '2.1'
+- - Name
+  - Sphinx
+- - Version
+  - 3.5.4
+- - Summary
+  - Python documentation generator
+- - Home-page
+  - http://sphinx-doc.org/
+- - Author
+  - Georg Brandl
+- - Author-email
+  - georg@python.org
+- - License
+  - BSD
+- - Download-URL
+  - https://pypi.org/project/Sphinx/
+- - Project-URL
+  - Code, https://github.com/sphinx-doc/sphinx
+- - Project-URL
+  - Issue tracker, https://github.com/sphinx-doc/sphinx/issues
+- - Platform
+  - any
+- - Classifier
+  - 'Development Status :: 5 - Production/Stable'
+- - Classifier
+  - 'Environment :: Console'
+- - Classifier
+  - 'Environment :: Web Environment'
+- - Classifier
+  - 'Intended Audience :: Developers'
+- - Classifier
+  - 'Intended Audience :: Education'
+- - Classifier
+  - 'Intended Audience :: End Users/Desktop'
+- - Classifier
+  - 'Intended Audience :: Science/Research'
+- - Classifier
+  - 'Intended Audience :: System Administrators'
+- - Classifier
+  - 'License :: OSI Approved :: BSD License'
+- - Classifier
+  - 'Operating System :: OS Independent'
+- - Classifier
+  - 'Programming Language :: Python'
+- - Classifier
+  - 'Programming Language :: Python :: 3'
+- - Classifier
+  - 'Programming Language :: Python :: 3 :: Only'
+- - Classifier
+  - 'Programming Language :: Python :: 3.5'
+- - Classifier
+  - 'Programming Language :: Python :: 3.6'
+- - Classifier
+  - 'Programming Language :: Python :: 3.7'
+- - Classifier
+  - 'Programming Language :: Python :: 3.8'
+- - Classifier
+  - 'Programming Language :: Python :: 3.9'
+- - Classifier
+  - 'Programming Language :: Python :: Implementation :: CPython'
+- - Classifier
+  - 'Programming Language :: Python :: Implementation :: PyPy'
+- - Classifier
+  - 'Framework :: Setuptools Plugin'
+- - Classifier
+  - 'Framework :: Sphinx'
+- - Classifier
+  - 'Framework :: Sphinx :: Extension'
+- - Classifier
+  - 'Framework :: Sphinx :: Theme'
+- - Classifier
+  - 'Topic :: Documentation'
+- - Classifier
+  - 'Topic :: Documentation :: Sphinx'
+- - Classifier
+  - 'Topic :: Internet :: WWW/HTTP :: Site Management'
+- - Classifier
+  - 'Topic :: Printing'
+- - Classifier
+  - 'Topic :: Software Development'
+- - Classifier
+  - 'Topic :: Software Development :: Documentation'
+- - Classifier
+  - 'Topic :: Text Processing'
+- - Classifier
+  - 'Topic :: Text Processing :: General'
+- - Classifier
+  - 'Topic :: Text Processing :: Indexing'
+- - Classifier
+  - 'Topic :: Text Processing :: Markup'
+- - Classifier
+  - 'Topic :: Text Processing :: Markup :: HTML'
+- - Classifier
+  - 'Topic :: Text Processing :: Markup :: LaTeX'
+- - Classifier
+  - 'Topic :: Utilities'
+- - Requires-Python
+  - '>=3.5'
+- - Description-Content-Type
+  - text/x-rst
+- - Requires-Dist
+  - sphinxcontrib-applehelp
+- - Requires-Dist
+  - sphinxcontrib-devhelp
+- - Requires-Dist
+  - sphinxcontrib-jsmath
+- - Requires-Dist
+  - sphinxcontrib-htmlhelp
+- - Requires-Dist
+  - sphinxcontrib-serializinghtml
+- - Requires-Dist
+  - sphinxcontrib-qthelp
+- - Requires-Dist
+  - Jinja2 (>=2.3)
+- - Requires-Dist
+  - Pygments (>=2.0)
+- - Requires-Dist
+  - docutils (<0.17,>=0.12)
+- - Requires-Dist
+  - snowballstemmer (>=1.1)
+- - Requires-Dist
+  - babel (>=1.3)
+- - Requires-Dist
+  - alabaster (<0.8,>=0.7)
+- - Requires-Dist
+  - imagesize
+- - Requires-Dist
+  - requests (>=2.5.0)
+- - Requires-Dist
+  - setuptools
+- - Requires-Dist
+  - packaging
+- - Requires-Dist
+  - colorama (>=0.3.5) ; sys_platform=="win32"
+- - Provides-Extra
+  - docs
+- - Requires-Dist
+  - sphinxcontrib-websupport ; extra == 'docs'
+- - Provides-Extra
+  - lint
+- - Requires-Dist
+  - flake8 (>=3.5.0) ; extra == 'lint'
+- - Requires-Dist
+  - isort ; extra == 'lint'
+- - Requires-Dist
+  - mypy (>=0.800) ; extra == 'lint'
+- - Requires-Dist
+  - docutils-stubs ; extra == 'lint'
+- - Provides-Extra
+  - test
+- - Requires-Dist
+  - pytest ; extra == 'test'
+- - Requires-Dist
+  - pytest-cov ; extra == 'test'
+- - Requires-Dist
+  - html5lib ; extra == 'test'
+- - Requires-Dist
+  - cython ; extra == 'test'
+- - Requires-Dist
+  - typed-ast ; (python_version < "3.8") and extra == 'test'
+- - Description
+  - "========\n Sphinx\n========\n\n.. image:: https://img.shields.io/pypi/v/sphinx.svg\n\
+    \   :target: https://pypi.org/project/Sphinx/\n   :alt: Package on PyPI\n\n..\
+    \ image:: https://readthedocs.org/projects/sphinx/badge/?version=master\n   :target:\
+    \ http://www.sphinx-doc.org/\n   :alt: Documentation Status\n\n.. image:: https://travis-ci.org/sphinx-doc/sphinx.svg?branch=master\n\
+    \   :target: https://travis-ci.org/sphinx-doc/sphinx\n   :alt: Build Status (Travis\
+    \ CI)\n\n.. image:: https://ci.appveyor.com/api/projects/status/github/sphinx-doc/sphinx?branch=master&svg=true\n\
+    \   :target: https://ci.appveyor.com/project/sphinxdoc/sphinx\n   :alt: Build\
+    \ Status (AppVeyor)\n\n.. image:: https://circleci.com/gh/sphinx-doc/sphinx.svg?style=shield\n\
+    \   :target: https://circleci.com/gh/sphinx-doc/sphinx\n   :alt: Build Status\
+    \ (CircleCI)\n\n.. image:: https://codecov.io/gh/sphinx-doc/sphinx/branch/master/graph/badge.svg\n\
+    \   :target: https://codecov.io/gh/sphinx-doc/sphinx\n   :alt: Code Coverage Status\
+    \ (Codecov)\n\n.. image:: https://img.shields.io/badge/License-BSD%203--Clause-blue.svg\n\
+    \   :target: https://opensource.org/licenses/BSD-3-Clause\n   :alt: BSD 3 Clause\n\
+    \n.. image:: https://codetriage.com/sphinx-doc/sphinx/badges/users.svg\n   :target:\
+    \ https://codetriage.com/sphinx-doc/sphinx\n   :alt: Open Source Helpers badge\n\
+    \nSphinx is a tool that makes it easy to create intelligent and beautiful\ndocumentation\
+    \ for Python projects (or other documents consisting of multiple\nreStructuredText\
+    \ sources), written by Georg Brandl.  It was originally created\nfor the new Python\
+    \ documentation, and has excellent facilities for Python\nproject documentation,\
+    \ but C/C++ is supported as well, and more languages are\nplanned.\n\nSphinx uses\
+    \ reStructuredText as its markup language, and many of its strengths\ncome from\
+    \ the power and straightforwardness of reStructuredText and its parsing\nand translating\
+    \ suite, the Docutils.\n\nAmong its features are the following:\n\n* Output formats:\
+    \ HTML (including derivative formats such as HTML Help, Epub\n  and Qt Help),\
+    \ plain text, manual pages and LaTeX or direct PDF output\n  using rst2pdf\n*\
+    \ Extensive cross-references: semantic markup and automatic links\n  for functions,\
+    \ classes, glossary terms and similar pieces of information\n* Hierarchical structure:\
+    \ easy definition of a document tree, with automatic\n  links to siblings, parents\
+    \ and children\n* Automatic indices: general index as well as a module index\n\
+    * Code handling: automatic highlighting using the Pygments highlighter\n* Flexible\
+    \ HTML output using the Jinja 2 templating engine\n* Various extensions are available,\
+    \ e.g. for automatic testing of snippets\n  and inclusion of appropriately formatted\
+    \ docstrings\n* Setuptools integration\n\nFor more information, refer to the `the\
+    \ documentation`__.\n\n.. __: http://www.sphinx-doc.org/\n\nInstallation\n============\n\
+    \nSphinx is published on `PyPI`__ and can be installed from there::\n\n   pip\
+    \ install -U sphinx\n\nWe also publish beta releases::\n\n   pip install -U --pre\
+    \ sphinx\n\nIf you wish to install `Sphinx` for development purposes, refer to\
+    \ `the\ncontributors guide`__.\n\n__ https://pypi.org/project/Sphinx/\n__ http://www.sphinx-doc.org/en/master/internals/contributing.html\n\
+    \nDocumentation\n=============\n\nDocumentation is available from `sphinx-doc.org`__.\n\
+    \n__ http://www.sphinx-doc.org/\n\nGet in touch\n============\n\n- Report bugs,\
+    \ suggest features or view the source code `on GitHub`_.\n- For less well defined\
+    \ questions or ideas, use the `mailing list`_.\n\n.. _on GitHub: https://github.com/sphinx-doc/sphinx\n\
+    .. _mailing list: https://groups.google.com/forum/#!forum/sphinx-users\n\nPlease\
+    \ adhere to our `code of conduct`__.\n\n__ http://www.sphinx-doc.org/en/master/code_of_conduct.html\n\
+    \nTesting\n=======\n\nContinuous testing is provided by `Travis`__ (for unit tests\
+    \ and style checks\non Linux), `AppVeyor`__ (for unit tests on Windows), and `CircleCI`__\
+    \ (for\nlarge processes like TeX compilation).\n\nFor information on running tests\
+    \ locally, refer to `the contributors guide`__.\n\n__ https://travis-ci.org/sphinx-doc/sphinx\n\
+    __ https://ci.appveyor.com/project/sphinxdoc/sphinx\n__ https://circleci.com/gh/sphinx-doc/sphinx\n\
+    __ http://www.sphinx-doc.org/en/master/internals/contributing.html\n\nContributing\n\
+    ============\n\nRefer to `the contributors guide`__.\n\n__ http://www.sphinx-doc.org/en/master/internals/contributing.html\n\
+    \nRelease signatures\n==================\n\nReleases are signed with following\
+    \ keys:\n\n* `498D6B9E <https://pgp.mit.edu/pks/lookup?op=vindex&search=0x102C2C17498D6B9E>`_\n\
+    * `5EBA0E07 <https://pgp.mit.edu/pks/lookup?op=vindex&search=0x1425F8CE5EBA0E07>`_\n"
+name: Sphinx
+path: Sphinx-3.5.4-py3-none-any.whl
+repr: <WheelDistribution('Sphinx', <Version('3.5.4')>)>
+top_level: 'sphinx
+
+  '
+version: 3.5.4
+wheel:
+- - Wheel-Version
+  - '1.0'
+- - Generator
+  - bdist_wheel (0.36.2)
+- - Root-Is-Purelib
+  - 'true'
+- - Tag
+  - py3-none-any

@@ -1,0 +1,346 @@
+entry_points:
+  console_scripts:
+    natsort: natsort.__main__:main
+filename: natsort-7.1.1-py3-none-any.whl
+has_license: true
+metadata:
+- - Metadata-Version
+  - '2.1'
+- - Name
+  - natsort
+- - Version
+  - 7.1.1
+- - Summary
+  - Simple yet flexible natural sorting in Python.
+- - Home-page
+  - https://github.com/SethMMorton/natsort
+- - Author
+  - Seth M. Morton
+- - Author-email
+  - drtuba78@gmail.com
+- - License
+  - MIT
+- - Platform
+  - UNKNOWN
+- - Classifier
+  - 'Development Status :: 5 - Production/Stable'
+- - Classifier
+  - 'Intended Audience :: Developers'
+- - Classifier
+  - 'Intended Audience :: Science/Research'
+- - Classifier
+  - 'Intended Audience :: System Administrators'
+- - Classifier
+  - 'Intended Audience :: Information Technology'
+- - Classifier
+  - 'Intended Audience :: Financial and Insurance Industry'
+- - Classifier
+  - 'Operating System :: OS Independent'
+- - Classifier
+  - 'License :: OSI Approved :: MIT License'
+- - Classifier
+  - 'Natural Language :: English'
+- - Classifier
+  - 'Programming Language :: Python'
+- - Classifier
+  - 'Programming Language :: Python :: 3'
+- - Classifier
+  - 'Programming Language :: Python :: 3.4'
+- - Classifier
+  - 'Programming Language :: Python :: 3.5'
+- - Classifier
+  - 'Programming Language :: Python :: 3.6'
+- - Classifier
+  - 'Programming Language :: Python :: 3.7'
+- - Classifier
+  - 'Programming Language :: Python :: 3.8'
+- - Classifier
+  - 'Programming Language :: Python :: 3.9'
+- - Classifier
+  - 'Topic :: Scientific/Engineering :: Information Analysis'
+- - Classifier
+  - 'Topic :: Utilities'
+- - Classifier
+  - 'Topic :: Text Processing'
+- - Requires-Python
+  - '>=3.4'
+- - Description-Content-Type
+  - text/x-rst
+- - Provides-Extra
+  - fast
+- - Requires-Dist
+  - fastnumbers (>=2.0.0) ; extra == 'fast'
+- - Provides-Extra
+  - icu
+- - Requires-Dist
+  - PyICU (>=1.0.0) ; extra == 'icu'
+- - Description
+  - "natsort\n=======\n\n.. image:: https://img.shields.io/pypi/v/natsort.svg\n  \
+    \  :target: https://pypi.org/project/natsort/\n\n.. image:: https://img.shields.io/pypi/pyversions/natsort.svg\n\
+    \    :target: https://pypi.org/project/natsort/\n\n.. image:: https://img.shields.io/pypi/l/natsort.svg\n\
+    \    :target: https://github.com/SethMMorton/natsort/blob/master/LICENSE\n\n..\
+    \ image:: https://github.com/SethMMorton/natsort/workflows/Tests/badge.svg\n \
+    \   :target: https://github.com/SethMMorton/natsort/actions\n\n.. image:: https://codecov.io/gh/SethMMorton/natsort/branch/master/graph/badge.svg\n\
+    \    :target: https://codecov.io/gh/SethMMorton/natsort\n\nSimple yet flexible\
+    \ natural sorting in Python.\n\n    - Source Code: https://github.com/SethMMorton/natsort\n\
+    \    - Downloads: https://pypi.org/project/natsort/\n    - Documentation: https://natsort.readthedocs.io/\n\
+    \n      - `Examples and Recipes <https://natsort.readthedocs.io/en/master/examples.html>`_\n\
+    \      - `How Does Natsort Work? <https://natsort.readthedocs.io/en/master/howitworks.html>`_\n\
+    \      - `API <https://natsort.readthedocs.io/en/master/api.html>`_\n\n    - `Quick\
+    \ Description`_\n    - `Quick Examples`_\n    - `FAQ`_\n    - `Requirements`_\n\
+    \    - `Optional Dependencies`_\n    - `Installation`_\n    - `How to Run Tests`_\n\
+    \    - `How to Build Documentation`_\n    - `Deprecation Schedule`_\n    - `History`_\n\
+    \n**NOTE**: Please see the `Deprecation Schedule`_ section for changes in\n``natsort``\
+    \ version 7.0.0.\n\nQuick Description\n-----------------\n\nWhen you try to sort\
+    \ a list of strings that contain numbers, the normal python\nsort algorithm sorts\
+    \ lexicographically, so you might not get the results that\nyou expect:\n\n..\
+    \ code-block:: pycon\n\n    >>> a = ['2 ft 7 in', '1 ft 5 in', '10 ft 2 in', '2\
+    \ ft 11 in', '7 ft 6 in']\n    >>> sorted(a)\n    ['1 ft 5 in', '10 ft 2 in',\
+    \ '2 ft 11 in', '2 ft 7 in', '7 ft 6 in']\n\nNotice that it has the order ('1',\
+    \ '10', '2') - this is because the list is\nbeing sorted in lexicographical order,\
+    \ which sorts numbers like you would\nletters (i.e. 'b', 'ba', 'c').\n\n``natsort``\
+    \ provides a function ``natsorted`` that helps sort lists\n\"naturally\" (\"naturally\"\
+    \ is rather ill-defined, but in general it means\nsorting based on meaning and\
+    \ not computer code point).\nUsing ``natsorted`` is simple:\n\n.. code-block::\
+    \ pycon\n\n    >>> from natsort import natsorted\n    >>> a = ['2 ft 7 in', '1\
+    \ ft 5 in', '10 ft 2 in', '2 ft 11 in', '7 ft 6 in']\n    >>> natsorted(a)\n \
+    \   ['1 ft 5 in', '2 ft 7 in', '2 ft 11 in', '7 ft 6 in', '10 ft 2 in']\n\n``natsorted``\
+    \ identifies numbers anywhere in a string and sorts them\nnaturally. Below are\
+    \ some other things you can do with ``natsort``\n(also see the `examples <https://natsort.readthedocs.io/en/master/examples.html>`_\n\
+    for a quick start guide, or the\n`api <https://natsort.readthedocs.io/en/master/api.html>`_\
+    \ for complete details).\n\n**Note**: ``natsorted`` is designed to be a drop-in\
+    \ replacement for the\nbuilt-in ``sorted`` function. Like ``sorted``, ``natsorted``\n\
+    `does not sort in-place`. To sort a list and assign the output to the same\nvariable,\
+    \ you must explicitly assign the output to a variable:\n\n.. code-block:: pycon\n\
+    \n    >>> a = ['2 ft 7 in', '1 ft 5 in', '10 ft 2 in', '2 ft 11 in', '7 ft 6 in']\n\
+    \    >>> natsorted(a)\n    ['1 ft 5 in', '2 ft 7 in', '2 ft 11 in', '7 ft 6 in',\
+    \ '10 ft 2 in']\n    >>> print(a)  # 'a' was not sorted; \"natsorted\" simply\
+    \ returned a sorted list\n    ['2 ft 7 in', '1 ft 5 in', '10 ft 2 in', '2 ft 11\
+    \ in', '7 ft 6 in']\n    >>> a = natsorted(a)  # Now 'a' will be sorted because\
+    \ the sorted list was assigned to 'a'\n    >>> print(a)\n    ['1 ft 5 in', '2\
+    \ ft 7 in', '2 ft 11 in', '7 ft 6 in', '10 ft 2 in']\n\nPlease see `Generating\
+    \ a Reusable Sorting Key and Sorting In-Place`_ for\nan alternate way to sort\
+    \ in-place naturally.\n\nQuick Examples\n--------------\n\n- `Sorting Versions`_\n\
+    - `Sort Paths Like My File Browser (e.g. Windows Explorer on Windows)`_\n- `Sorting\
+    \ by Real Numbers (i.e. Signed Floats)`_\n- `Locale-Aware Sorting (or \"Human\
+    \ Sorting\")`_\n- `Further Customizing Natsort`_\n- `Sorting Mixed Types`_\n-\
+    \ `Handling Bytes on Python 3`_\n- `Generating a Reusable Sorting Key and Sorting\
+    \ In-Place`_\n- `Other Useful Things`_\n\nSorting Versions\n++++++++++++++++\n\
+    \n``natsort`` does not actually *comprehend* version numbers.\nIt just so happens\
+    \ that the most common versioning schemes are designed to\nwork with standard\
+    \ natural sorting techniques; these schemes include\n``MAJOR.MINOR``, ``MAJOR.MINOR.PATCH``,\
+    \ ``YEAR.MONTH.DAY``. If your data\nconforms to a scheme like this, then it will\
+    \ work out-of-the-box with\n``natsorted`` (as of ``natsort`` version >= 4.0.0):\n\
+    \n.. code-block:: pycon\n\n    >>> a = ['version-1.9', 'version-2.0', 'version-1.11',\
+    \ 'version-1.10']\n    >>> natsorted(a)\n    ['version-1.9', 'version-1.10', 'version-1.11',\
+    \ 'version-2.0']\n\nIf you need to versions that use a more complicated scheme,\
+    \ please see\n`these examples <https://natsort.readthedocs.io/en/master/examples.html#rc-sorting>`_.\n\
+    \nSort Paths Like My File Browser (e.g. Windows Explorer on Windows)\n++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n\
+    \nPrior to ``natsort`` version 7.1.0, it was a common request to be able to\n\
+    sort paths like Windows Explorer. As of ``natsort`` 7.1.0, the function\n``os_sorted``\
+    \ has been added to provide users the ability to sort\nin the order that their\
+    \ file browser might sort (e.g Windows Explorer on\nWindows, Finder on MacOS,\
+    \ Dolphin/Nautilus/Thunar/etc. on Linux).\n\n.. code-block:: python\n\n    import\
+    \ os\n    from natsort import os_sorted\n    print(os_sorted(os.listdir()))\n\
+    \    # The directory sorted like your file browser might show\n\nOutput will be\
+    \ different depending on the operating system you are on.\n\nFor users **not**\
+    \ on Windows (e.g. MacOS/Linux) it is **strongly** recommended\nto also install\
+    \ `PyICU <https://pypi.org/project/PyICU>`_, which will help\n``natsort`` give\
+    \ results that match most file browsers. If this is not installed,\nit will fall\
+    \ back on Python's built-in ``locale`` module and will give good\nresults for\
+    \ most input, but will give poor restuls for special characters.\n\nSorting by\
+    \ Real Numbers (i.e. Signed Floats)\n++++++++++++++++++++++++++++++++++++++++++++\n\
+    \nThis is useful in scientific data analysis (and was\nthe default behavior of\
+    \ ``natsorted`` for ``natsort``\nversion < 4.0.0). Use the ``realsorted`` function:\n\
+    \n.. code-block:: pycon\n\n    >>> from natsort import realsorted, ns\n    >>>\
+    \ # Note that when interpreting as signed floats, the below numbers are\n    >>>\
+    \ #            +5.10,                -3.00,            +5.30,              +2.00\n\
+    \    >>> a = ['position5.10.data', 'position-3.data', 'position5.3.data', 'position2.data']\n\
+    \    >>> natsorted(a)\n    ['position2.data', 'position5.3.data', 'position5.10.data',\
+    \ 'position-3.data']\n    >>> natsorted(a, alg=ns.REAL)\n    ['position-3.data',\
+    \ 'position2.data', 'position5.10.data', 'position5.3.data']\n    >>> realsorted(a)\
+    \  # shortcut for natsorted with alg=ns.REAL\n    ['position-3.data', 'position2.data',\
+    \ 'position5.10.data', 'position5.3.data']\n\nLocale-Aware Sorting (or \"Human\
+    \ Sorting\")\n+++++++++++++++++++++++++++++++++++++++++\n\nThis is where the non-numeric\
+    \ characters are also ordered based on their\nmeaning, not on their ordinal value,\
+    \ and a locale-dependent thousands\nseparator and decimal separator is accounted\
+    \ for in the number.\nThis can be achieved with the ``humansorted`` function:\n\
+    \n.. code-block:: pycon\n\n    >>> a = ['Apple', 'apple15', 'Banana', 'apple14,689',\
+    \ 'banana']\n    >>> natsorted(a)\n    ['Apple', 'Banana', 'apple14,689', 'apple15',\
+    \ 'banana']\n    >>> import locale\n    >>> locale.setlocale(locale.LC_ALL, 'en_US.UTF-8')\n\
+    \    'en_US.UTF-8'\n    >>> natsorted(a, alg=ns.LOCALE)\n    ['apple15', 'apple14,689',\
+    \ 'Apple', 'banana', 'Banana']\n    >>> from natsort import humansorted\n    >>>\
+    \ humansorted(a)  # shortcut for natsorted with alg=ns.LOCALE\n    ['apple15',\
+    \ 'apple14,689', 'Apple', 'banana', 'Banana']\n\nYou may find you need to explicitly\
+    \ set the locale to get this to work\n(as shown in the example).\nPlease see `locale\
+    \ issues <https://natsort.readthedocs.io/en/master/locale_issues.html>`_ and the\n\
+    `Optional Dependencies`_ section below before using the ``humansorted`` function.\n\
+    \nFurther Customizing Natsort\n+++++++++++++++++++++++++++\n\nIf you need to combine\
+    \ multiple algorithm modifiers (such as ``ns.REAL``,\n``ns.LOCALE``, and ``ns.IGNORECASE``),\
+    \ you can combine the options using the\nbitwise OR operator (``|``). For example,\n\
+    \n.. code-block:: pycon\n\n    >>> a = ['Apple', 'apple15', 'Banana', 'apple14,689',\
+    \ 'banana']\n    >>> natsorted(a, alg=ns.REAL | ns.LOCALE | ns.IGNORECASE)\n \
+    \   ['Apple', 'apple15', 'apple14,689', 'Banana', 'banana']\n    >>> # The ns\
+    \ enum provides long and short forms for each option.\n    >>> ns.LOCALE == ns.L\n\
+    \    True\n    >>> # You can also customize the convenience functions, too.\n\
+    \    >>> natsorted(a, alg=ns.REAL | ns.LOCALE | ns.IGNORECASE) == realsorted(a,\
+    \ alg=ns.L | ns.IC)\n    True\n    >>> natsorted(a, alg=ns.REAL | ns.LOCALE |\
+    \ ns.IGNORECASE) == humansorted(a, alg=ns.R | ns.IC)\n    True\n\nAll of the available\
+    \ customizations can be found in the documentation for\n`the ns enum <https://natsort.readthedocs.io/en/master/api.html#natsort.ns>`_.\n\
+    \nYou can also add your own custom transformation functions with the ``key``\n\
+    argument. These can be used with ``alg`` if you wish.\n\n.. code-block:: pycon\n\
+    \n    >>> a = ['apple2.50', '2.3apple']\n    >>> natsorted(a, key=lambda x: x.replace('apple',\
+    \ ''), alg=ns.REAL)\n    ['2.3apple', 'apple2.50']\n\nSorting Mixed Types\n+++++++++++++++++++\n\
+    \nYou can mix and match ``int``, ``float``, and ``str`` (or ``unicode``) types\n\
+    when you sort:\n\n.. code-block:: pycon\n\n    >>> a = ['4.5', 6, 2.0, '5', 'a']\n\
+    \    >>> natsorted(a)\n    [2.0, '4.5', '5', 6, 'a']\n    >>> # On Python 2, sorted(a)\
+    \ would return [2.0, 6, '4.5', '5', 'a']\n    >>> # On Python 3, sorted(a) would\
+    \ raise an \"unorderable types\" TypeError\n\nHandling Bytes on Python 3\n++++++++++++++++++++++++++\n\
+    \n``natsort`` does not officially support the `bytes` type on Python 3, but\n\
+    convenience functions are provided that help you decode to `str` first:\n\n..\
+    \ code-block:: pycon\n\n    >>> from natsort import as_utf8\n    >>> a = [b'a',\
+    \ 14.0, 'b']\n    >>> # On Python 2, natsorted(a) would would work as expected.\n\
+    \    >>> # On Python 3, natsorted(a) would raise a TypeError (bytes() < str())\n\
+    \    >>> natsorted(a, key=as_utf8) == [14.0, b'a', 'b']\n    True\n    >>> a =\
+    \ [b'a56', b'a5', b'a6', b'a40']\n    >>> # On Python 2, natsorted(a) would would\
+    \ work as expected.\n    >>> # On Python 3, natsorted(a) would return the same\
+    \ results as sorted(a)\n    >>> natsorted(a, key=as_utf8) == [b'a5', b'a6', b'a40',\
+    \ b'a56']\n    True\n\nGenerating a Reusable Sorting Key and Sorting In-Place\n\
+    ++++++++++++++++++++++++++++++++++++++++++++++++++++++\n\nUnder the hood, ``natsorted``\
+    \ works by generating a custom sorting\nkey using ``natsort_keygen`` and then\
+    \ passes that to the built-in\n``sorted``. You can use the ``natsort_keygen``\
+    \ function yourself to\ngenerate a custom sorting key to sort in-place using the\
+    \ ``list.sort``\nmethod.\n\n.. code-block:: pycon\n\n    >>> from natsort import\
+    \ natsort_keygen\n    >>> natsort_key = natsort_keygen()\n    >>> a = ['2 ft 7\
+    \ in', '1 ft 5 in', '10 ft 2 in', '2 ft 11 in', '7 ft 6 in']\n    >>> natsorted(a)\
+    \ == sorted(a, key=natsort_key)\n    True\n    >>> a.sort(key=natsort_key)\n \
+    \   >>> a\n    ['1 ft 5 in', '2 ft 7 in', '2 ft 11 in', '7 ft 6 in', '10 ft 2\
+    \ in']\n\nAll of the algorithm customizations mentioned in the\n`Further Customizing\
+    \ Natsort`_ section can also be applied to\n``natsort_keygen`` through the *alg*\
+    \ keyword option.\n\nOther Useful Things\n+++++++++++++++++++\n\n - recursively\
+    \ descend into lists of lists\n - automatic unicode normalization of input data\n\
+    \ - `controlling the case-sensitivity <https://natsort.readthedocs.io/en/master/examples.html#case-sort>`_\n\
+    \ - `sorting file paths correctly <https://natsort.readthedocs.io/en/master/examples.html#path-sort>`_\n\
+    \ - `allow custom sorting keys <https://natsort.readthedocs.io/en/master/examples.html#custom-sort>`_\n\
+    \ - `accounting for units <https://natsort.readthedocs.io/en/master/examples.html#accounting-for-units-when-sorting>`_\n\
+    \nFAQ\n---\n\nHow do I debug ``natsort.natsorted()``?\n    The best way to debug\
+    \ ``natsorted()`` is to generate a key using ``natsort_keygen()``\n    with the\
+    \ same options being passed to ``natsorted``. One can take a look at\n    exactly\
+    \ what is being done with their input using this key - it is highly\n    recommended\n\
+    \    to `look at this issue describing how to debug <https://github.com/SethMMorton/natsort/issues/13#issuecomment-50422375>`_\n\
+    \    for *how* to debug, and also to review the\n    `How Does Natsort Work? <https://natsort.readthedocs.io/en/master/howitworks.html>`_\n\
+    \    page for *why* ``natsort`` is doing that to your data.\n\n    If you are\
+    \ trying to sort custom classes and running into trouble, please\n    take a look\
+    \ at https://github.com/SethMMorton/natsort/issues/60. In short,\n    custom classes\
+    \ are not likely to be sorted correctly if one relies\n    on the behavior of\
+    \ ``__lt__`` and the other rich comparison operators in\n    their custom class\
+    \ - it is better to use a ``key`` function with\n    ``natsort``, or use the ``natsort``\
+    \ key as part of your rich comparison\n    operator definition.\n\n``natsort``\
+    \ gave me results I didn't expect, and it's a terrible library!\n    Did you try\
+    \ to debug using the above advice? If so, and you still cannot figure out\n  \
+    \  the error, then please `file an issue <https://github.com/SethMMorton/natsort/issues/new>`_.\n\
+    \nHow *does* ``natsort`` work?\n    If you don't want to read `How Does Natsort\
+    \ Work? <https://natsort.readthedocs.io/en/master/howitworks.html>`_,\n    here\
+    \ is a quick primer.\n\n    ``natsort`` provides a `key function <https://docs.python.org/3/howto/sorting.html#key-functions>`_\n\
+    \    that can be passed to `list.sort() <https://docs.python.org/3/library/stdtypes.html#list.sort>`_\n\
+    \    or `sorted() <https://docs.python.org/3/library/functions.html#sorted>`_\
+    \ in order to\n    modify the default sorting behavior. This key is generated\
+    \ on-demand with\n    the key generator ``natsort.natsort_keygen()``.  ``natsort.natsorted()``\n\
+    \    is essentially a wrapper for the following code:\n\n    .. code-block:: pycon\n\
+    \n        >>> from natsort import natsort_keygen\n        >>> natsort_key = natsort_keygen()\n\
+    \        >>> sorted(['1', '10', '2'], key=natsort_key)\n        ['1', '2', '10']\n\
+    \n    Users can further customize ``natsort`` sorting behavior with the ``key``\n\
+    \    and/or ``alg`` options (see details in the `Further Customizing Natsort`_\n\
+    \    section).\n\n    The key generated by ``natsort_keygen`` *always* returns\
+    \ a ``tuple``. It\n    does so in the following way (*some details omitted for\
+    \ clarity*):\n\n      1. Assume the input is a string, and attempt to split it\
+    \ into numbers and\n         non-numbers using regular expressions. Numbers are\
+    \ then converted into\n         either ``int`` or ``float``.\n      2. If the\
+    \ above fails because the input is not a string, assume the input\n         is\
+    \ some other sequence (e.g. ``list`` or ``tuple``), and recursively\n        \
+    \ apply the key to each element of the sequence.\n      3. If the above fails\
+    \ because the input is not iterable, assume the input\n         is an ``int``\
+    \ or ``float``, and just return the input in a ``tuple``.\n\n    Because a ``tuple``\
+    \ is always returned, a ``TypeError`` should not be common\n    unless one tries\
+    \ to do something odd like sort an ``int`` against a ``list``.\n\nShell script\n\
+    ------------\n\n``natsort`` comes with a shell script called ``natsort``, or can\
+    \ also be called\nfrom the command line with ``python -m natsort``.\n\nRequirements\n\
+    ------------\n\n``natsort`` requires Python 3.5 or greater. Python 3.4 is unofficially\
+    \ supported,\nmeaning that support has not been removed, but it is no longer tested.\n\
+    \nOptional Dependencies\n---------------------\n\nfastnumbers\n+++++++++++\n\n\
+    The most efficient sorting can occur if you install the\n`fastnumbers <https://pypi.org/project/fastnumbers>`_\
+    \ package\n(version >=2.0.0); it helps with the string to number conversions.\n\
+    ``natsort`` will still run (efficiently) without the package, but if you need\n\
+    to squeeze out that extra juice it is recommended you include this as a\ndependency.\
+    \ ``natsort`` will not require (or check) that\n`fastnumbers <https://pypi.org/project/fastnumbers>`_\
+    \ is installed\nat installation.\n\nPyICU\n+++++\n\nIt is recommended that you\
+    \ install `PyICU <https://pypi.org/project/PyICU>`_\nif you wish to sort in a\
+    \ locale-dependent manner, see\nhttps://natsort.readthedocs.io/en/master/locale_issues.html\
+    \ for an explanation why.\n\nInstallation\n------------\n\nUse ``pip``!\n\n..\
+    \ code-block:: console\n\n    $ pip install natsort\n\nIf you want to install\
+    \ the `Optional Dependencies`_, you can use the\n`\"extras\" notation <https://packaging.python.org/tutorials/installing-packages/#installing-setuptools-extras>`_\n\
+    at installation time to install those dependencies as well - use ``fast`` for\n\
+    `fastnumbers <https://pypi.org/project/fastnumbers>`_ and ``icu`` for\n`PyICU\
+    \ <https://pypi.org/project/PyICU>`_.\n\n.. code-block:: console\n\n    # Install\
+    \ both optional dependencies.\n    $ pip install natsort[fast,icu]\n    # Install\
+    \ just fastnumbers\n    $ pip install natsort[fast]\n\nHow to Run Tests\n----------------\n\
+    \nPlease note that ``natsort`` is NOT set-up to support ``python setup.py test``.\n\
+    \nThe recommended way to run tests is with `tox <https://tox.readthedocs.io/en/latest/>`_.\n\
+    After installing ``tox``, running tests is as simple as executing the following\n\
+    in the ``natsort`` directory:\n\n.. code-block:: console\n\n    $ tox\n\n``tox``\
+    \ will create virtual a virtual environment for your tests and install\nall the\
+    \ needed testing requirements for you.  You can specify a particular\npython version\
+    \ with the ``-e`` flag, e.g. ``tox -e py36``. Static analysis\nis done with ``tox\
+    \ -e flake8``. You can see all available testing environments\nwith ``tox --listenvs``.\n\
+    \nIf you do not wish to use ``tox``, you can install the testing dependencies\
+    \ with the\n``dev/requirements.txt`` file and then run the tests manually using\n\
+    `pytest <https://docs.pytest.org/en/latest/>`_.\n\n.. code-block:: console\n\n\
+    \    $ pip install -r dev/requirements.txt\n    $ python -m pytest\n\nNote that\
+    \ above I invoked ``python -m pytest`` instead of just ``pytest`` - this is because\n\
+    `the former puts the CWD on sys.path <https://docs.pytest.org/en/latest/usage.html#calling-pytest-through-python-m-pytest>`_.\n\
+    \nHow to Build Documentation\n--------------------------\n\nIf you want to build\
+    \ the documentation for ``natsort``, it is recommended to\nuse ``tox``:\n\n..\
+    \ code-block:: console\n\n    $ tox -e docs\n\nThis will place the documentation\
+    \ in ``build/sphinx/html``.  If you do not\nwhich to use ``tox``, you can do the\
+    \ following:\n\n.. code-block:: console\n\n    $ pip install sphinx sphinx_rtd_theme\n\
+    \    $ python setup.py build_sphinx\n\nDeprecation Schedule\n--------------------\n\
+    \nDropped Python 2.7 Support\n++++++++++++++++++++++++++\n\n``natsort`` version\
+    \ 7.0.0 dropped support for Python 2.7.\n\nThe version 6.X branch will remain\
+    \ as a \"long term support\" branch where bug\nfixes are applied so that users\
+    \ who cannot update from Python 2.7 will not be\nforced to use a buggy ``natsort``\
+    \ version (bug fixes will need to be requested;\nby default only the 7.X branch\
+    \ will be updated).\nNew features would not be added to version 6.X, only bug\
+    \ fixes.\n\nDropped Deprecated APIs\n+++++++++++++++++++++++\n\nIn ``natsort``\
+    \ version 6.0.0, the following APIs and functions were removed\n\n - ``number_type``\
+    \ keyword argument (deprecated since 3.4.0)\n - ``signed`` keyword argument (deprecated\
+    \ since 3.4.0)\n - ``exp`` keyword argument (deprecated since 3.4.0)\n - ``as_path``\
+    \ keyword argument (deprecated since 3.4.0)\n - ``py3_safe`` keyword argument\
+    \ (deprecated since 3.4.0)\n - ``ns.TYPESAFE`` (deprecated since version 5.0.0)\n\
+    \ - ``ns.DIGIT`` (deprecated since version 5.0.0)\n - ``ns.VERSION`` (deprecated\
+    \ since version 5.0.0)\n - ``versorted()`` (discouraged since version 4.0.0,\n\
+    \   officially deprecated since version 5.5.0)\n - ``index_versorted()`` (discouraged\
+    \ since version 4.0.0,\n   officially deprecated since version 5.5.0)\n\nIn general,\
+    \ if you want to determine if you are using deprecated APIs you\ncan run your\
+    \ code with the following flag\n\n.. code-block:: console\n\n    $ python -Wdefault::DeprecationWarning\
+    \ my-code.py\n\nBy default ``DeprecationWarnings`` are not shown, but this will\
+    \ cause them\nto be shown. Alternatively, you can just set the environment variable\n\
+    ``PYTHONWARNINGS`` to \"default::DeprecationWarning\" and then run your code.\n\
+    \nAuthor\n------\n\nSeth M. Morton\n\nHistory\n-------\n\nPlease visit the changelog\n\
+    `on GitHub <https://github.com/SethMMorton/natsort/blob/master/CHANGELOG.md>`_\
+    \ or\n`in the documentation <https://natsort.readthedocs.io/en/master/changelog.html>`_.\n"
+name: natsort
+path: natsort-7.1.1.dist-info
+repr: <Distribution('natsort', <Version('7.1.1')>)>
+top_level: 'natsort
+
+  '
+version: 7.1.1
+wheel:
+- - Wheel-Version
+  - '1.0'
+- - Generator
+  - bdist_wheel (0.36.2)
+- - Root-Is-Purelib
+  - 'true'
+- - Tag
+  - py3-none-any

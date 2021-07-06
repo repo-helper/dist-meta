@@ -1,0 +1,187 @@
+babel.checkers:
+- attr: num_plurals
+  distro:
+    name: Babel
+    path: python3.8/site-packages/Babel-2.9.1.dist-info
+    version: 2.9.1
+  extras: []
+  group: babel.checkers
+  module: babel.messages.checkers
+  name: num_plurals
+  value: babel.messages.checkers:num_plurals
+- attr: python_format
+  distro:
+    name: Babel
+    path: python3.8/site-packages/Babel-2.9.1.dist-info
+    version: 2.9.1
+  extras: []
+  group: babel.checkers
+  module: babel.messages.checkers
+  name: python_format
+  value: babel.messages.checkers:python_format
+babel.extractors:
+- attr: extract_nothing
+  distro:
+    name: Babel
+    path: python3.8/site-packages/Babel-2.9.1.dist-info
+    version: 2.9.1
+  extras: []
+  group: babel.extractors
+  module: babel.messages.extract
+  name: ignore
+  value: babel.messages.extract:extract_nothing
+- attr: extract_javascript
+  distro:
+    name: Babel
+    path: python3.8/site-packages/Babel-2.9.1.dist-info
+    version: 2.9.1
+  extras: []
+  group: babel.extractors
+  module: babel.messages.extract
+  name: javascript
+  value: babel.messages.extract:extract_javascript
+- attr: babel_extract
+  distro:
+    name: Jinja2
+    path: python3.8/site-packages/Jinja2-3.0.1.dist-info
+    version: 3.0.1
+  extras:
+  - i18n
+  group: babel.extractors
+  module: jinja2.ext
+  name: jinja2
+  value: jinja2.ext:babel_extract [i18n]
+- attr: extract_python
+  distro:
+    name: Babel
+    path: python3.8/site-packages/Babel-2.9.1.dist-info
+    version: 2.9.1
+  extras: []
+  group: babel.extractors
+  module: babel.messages.extract
+  name: python
+  value: babel.messages.extract:extract_python
+console_scripts:
+- attr: main
+  distro:
+    name: Babel
+    path: python3.8/site-packages/Babel-2.9.1.dist-info
+    version: 2.9.1
+  extras: []
+  group: console_scripts
+  module: babel.messages.frontend
+  name: pybabel
+  value: babel.messages.frontend:main
+- attr: main
+  distro:
+    name: Sphinx
+    path: python3.8/site-packages/Sphinx-3.5.4.dist-info
+    version: 3.5.4
+  extras: []
+  group: console_scripts
+  module: sphinx.ext.apidoc
+  name: sphinx-apidoc
+  value: sphinx.ext.apidoc:main
+- attr: main
+  distro:
+    name: Sphinx
+    path: python3.8/site-packages/Sphinx-3.5.4.dist-info
+    version: 3.5.4
+  extras: []
+  group: console_scripts
+  module: sphinx.ext.autosummary.generate
+  name: sphinx-autogen
+  value: sphinx.ext.autosummary.generate:main
+- attr: main
+  distro:
+    name: Sphinx
+    path: python3.8/site-packages/Sphinx-3.5.4.dist-info
+    version: 3.5.4
+  extras: []
+  group: console_scripts
+  module: sphinx.cmd.build
+  name: sphinx-build
+  value: sphinx.cmd.build:main
+- attr: main
+  distro:
+    name: Sphinx
+    path: python3.8/site-packages/Sphinx-3.5.4.dist-info
+    version: 3.5.4
+  extras: []
+  group: console_scripts
+  module: sphinx.cmd.quickstart
+  name: sphinx-quickstart
+  value: sphinx.cmd.quickstart:main
+distutils.commands:
+- attr: BuildDoc
+  distro:
+    name: Sphinx
+    path: python3.8/site-packages/Sphinx-3.5.4.dist-info
+    version: 3.5.4
+  extras: []
+  group: distutils.commands
+  module: sphinx.setup_command
+  name: build_sphinx
+  value: sphinx.setup_command:BuildDoc
+- attr: compile_catalog
+  distro:
+    name: Babel
+    path: python3.8/site-packages/Babel-2.9.1.dist-info
+    version: 2.9.1
+  extras: []
+  group: distutils.commands
+  module: babel.messages.frontend
+  name: compile_catalog
+  value: babel.messages.frontend:compile_catalog
+- attr: extract_messages
+  distro:
+    name: Babel
+    path: python3.8/site-packages/Babel-2.9.1.dist-info
+    version: 2.9.1
+  extras: []
+  group: distutils.commands
+  module: babel.messages.frontend
+  name: extract_messages
+  value: babel.messages.frontend:extract_messages
+- attr: init_catalog
+  distro:
+    name: Babel
+    path: python3.8/site-packages/Babel-2.9.1.dist-info
+    version: 2.9.1
+  extras: []
+  group: distutils.commands
+  module: babel.messages.frontend
+  name: init_catalog
+  value: babel.messages.frontend:init_catalog
+- attr: update_catalog
+  distro:
+    name: Babel
+    path: python3.8/site-packages/Babel-2.9.1.dist-info
+    version: 2.9.1
+  extras: []
+  group: distutils.commands
+  module: babel.messages.frontend
+  name: update_catalog
+  value: babel.messages.frontend:update_catalog
+distutils.setup_keywords:
+- attr: check_message_extractors
+  distro:
+    name: Babel
+    path: python3.8/site-packages/Babel-2.9.1.dist-info
+    version: 2.9.1
+  extras: []
+  group: distutils.setup_keywords
+  module: babel.messages.frontend
+  name: message_extractors
+  value: babel.messages.frontend:check_message_extractors
+sphinx.html_themes:
+- attr: null
+  distro:
+    name: alabaster
+    path: python3.8/site-packages/alabaster-0.7.12.dist-info
+    version: 0.7.12
+  extras: []
+  group: sphinx.html_themes
+  module: alabaster
+  name: alabaster
+  value: alabaster

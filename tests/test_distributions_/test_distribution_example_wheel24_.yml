@@ -1,0 +1,183 @@
+entry_points: {}
+filename: snowballstemmer-2.1.0-py2.py3-none-any.whl
+has_license: false
+metadata:
+- - Metadata-Version
+  - '2.1'
+- - Name
+  - snowballstemmer
+- - Version
+  - 2.1.0
+- - Summary
+  - This package provides 29 stemmers for 28 languages generated from Snowball algorithms.
+- - Home-page
+  - https://github.com/snowballstem/snowball
+- - Author
+  - Snowball Developers
+- - Author-email
+  - snowball-discuss@lists.tartarus.org
+- - License
+  - BSD-3-Clause
+- - Keywords
+  - stemmer
+- - Platform
+  - UNKNOWN
+- - Classifier
+  - 'Development Status :: 5 - Production/Stable'
+- - Classifier
+  - 'Intended Audience :: Developers'
+- - Classifier
+  - 'License :: OSI Approved :: BSD License'
+- - Classifier
+  - 'Natural Language :: Arabic'
+- - Classifier
+  - 'Natural Language :: Basque'
+- - Classifier
+  - 'Natural Language :: Catalan'
+- - Classifier
+  - 'Natural Language :: Danish'
+- - Classifier
+  - 'Natural Language :: Dutch'
+- - Classifier
+  - 'Natural Language :: English'
+- - Classifier
+  - 'Natural Language :: Finnish'
+- - Classifier
+  - 'Natural Language :: French'
+- - Classifier
+  - 'Natural Language :: German'
+- - Classifier
+  - 'Natural Language :: Greek'
+- - Classifier
+  - 'Natural Language :: Hindi'
+- - Classifier
+  - 'Natural Language :: Hungarian'
+- - Classifier
+  - 'Natural Language :: Indonesian'
+- - Classifier
+  - 'Natural Language :: Irish'
+- - Classifier
+  - 'Natural Language :: Italian'
+- - Classifier
+  - 'Natural Language :: Lithuanian'
+- - Classifier
+  - 'Natural Language :: Nepali'
+- - Classifier
+  - 'Natural Language :: Norwegian'
+- - Classifier
+  - 'Natural Language :: Portuguese'
+- - Classifier
+  - 'Natural Language :: Romanian'
+- - Classifier
+  - 'Natural Language :: Russian'
+- - Classifier
+  - 'Natural Language :: Serbian'
+- - Classifier
+  - 'Natural Language :: Spanish'
+- - Classifier
+  - 'Natural Language :: Swedish'
+- - Classifier
+  - 'Natural Language :: Tamil'
+- - Classifier
+  - 'Natural Language :: Turkish'
+- - Classifier
+  - 'Operating System :: OS Independent'
+- - Classifier
+  - 'Programming Language :: Python'
+- - Classifier
+  - 'Programming Language :: Python :: 2'
+- - Classifier
+  - 'Programming Language :: Python :: 2.6'
+- - Classifier
+  - 'Programming Language :: Python :: 2.7'
+- - Classifier
+  - 'Programming Language :: Python :: 3'
+- - Classifier
+  - 'Programming Language :: Python :: 3.4'
+- - Classifier
+  - 'Programming Language :: Python :: 3.5'
+- - Classifier
+  - 'Programming Language :: Python :: 3.6'
+- - Classifier
+  - 'Programming Language :: Python :: 3.7'
+- - Classifier
+  - 'Programming Language :: Python :: Implementation :: CPython'
+- - Classifier
+  - 'Programming Language :: Python :: Implementation :: PyPy'
+- - Classifier
+  - 'Topic :: Database'
+- - Classifier
+  - 'Topic :: Internet :: WWW/HTTP :: Indexing/Search'
+- - Classifier
+  - 'Topic :: Text Processing :: Indexing'
+- - Classifier
+  - 'Topic :: Text Processing :: Linguistic'
+- - Description-Content-Type
+  - text/x-rst
+- - Description
+  - "Snowball stemming library collection for Python\n===============================================\n\
+    \nBoth Python 2 and Python 3 (>= 3.3) are supported.\n\nWhat is Stemming?\n-----------------\n\
+    \nStemming maps different forms of the same word to a common \"stem\" - for\n\
+    example, the English stemmer maps *connection*, *connections*, *connective*,\n\
+    *connected*, and *connecting* to *connect*.  So a searching for *connected*\n\
+    would also find documents which only have the other forms.\n\nThis stem form is\
+    \ often a word itself, but this is not always the case as this\nis not a requirement\
+    \ for text search systems, which are the intended field of\nuse.  We also aim\
+    \ to conflate words with the same meaning, rather than all\nwords with a common\
+    \ linguistic root (so *awe* and *awful* don't have the same\nstem), and over-stemming\
+    \ is more problematic than under-stemming so we tend not\nto stem in cases that\
+    \ are hard to resolve.  If you want to always reduce words\nto a root form and/or\
+    \ get a root form which is itself a word then Snowball's\nstemming algorithms\
+    \ likely aren't the right answer.\n\nHow to use library\n------------------\n\n\
+    The ``snowballstemmer`` module has two functions.\n\nThe ``snowballstemmer.algorithms``\
+    \ function returns a list of available\nalgorithm names.\n\nThe ``snowballstemmer.stemmer``\
+    \ function takes an algorithm name and returns a\n``Stemmer`` object.\n\n``Stemmer``\
+    \ objects have a ``Stemmer.stemWord(word)`` method and a\n``Stemmer.stemWords(word[])``\
+    \ method.\n\n.. code-block:: python\n\n   import snowballstemmer\n\n   stemmer\
+    \ = snowballstemmer.stemmer('english');\n   print(stemmer.stemWords(\"We are the\
+    \ world\".split()));\n\nAutomatic Acceleration\n----------------------\n\nIf `PyStemmer\
+    \ <https://pypi.org/project/PyStemmer/>`_ is installed,\n``snowballstemmer.stemmer``\
+    \ returns a ``PyStemmer`` ``Stemmer`` object\nwhich provides the same ``Stemmer.stemWord()``\
+    \ and ``Stemmer.stemWords()``\nmethods.\n\n**PyStemmer** is a wrapper module for\
+    \ Snowball's ``libstemmer_c`` and should\nprovide results 100% compatible to **snowballstemmer**.\n\
+    \n**PyStemmer** is faster because it wraps generated C versions of the stemmers;\n\
+    **snowballstemmer** uses generate Python code and is slower but offers a pure\n\
+    Python solution.\n\nBenchmark\n~~~~~~~~~\n\nThis is a crude benchmark which measures\
+    \ the time for running each stemmer on\nevery word in its sample vocabulary (10,787,583\
+    \ words over 26 languages).  It's\nnot a realistic test of normal use as a real\
+    \ application would do much more\nthan just stemming.  It's also skewed towards\
+    \ the stemmers which do more work\nper word and towards those with larger sample\
+    \ vocabularies.\n\n* Python 2.7 + **snowballstemmer** : 13m00s (15.0 * PyStemmer)\n\
+    * Python 3.7 + **snowballstemmer** : 12m19s (14.2 * PyStemmer)\n* PyPy 7.1.1 (Python\
+    \ 2.7.13) + **snowballstemmer** : 2m14s (2.6 * PyStemmer)\n* PyPy 7.1.1 (Python\
+    \ 3.6.1) + **snowballstemmer** : 1m46s (2.0 * PyStemmer)\n* Python 2.7 + **PyStemmer**\
+    \ : 52s\n\nFor reference the equivalent test for C runs in 9 seconds.\n\nThese\
+    \ results are for Snowball 2.0.0.  They're likely to evolve over time as\nthe\
+    \ code Snowball generates for both Python and C continues to improve (for\na much\
+    \ older test over a different set of stemmers using Python 2.7,\n**snowballstemmer**\
+    \ was 30 times slower than **PyStemmer**, or 9 times slower\nwith **PyPy**).\n\
+    \nThe message to take away is that if you're stemming a lot of words you should\n\
+    either install **PyStemmer** (which **snowballstemmer** will then automatically\n\
+    use for you as described above) or use PyPy.\n\nThe TestApp example\n-------------------\n\
+    \nThe ``testapp.py`` example program allows you to run any of the stemmers\non\
+    \ a sample vocabulary.\n\nUsage::\n\n   testapp.py <algorithm> \"sentences ...\
+    \ \"\n\n.. code-block:: bash\n\n   $ python testapp.py English \"sentences...\
+    \ \"\n"
+name: snowballstemmer
+path: snowballstemmer-2.1.0.dist-info
+repr: <Distribution('snowballstemmer', <Version('2.1.0')>)>
+top_level: 'snowballstemmer
+
+  '
+version: 2.1.0
+wheel:
+- - Wheel-Version
+  - '1.0'
+- - Generator
+  - bdist_wheel (0.34.2)
+- - Root-Is-Purelib
+  - 'true'
+- - Tag
+  - py2-none-any
+- - Tag
+  - py3-none-any

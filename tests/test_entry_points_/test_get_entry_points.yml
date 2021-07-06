@@ -1,0 +1,50 @@
+- attr: main
+  distro:
+    name: Babel
+    path: python3.8/site-packages/Babel-2.9.1.dist-info
+    version: 2.9.1
+  extras: []
+  group: console_scripts
+  module: babel.messages.frontend
+  name: pybabel
+  value: babel.messages.frontend:main
+- attr: main
+  distro:
+    name: Sphinx
+    path: python3.8/site-packages/Sphinx-3.5.4.dist-info
+    version: 3.5.4
+  extras: []
+  group: console_scripts
+  module: sphinx.ext.apidoc
+  name: sphinx-apidoc
+  value: sphinx.ext.apidoc:main
+- attr: main
+  distro:
+    name: Sphinx
+    path: python3.8/site-packages/Sphinx-3.5.4.dist-info
+    version: 3.5.4
+  extras: []
+  group: console_scripts
+  module: sphinx.ext.autosummary.generate
+  name: sphinx-autogen
+  value: sphinx.ext.autosummary.generate:main
+- attr: main
+  distro:
+    name: Sphinx
+    path: python3.8/site-packages/Sphinx-3.5.4.dist-info
+    version: 3.5.4
+  extras: []
+  group: console_scripts
+  module: sphinx.cmd.build
+  name: sphinx-build
+  value: sphinx.cmd.build:main
+- attr: main
+  distro:
+    name: Sphinx
+    path: python3.8/site-packages/Sphinx-3.5.4.dist-info
+    version: 3.5.4
+  extras: []
+  group: console_scripts
+  module: sphinx.cmd.quickstart
+  name: sphinx-quickstart
+  value: sphinx.cmd.quickstart:main

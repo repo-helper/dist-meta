@@ -1,0 +1,224 @@
+entry_points: {}
+filename: packaging-20.9-py2.py3-none-any.whl
+has_license: true
+metadata:
+- - Metadata-Version
+  - '2.1'
+- - Name
+  - packaging
+- - Version
+  - '20.9'
+- - Summary
+  - Core utilities for Python packages
+- - Home-page
+  - https://github.com/pypa/packaging
+- - Author
+  - Donald Stufft and individual contributors
+- - Author-email
+  - donald@stufft.io
+- - License
+  - BSD-2-Clause or Apache-2.0
+- - Platform
+  - UNKNOWN
+- - Classifier
+  - 'Development Status :: 5 - Production/Stable'
+- - Classifier
+  - 'Intended Audience :: Developers'
+- - Classifier
+  - 'License :: OSI Approved :: Apache Software License'
+- - Classifier
+  - 'License :: OSI Approved :: BSD License'
+- - Classifier
+  - 'Programming Language :: Python'
+- - Classifier
+  - 'Programming Language :: Python :: 2'
+- - Classifier
+  - 'Programming Language :: Python :: 2.7'
+- - Classifier
+  - 'Programming Language :: Python :: 3'
+- - Classifier
+  - 'Programming Language :: Python :: 3.4'
+- - Classifier
+  - 'Programming Language :: Python :: 3.5'
+- - Classifier
+  - 'Programming Language :: Python :: 3.6'
+- - Classifier
+  - 'Programming Language :: Python :: 3.7'
+- - Classifier
+  - 'Programming Language :: Python :: 3.8'
+- - Classifier
+  - 'Programming Language :: Python :: 3.9'
+- - Classifier
+  - 'Programming Language :: Python :: Implementation :: CPython'
+- - Classifier
+  - 'Programming Language :: Python :: Implementation :: PyPy'
+- - Requires-Python
+  - '>=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*'
+- - Description-Content-Type
+  - text/x-rst
+- - Requires-Dist
+  - pyparsing (>=2.0.2)
+- - Description
+  - "packaging\n=========\n\n.. start-intro\n\nReusable core utilities for various\
+    \ Python Packaging\n`interoperability specifications <https://packaging.python.org/specifications/>`_.\n\
+    \nThis library provides utilities that implement the interoperability\nspecifications\
+    \ which have clearly one correct behaviour (eg: :pep:`440`)\nor benefit greatly\
+    \ from having a single shared implementation (eg: :pep:`425`).\n\n.. end-intro\n\
+    \nThe ``packaging`` project includes the following: version handling, specifiers,\n\
+    markers, requirements, tags, utilities.\n\nDocumentation\n-------------\n\nThe\
+    \ `documentation`_ provides information and the API for the following:\n\n- Version\
+    \ Handling\n- Specifiers\n- Markers\n- Requirements\n- Tags\n- Utilities\n\nInstallation\n\
+    ------------\n\nUse ``pip`` to install these utilities::\n\n    pip install packaging\n\
+    \nDiscussion\n----------\n\nIf you run into bugs, you can file them in our `issue\
+    \ tracker`_.\n\nYou can also join ``#pypa`` on Freenode to ask questions or get\
+    \ involved.\n\n\n.. _`documentation`: https://packaging.pypa.io/\n.. _`issue tracker`:\
+    \ https://github.com/pypa/packaging/issues\n\n\nCode of Conduct\n---------------\n\
+    \nEveryone interacting in the packaging project's codebases, issue trackers, chat\n\
+    rooms, and mailing lists is expected to follow the `PSF Code of Conduct`_.\n\n\
+    .. _PSF Code of Conduct: https://github.com/pypa/.github/blob/main/CODE_OF_CONDUCT.md\n\
+    \nContributing\n------------\n\nThe ``CONTRIBUTING.rst`` file outlines how to\
+    \ contribute to this project as\nwell as how to report a potential security issue.\
+    \ The documentation for this\nproject also covers information about `project development`_\
+    \ and `security`_.\n\n.. _`project development`: https://packaging.pypa.io/en/latest/development/\n\
+    .. _`security`: https://packaging.pypa.io/en/latest/security/\n\nProject History\n\
+    ---------------\n\nPlease review the ``CHANGELOG.rst`` file or the `Changelog\
+    \ documentation`_ for\nrecent changes and project history.\n\n.. _`Changelog documentation`:\
+    \ https://packaging.pypa.io/en/latest/changelog/\n\nChangelog\n---------\n\n20.9\
+    \ - 2021-01-29\n~~~~~~~~~~~~~~~~~\n\n* Run [isort](https://pypi.org/project/isort/)\
+    \ over the code base (`#377 <https://github.com/pypa/packaging/issues/377>`__)\n\
+    * Add support for the ``macosx_10_*_universal2`` platform tags (`#379 <https://github.com/pypa/packaging/issues/379>`__)\n\
+    * Introduce ``packaging.utils.parse_wheel_filename()`` and ``parse_sdist_filename()``\n\
+    \  (`#387 <https://github.com/pypa/packaging/issues/387>`__ and `#389 <https://github.com/pypa/packaging/issues/389>`__)\n\
+    \n20.8 - 2020-12-11\n~~~~~~~~~~~~~~~~~\n\n* Revert back to setuptools for compatibility\
+    \ purposes for some Linux distros (`#363 <https://github.com/pypa/packaging/issues/363>`__)\n\
+    * Do not insert an underscore in wheel tags when the interpreter version number\n\
+    \  is more than 2 digits (`#372 <https://github.com/pypa/packaging/issues/372>`__)\n\
+    \n20.7 - 2020-11-28\n~~~~~~~~~~~~~~~~~\n\nNo unreleased changes.\n\n20.6 - 2020-11-28\n\
+    ~~~~~~~~~~~~~~~~~\n\n.. note:: This release was subsequently yanked, and these\
+    \ changes were included in 20.7.\n\n* Fix flit configuration, to include LICENSE\
+    \ files (`#357 <https://github.com/pypa/packaging/issues/357>`__)\n* Make `intel`\
+    \ a recognized CPU architecture for the `universal` macOS platform tag (`#361\
+    \ <https://github.com/pypa/packaging/issues/361>`__)\n* Add some missing type\
+    \ hints to `packaging.requirements` (issue:`350`)\n\n20.5 - 2020-11-27\n~~~~~~~~~~~~~~~~~\n\
+    \n* Officially support Python 3.9 (`#343 <https://github.com/pypa/packaging/issues/343>`__)\n\
+    * Deprecate the ``LegacyVersion`` and ``LegacySpecifier`` classes (`#321 <https://github.com/pypa/packaging/issues/321>`__)\n\
+    * Handle ``OSError`` on non-dynamic executables when attempting to resolve\n \
+    \ the glibc version string.\n\n20.4 - 2020-05-19\n~~~~~~~~~~~~~~~~~\n\n* Canonicalize\
+    \ version before comparing specifiers. (`#282 <https://github.com/pypa/packaging/issues/282>`__)\n\
+    * Change type hint for ``canonicalize_name`` to return\n  ``packaging.utils.NormalizedName``.\n\
+    \  This enables the use of static typing tools (like mypy) to detect mixing of\n\
+    \  normalized and un-normalized names.\n\n20.3 - 2020-03-05\n~~~~~~~~~~~~~~~~~\n\
+    \n* Fix changelog for 20.2.\n\n20.2 - 2020-03-05\n~~~~~~~~~~~~~~~~~\n\n* Fix a\
+    \ bug that caused a 32-bit OS that runs on a 64-bit ARM CPU (e.g. ARM-v8,\n  aarch64),\
+    \ to report the wrong bitness.\n\n20.1 - 2020-01-24\n~~~~~~~~~~~~~~~~~~~\n\n*\
+    \ Fix a bug caused by reuse of an exhausted iterator. (`#257 <https://github.com/pypa/packaging/issues/257>`__)\n\
+    \n20.0 - 2020-01-06\n~~~~~~~~~~~~~~~~~\n\n* Add type hints (`#191 <https://github.com/pypa/packaging/issues/191>`__)\n\
+    \n* Add proper trove classifiers for PyPy support (`#198 <https://github.com/pypa/packaging/issues/198>`__)\n\
+    \n* Scale back depending on ``ctypes`` for manylinux support detection (`#171\
+    \ <https://github.com/pypa/packaging/issues/171>`__)\n\n* Use ``sys.implementation.name``\
+    \ where appropriate for ``packaging.tags`` (`#193 <https://github.com/pypa/packaging/issues/193>`__)\n\
+    \n* Expand upon the API provded by ``packaging.tags``: ``interpreter_name()``,\
+    \ ``mac_platforms()``, ``compatible_tags()``, ``cpython_tags()``, ``generic_tags()``\
+    \ (`#187 <https://github.com/pypa/packaging/issues/187>`__)\n\n* Officially support\
+    \ Python 3.8 (`#232 <https://github.com/pypa/packaging/issues/232>`__)\n\n* Add\
+    \ ``major``, ``minor``, and ``micro`` aliases to ``packaging.version.Version``\
+    \ (`#226 <https://github.com/pypa/packaging/issues/226>`__)\n\n* Properly mark\
+    \ ``packaging`` has being fully typed by adding a `py.typed` file (`#226 <https://github.com/pypa/packaging/issues/226>`__)\n\
+    \n19.2 - 2019-09-18\n~~~~~~~~~~~~~~~~~\n\n* Remove dependency on ``attrs`` (`#178\
+    \ <https://github.com/pypa/packaging/issues/178>`__, `#179 <https://github.com/pypa/packaging/issues/179>`__)\n\
+    \n* Use appropriate fallbacks for CPython ABI tag (`#181 <https://github.com/pypa/packaging/issues/181>`__,\
+    \ `#185 <https://github.com/pypa/packaging/issues/185>`__)\n\n* Add manylinux2014\
+    \ support (`#186 <https://github.com/pypa/packaging/issues/186>`__)\n\n* Improve\
+    \ ABI detection (`#181 <https://github.com/pypa/packaging/issues/181>`__)\n\n\
+    * Properly handle debug wheels for Python 3.8 (`#172 <https://github.com/pypa/packaging/issues/172>`__)\n\
+    \n* Improve detection of debug builds on Windows (`#194 <https://github.com/pypa/packaging/issues/194>`__)\n\
+    \n19.1 - 2019-07-30\n~~~~~~~~~~~~~~~~~\n\n* Add the ``packaging.tags`` module.\
+    \ (`#156 <https://github.com/pypa/packaging/issues/156>`__)\n\n* Correctly handle\
+    \ two-digit versions in ``python_version`` (`#119 <https://github.com/pypa/packaging/issues/119>`__)\n\
+    \n\n19.0 - 2019-01-20\n~~~~~~~~~~~~~~~~~\n\n* Fix string representation of PEP\
+    \ 508 direct URL requirements with markers.\n\n* Better handling of file URLs\n\
+    \n  This allows for using ``file:///absolute/path``, which was previously\n  prevented\
+    \ due to the missing ``netloc``.\n\n  This allows for all file URLs that ``urlunparse``\
+    \ turns back into the\n  original URL to be valid.\n\n\n18.0 - 2018-09-26\n~~~~~~~~~~~~~~~~~\n\
+    \n* Improve error messages when invalid requirements are given. (`#129 <https://github.com/pypa/packaging/issues/129>`__)\n\
+    \n\n17.1 - 2017-02-28\n~~~~~~~~~~~~~~~~~\n\n* Fix ``utils.canonicalize_version``\
+    \ when supplying non PEP 440 versions.\n\n\n17.0 - 2017-02-28\n~~~~~~~~~~~~~~~~~\n\
+    \n* Drop support for python 2.6, 3.2, and 3.3.\n\n* Define minimal pyparsing version\
+    \ to 2.0.2 (`#91 <https://github.com/pypa/packaging/issues/91>`__).\n\n* Add ``epoch``,\
+    \ ``release``, ``pre``, ``dev``, and ``post`` attributes to\n  ``Version`` and\
+    \ ``LegacyVersion`` (`#34 <https://github.com/pypa/packaging/issues/34>`__).\n\
+    \n* Add ``Version().is_devrelease`` and ``LegacyVersion().is_devrelease`` to\n\
+    \  make it easy to determine if a release is a development release.\n\n* Add ``utils.canonicalize_version``\
+    \ to canonicalize version strings or\n  ``Version`` instances (`#121 <https://github.com/pypa/packaging/issues/121>`__).\n\
+    \n\n16.8 - 2016-10-29\n~~~~~~~~~~~~~~~~~\n\n* Fix markers that utilize ``in``\
+    \ so that they render correctly.\n\n* Fix an erroneous test on Python RC releases.\n\
+    \n\n16.7 - 2016-04-23\n~~~~~~~~~~~~~~~~~\n\n* Add support for the deprecated ``python_implementation``\
+    \ marker which was\n  an undocumented setuptools marker in addition to the newer\
+    \ markers.\n\n\n16.6 - 2016-03-29\n~~~~~~~~~~~~~~~~~\n\n* Add support for the\
+    \ deprecated, PEP 345 environment markers in addition to\n  the newer markers.\n\
+    \n\n16.5 - 2016-02-26\n~~~~~~~~~~~~~~~~~\n\n* Fix a regression in parsing requirements\
+    \ with whitespaces between the comma\n  separators.\n\n\n16.4 - 2016-02-22\n~~~~~~~~~~~~~~~~~\n\
+    \n* Fix a regression in parsing requirements like ``foo (==4)``.\n\n\n16.3 - 2016-02-21\n\
+    ~~~~~~~~~~~~~~~~~\n\n* Fix a bug where ``packaging.requirements:Requirement``\
+    \ was overly strict when\n  matching legacy requirements.\n\n\n16.2 - 2016-02-09\n\
+    ~~~~~~~~~~~~~~~~~\n\n* Add a function that implements the name canonicalization\
+    \ from PEP 503.\n\n\n16.1 - 2016-02-07\n~~~~~~~~~~~~~~~~~\n\n* Implement requirement\
+    \ specifiers from PEP 508.\n\n\n16.0 - 2016-01-19\n~~~~~~~~~~~~~~~~~\n\n* Relicense\
+    \ so that packaging is available under *either* the Apache License,\n  Version\
+    \ 2.0 or a 2 Clause BSD license.\n\n* Support installation of packaging when only\
+    \ distutils is available.\n\n* Fix ``==`` comparison when there is a prefix and\
+    \ a local version in play.\n  (`#41 <https://github.com/pypa/packaging/issues/41>`__).\n\
+    \n* Implement environment markers from PEP 508.\n\n\n15.3 - 2015-08-01\n~~~~~~~~~~~~~~~~~\n\
+    \n* Normalize post-release spellings for rev/r prefixes. `#35 <https://github.com/pypa/packaging/issues/35>`__\n\
+    \n\n15.2 - 2015-05-13\n~~~~~~~~~~~~~~~~~\n\n* Fix an error where the arbitary\
+    \ specifier (``===``) was not correctly\n  allowing pre-releases when it was being\
+    \ used.\n\n* Expose the specifier and version parts through properties on the\n\
+    \  ``Specifier`` classes.\n\n* Allow iterating over the ``SpecifierSet`` to get\
+    \ access to all of the\n  ``Specifier`` instances.\n\n* Allow testing if a version\
+    \ is contained within a specifier via the ``in``\n  operator.\n\n\n15.1 - 2015-04-13\n\
+    ~~~~~~~~~~~~~~~~~\n\n* Fix a logic error that was causing inconsistent answers\
+    \ about whether or not\n  a pre-release was contained within a ``SpecifierSet``\
+    \ or not.\n\n\n15.0 - 2015-01-02\n~~~~~~~~~~~~~~~~~\n\n* Add ``Version().is_postrelease``\
+    \ and ``LegacyVersion().is_postrelease`` to\n  make it easy to determine if a\
+    \ release is a post release.\n\n* Add ``Version().base_version`` and ``LegacyVersion().base_version``\
+    \ to make\n  it easy to get the public version without any pre or post release\
+    \ markers.\n\n* Support the update to PEP 440 which removed the implied ``!=V.*``\
+    \ when using\n  either ``>V`` or ``<V`` and which instead special cased the handling\
+    \ of\n  pre-releases, post-releases, and local versions when using ``>V`` or ``<V``.\n\
+    \n\n14.5 - 2014-12-17\n~~~~~~~~~~~~~~~~~\n\n* Normalize release candidates as\
+    \ ``rc`` instead of ``c``.\n\n* Expose the ``VERSION_PATTERN`` constant, a regular\
+    \ expression matching\n  a valid version.\n\n\n14.4 - 2014-12-15\n~~~~~~~~~~~~~~~~~\n\
+    \n* Ensure that versions are normalized before comparison when used in a\n  specifier\
+    \ with a less than (``<``) or greater than (``>``) operator.\n\n\n14.3 - 2014-11-19\n\
+    ~~~~~~~~~~~~~~~~~\n\n* **BACKWARDS INCOMPATIBLE** Refactor specifier support so\
+    \ that it can sanely\n  handle legacy specifiers as well as PEP 440 specifiers.\n\
+    \n* **BACKWARDS INCOMPATIBLE** Move the specifier support out of\n  ``packaging.version``\
+    \ into ``packaging.specifiers``.\n\n\n14.2 - 2014-09-10\n~~~~~~~~~~~~~~~~~\n\n\
+    * Add prerelease support to ``Specifier``.\n* Remove the ability to do ``item\
+    \ in Specifier()`` and replace it with\n  ``Specifier().contains(item)`` in order\
+    \ to allow flags that signal if a\n  prerelease should be accepted or not.\n*\
+    \ Add a method ``Specifier().filter()`` which will take an iterable and returns\n\
+    \  an iterable with items that do not match the specifier filtered out.\n\n\n\
+    14.1 - 2014-09-08\n~~~~~~~~~~~~~~~~~\n\n* Allow ``LegacyVersion`` and ``Version``\
+    \ to be sorted together.\n* Add ``packaging.version.parse()`` to enable easily\
+    \ parsing a version string\n  as either a ``Version`` or a ``LegacyVersion`` depending\
+    \ on it's PEP 440\n  validity.\n\n\n14.0 - 2014-09-05\n~~~~~~~~~~~~~~~~~\n\n*\
+    \ Initial release.\n\n\n.. _`master`: https://github.com/pypa/packaging/\n"
+name: packaging
+path: packaging-20.9-py2.py3-none-any.whl
+repr: <WheelDistribution('packaging', <Version('20.9')>)>
+top_level: 'packaging
+
+  '
+version: '20.9'
+wheel:
+- - Wheel-Version
+  - '1.0'
+- - Generator
+  - bdist_wheel (0.36.2)
+- - Root-Is-Purelib
+  - 'true'
+- - Tag
+  - py2-none-any
+- - Tag
+  - py3-none-any

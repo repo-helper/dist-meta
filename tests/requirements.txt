@@ -1,0 +1,14 @@
+apeye>=1.0.1
+coincidence>=0.2.0
+consolekit>=1.2.3
+coverage>=5.1
+coverage-pyver-pragma>=0.2.1
+first>=2.0.2
+flake8==3.9.2
+importlib-metadata>=3.6.0
+pytest>=6.0.0
+pytest-cov>=2.8.1
+pytest-randomly>=3.7.0
+pytest-timeout>=1.4.2
+shippinglabel>=0.16.0
+sphinx==4.0.2
