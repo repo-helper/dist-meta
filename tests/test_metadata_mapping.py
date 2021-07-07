@@ -3,7 +3,6 @@ from textwrap import dedent
 
 # 3rd party
 import pytest
-from coincidence import AdvancedFileRegressionFixture
 
 # this package
 from dist_meta.metadata_mapping import MetadataEmitter, MetadataMapping
@@ -35,6 +34,11 @@ def test_headermapping():
 	assert h.get_all("foo") == ["bar", "bar", "baz"]
 	assert list(iter(h)) == ["foo", "Foo", "Foo"]
 	assert repr(h) == "<MetadataMapping({'foo': 'bar', 'Foo': 'bar', 'Foo': 'baz'})>"
+
+	h.replace("foo", "BAR")
+	assert h.items() == [("foo", "BAR"), ("Foo", "bar"), ("Foo", "baz")]
+	assert h.get_all("foo") == ["BAR", "bar", "baz"]
+	h.replace("foo", "bar")
 
 	# getitem
 	assert h["foo"] == "bar"
@@ -122,3 +126,58 @@ def test_metadata_emitter():
 		\t\tand indents
 		"""
 			)
+
+
+def test_replace():
+	msg = MetadataMapping()
+	msg["First"] = "One"
+	msg["Second"] = "Two"
+	msg["Third"] = "Three"
+	assert msg.keys() == ["First", "Second", "Third"]
+	assert msg.values() == ["One", "Two", "Three"]
+	msg.replace("Second", "Twenty")
+	assert msg.keys() == ["First", "Second", "Third"]
+	assert msg.values() == ["One", "Twenty", "Three"]
+	msg["First"] = "Eleven"
+	msg.replace("First", "One Hundred")
+	assert msg.keys() == ["First", "Second", "Third", "First"]
+	assert msg.values() == ["One Hundred", "Twenty", "Three", "Eleven"]
+
+	with pytest.raises(KeyError, match="Fourth"):
+		msg.replace("Fourth", "Missing")
+
+
+def test_values():
+	msg = MetadataMapping()
+	msg["From"] = "foo@bar.com"
+	msg["To"] = "bob"
+	msg["Subject"] = "Hello World"
+
+	assert msg.values() == [
+			"foo@bar.com",
+			"bob",
+			"Hello World",
+			]
+
+
+def test_items():
+	msg = MetadataMapping()
+	msg["From"] = "foo@bar.com"
+	msg["To"] = "bob"
+	msg["Subject"] = "Hello World"
+
+	assert msg.items() == [
+			("From", "foo@bar.com"),
+			("To", "bob"),
+			("Subject", "Hello World"),
+			]
+
+
+def test_get_all():
+	msg = MetadataMapping()
+	msg["From"] = "foo@bar.com"
+	msg["To"] = "bob"
+	msg["Subject"] = "Hello World"
+	msg["From"] = "Alan"
+
+	assert msg.get_all("From", ["foo@bar.com", "Alan"])

@@ -189,12 +189,12 @@ class MetadataMapping(MutableMapping[str, str]):
 		return self._fields[:]
 
 	@overload
-	def get(self, k: str) -> Optional[str]: ...
+	def get(self, name: str) -> Optional[str]: ...
 
 	@overload
-	def get(self, k: str, default: Union[str, _T]) -> Union[str, _T]: ...
+	def get(self, name: str, default: Union[str, _T]) -> Union[str, _T]: ...
 
-	def get(self, k: str, default=None):
+	def get(self, name: str, default=None):
 		"""
 		Get a field value.
 
@@ -208,11 +208,11 @@ class MetadataMapping(MutableMapping[str, str]):
 
 		.. latex:vspace:: -10px
 
-		:param k:
+		:param name:
 		:param default:
 		"""
 
-		name = k.lower()
+		name = name.lower()
 
 		for key, val in self._fields:
 			if key.lower() == name:
@@ -225,12 +225,12 @@ class MetadataMapping(MutableMapping[str, str]):
 	#
 
 	@overload
-	def get_all(self, k: str) -> Optional[List[str]]: ...
+	def get_all(self, name: str) -> Optional[List[str]]: ...
 
 	@overload
-	def get_all(self, k: str, default: Union[str, _T]) -> Union[List[str], _T]: ...
+	def get_all(self, name: str, default: Union[str, _T]) -> Union[List[str], _T]: ...
 
-	def get_all(self, k: str, default=None):
+	def get_all(self, name: str, default=None):
 		"""
 		Return a list of all the values for the named field.
 
@@ -240,12 +240,12 @@ class MetadataMapping(MutableMapping[str, str]):
 
 		If no such fields exist, ``default`` is returned.
 
-		:param k:
+		:param name:
 		:param default:
 		"""
 
 		values = []
-		name = k.lower()
+		name = name.lower()
 
 		for key, val in self._fields:
 			if key.lower() == name:
@@ -265,6 +265,20 @@ class MetadataMapping(MutableMapping[str, str]):
 		as_dict = f"{{{items:, }}}"
 
 		return f"<{self.__class__.__name__}({as_dict})>"
+
+	def replace(self, name: str, value: str):
+		"""
+		Replace the value of the first matching field, retaining header order and case.
+
+		:raises KeyError: If no matching field was found.
+		"""
+
+		for i, (key, val) in enumerate(self._fields):
+			if key.lower() == name.lower():
+				self._fields[i] = (name, value)
+				break
+		else:
+			raise KeyError(name)
 
 
 class MetadataEmitter(StringList):
