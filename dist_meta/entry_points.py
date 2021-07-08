@@ -44,7 +44,19 @@ import functools
 import importlib
 import itertools
 import re
-from typing import Dict, Iterable, Iterator, List, NamedTuple, Optional, Sequence, Tuple, Type, TypeVar, Union
+from typing import (
+		Dict,
+		Iterable,
+		Iterator,
+		List,
+		Mapping,
+		NamedTuple,
+		Optional,
+		Sequence,
+		Tuple,
+		TypeVar,
+		Union
+		)
 
 # 3rd party
 from domdf_python_tools.paths import PathPlus
@@ -357,3 +369,27 @@ class EntryPoint(NamedTuple):
 			raise ValueError(f"Malformed entry point {self.value!r}")
 
 		return match.group("objectname")
+
+	@classmethod
+	def from_mapping(
+			cls,
+			mapping: Mapping[str, str],
+			*,
+			group: Optional[str] = None,
+			distro: Optional["Distribution"] = None,
+			) -> List["EntryPoint"]:
+		"""
+		Returns a list of :class:`~.EntryPoint` objects constructed from values in ``mapping``.
+
+		:param mapping: A mapping of entry point names to values,
+			where values are in the form ``module.submodule:attribute``.
+		:param group: The group the entry points belong to.
+		:param distro: The distribution the entry points belong to.
+		"""
+
+		output = []
+
+		for name, value in mapping.items():
+			output.append(EntryPoint(name, value, group, distro))
+
+		return output

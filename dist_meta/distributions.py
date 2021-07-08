@@ -31,6 +31,7 @@ Iterate over installed distributions.
 #
 
 # stdlib
+import csv
 import posixpath
 import sys
 from typing import Dict, Iterable, Iterator, List, NamedTuple, Optional, Type, TypeVar, Union
@@ -49,10 +50,11 @@ from dist_meta.metadata_mapping import MetadataMapping
 from dist_meta.record import FileHash, RecordEntry
 
 __all__ = [
+		"get_distribution",
+		"iter_distributions",
 		"Distribution",
 		"WheelDistribution",
-		"iter_distributions",
-		"get_distribution",
+		"DistributionType",
 		"DistributionNotFoundError",
 		"_D",
 		"_WD",
@@ -147,6 +149,33 @@ class Distribution(NamedTuple):
 
 		if self.has_file("WHEEL"):
 			return wheel.loads(self.read_file("WHEEL"))
+		else:
+			return None
+
+	def get_record(self) -> Optional[List[RecordEntry]]:
+		"""
+		Returns the parsed content of the ``*.dist-info/RECORD`` file, or :py:obj:`None` if the file does not exist.
+
+		:returns: A :class:`dist_meta.record.RecordEntry` object for each line in the record
+			(i.e. each file in the distribution).
+			This includes files in the ``*.dist-info`` directory.
+		"""  # noqa: RST399
+
+		if self.has_file("RECORD"):
+			content = self.read_file("RECORD").splitlines()
+			output = []
+
+			for line in csv.reader(content):
+				name, hash_, size_str, *_ = line
+				entry = RecordEntry(
+						name,
+						hash=FileHash.from_string(hash_) if hash_ else None,
+						size=int(size_str) if size_str else None,
+						distro=self,
+						)
+				output.append(entry)
+
+			return output
 		else:
 			return None
 
@@ -268,7 +297,33 @@ class WheelDistribution(NamedTuple):
 
 		return f"<{self.__class__.__name__}({self.name!r}, {self.version!r})>"
 
+	def get_record(self) -> List[RecordEntry]:
+		"""
+		Returns the parsed content of the ``*.dist-info/RECORD`` file, or :py:obj:`None` if the file does not exist.
 
+		:returns: A :class:`dist_meta.record.RecordEntry` object for each line in the record
+			(i.e. each file in the distribution).
+			This includes files in the ``*.dist-info`` directory.
+
+		:raises FileNotFoundError: if the file does not exist.
+		"""
+
+		content = self.read_file("RECORD").splitlines()
+		output = []
+
+		for line in csv.reader(content):
+			name, hash_, size_str, *_ = line
+			entry = RecordEntry(
+					name,
+					hash=FileHash.from_string(hash_) if hash_ else None,
+					size=int(size_str) if size_str else None,
+					)
+			output.append(entry)
+
+		return output
+
+
+#: Type hint for functions that accept either a :class:`~.Distribution` or a :class:`~.WheelDistribution`.
 DistributionType = Union[Distribution, WheelDistribution]
 
 

@@ -75,3 +75,11 @@ def setup(app):
 	from sphinx_toolbox.latex import better_header_layout
 
 	app.connect("config-inited", lambda app, config: better_header_layout(config))
+
+
+nitpicky = True
+# 3rd party
+import dist_meta.record
+from dist_meta.distributions import Distribution
+
+dist_meta.record.__dict__["Distribution"] = Distribution

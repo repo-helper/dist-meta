@@ -1,4 +1,5 @@
 # stdlib
+import os
 import shutil
 import zipfile
 from operator import itemgetter
@@ -12,6 +13,7 @@ from domdf_python_tools.paths import PathPlus
 from first import first
 from packaging.utils import InvalidWheelFilename
 from packaging.version import Version
+from shippinglabel.checksum import get_sha256_hash
 
 # this package
 from dist_meta import distributions
@@ -35,7 +37,7 @@ class TestDistribution:
 			):
 
 		(tmp_pathplus / "site-packages").mkdir()
-		shutil.unpack_archive(example_wheel, tmp_pathplus / "site-packages")
+		handy_archives.unpack_archive(example_wheel, tmp_pathplus / "site-packages")
 
 		filename: Optional[PathPlus] = first((tmp_pathplus / "site-packages").glob("*.dist-info"))
 		assert filename is not None
@@ -56,8 +58,48 @@ class TestDistribution:
 		advanced_file_regression.check(repr(distro), extension="_distro.repr")
 		advanced_file_regression.check(distro.path.name, extension="_distro.path")
 
+		assert distro.get_record()
+
 		(filename / "WHEEL").unlink()
 		assert distro.get_wheel() is None
+		assert distro.get_record()
+
+		(filename / "RECORD").unlink()
+		assert distro.get_record() is None
+
+	def test_get_record(
+			self,
+			example_wheel,
+			tmp_pathplus: PathPlus,
+			advanced_file_regression: AdvancedFileRegressionFixture,
+			advanced_data_regression: AdvancedDataRegressionFixture,
+			):
+
+		(tmp_pathplus / "site-packages").mkdir()
+		handy_archives.unpack_archive(example_wheel, tmp_pathplus / "site-packages")
+
+		filename: Optional[PathPlus] = first((tmp_pathplus / "site-packages").glob("*.dist-info"))
+		assert filename is not None
+
+		distro = distributions.Distribution.from_path(filename)
+		record = distro.get_record()
+		assert record is not None
+		assert len(record)
+
+		for file in record:
+			assert (distro.path.parent / file).exists()
+			assert (distro.path.parent / file).is_file()
+
+			if file.hash is None:
+				assert file.name == "RECORD"
+			else:
+				assert get_sha256_hash(distro.path.parent / file).hexdigest() == file.hash.hexdigest()
+
+			if file.size is not None:
+				assert (distro.path.parent / file).stat().st_size == file.size
+
+			assert file.distro is distro
+			file.read_bytes()  # will fail if can't read
 
 
 class TestWheelDistribution:
@@ -86,6 +128,35 @@ class TestWheelDistribution:
 
 		assert isinstance(wd.wheel_zip, zipfile.ZipFile)
 		assert isinstance(wd.wheel_zip, handy_archives.ZipFile)
+
+	def test_get_record(
+			self,
+			example_wheel,
+			tmp_pathplus: PathPlus,
+			advanced_file_regression: AdvancedFileRegressionFixture,
+			advanced_data_regression: AdvancedDataRegressionFixture,
+			):
+
+		distro = distributions.WheelDistribution.from_path(example_wheel)
+		record = distro.get_record()
+		assert record is not None
+		assert len(record)
+
+		for file in record:
+
+			if file.hash is None:
+				assert file.name == "RECORD"
+			else:
+				with distro.wheel_zip.open(os.fspath(file)) as fp:
+					assert get_sha256_hash(fp).hexdigest() == file.hash.hexdigest()
+
+			if file.size is not None:
+				assert distro.wheel_zip.getinfo(os.fspath(file)).file_size == file.size
+
+			assert file.distro is None
+
+			with pytest.raises(ValueError, match="Cannot read files with 'self.distro = None'"):
+				file.read_bytes()
 
 
 def test_wheel_distribution_zip(

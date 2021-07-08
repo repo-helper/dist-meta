@@ -28,8 +28,11 @@ python_versions:
 conda_channels:
  - conda-forge
 
-#sphinx_conf_epilogue:
-# - nitpicky = True
+sphinx_conf_epilogue:
+ - nitpicky = True
+ - from dist_meta.distributions import Distribution
+ - import dist_meta.record
+ - dist_meta.record.__dict__["Distribution"] = Distribution
 
 keywords:
  - packaging

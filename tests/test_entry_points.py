@@ -187,6 +187,40 @@ def test_entry_point_class():
 	assert ep.attr == "console_main"
 
 
+def test_entry_point_class_from_mapping():
+
+	eps = entry_points.EntryPoint.from_mapping(
+			{"pytest": "pytest:console_main", "py.test": "pytest:console_main"},
+			group="console_scripts",
+			)
+
+	ep = eps[0]
+
+	assert ep.name == "pytest"
+	assert ep.value == "pytest:console_main"
+	assert ep.group == "console_scripts"
+	assert ep.distro is None
+
+	assert ep.load() is pytest.console_main
+
+	assert ep.extras == []
+	assert ep.module == "pytest"
+	assert ep.attr == "console_main"
+
+	ep = eps[1]
+
+	assert ep.name == "py.test"
+	assert ep.value == "pytest:console_main"
+	assert ep.group == "console_scripts"
+	assert ep.distro is None
+
+	assert ep.load() is pytest.console_main
+
+	assert ep.extras == []
+	assert ep.module == "pytest"
+	assert ep.attr == "console_main"
+
+
 def test_entry_point_class_extras():
 
 	ep = entry_points.EntryPoint(

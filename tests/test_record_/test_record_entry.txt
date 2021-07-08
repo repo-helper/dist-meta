@@ -1,0 +1,1 @@
+RecordEntry('domdf_python_tools-2.9.1.dist-info/LICENSE', hash=FileHash(name='sha256', value='46mU2C5kSwOnkqkw9XQAJlhBL2JAf1_uCD8lVcXyMRg'), size=7652, distro=<Distribution('domdf_python_tools', <Version('2.9.1')>)>)
