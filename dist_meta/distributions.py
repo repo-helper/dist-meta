@@ -32,21 +32,21 @@ Iterate over installed distributions.
 
 # stdlib
 import posixpath
-import re
 import sys
-from typing import Dict, Iterable, Iterator, NamedTuple, Optional, Tuple, Type, TypeVar, Union, cast
+from typing import Dict, Iterable, Iterator, List, NamedTuple, Optional, Type, TypeVar, Union
 
 # 3rd party
 import handy_archives
 from domdf_python_tools.paths import PathPlus
 from domdf_python_tools.typing import PathLike
 from domdf_python_tools.utils import divide
-from packaging.utils import InvalidWheelFilename, canonicalize_name
 from packaging.version import Version
 
 # this package
 from dist_meta import metadata, wheel
+from dist_meta._utils import _canonicalize, _iter_dist_infos, _parse_version, _parse_wheel_filename
 from dist_meta.metadata_mapping import MetadataMapping
+from dist_meta.record import FileHash, RecordEntry
 
 __all__ = [
 		"Distribution",
@@ -89,7 +89,7 @@ class Distribution(NamedTuple):
 		path = PathPlus(path)
 		distro_name_version = path.stem
 		name, version = divide(distro_name_version, '-')
-		return cls(name, Version(version), path)
+		return cls(name, _parse_version(version), path)
 
 	def read_file(self, filename: str) -> str:
 		"""
@@ -292,10 +292,10 @@ def iter_distributions(path: Optional[Iterable[PathLike]] = None) -> Iterator[Di
 		if not folder.is_dir():
 			continue
 
-		for dist_info in folder.glob("*.dist-info"):
-			distro = Distribution.from_path(dist_info)
+		for subdir in _iter_dist_infos(folder):
+			distro = Distribution.from_path(subdir)
 
-			normalized_name = canonicalize_name(distro.name)
+			normalized_name = _canonicalize(distro.name)
 
 			if normalized_name in distro_names_seen:
 				continue
@@ -320,7 +320,7 @@ def get_distribution(
 	"""
 
 	for distro in iter_distributions(path=path):
-		if canonicalize_name(distro.name) == canonicalize_name(name):
+		if _canonicalize(distro.name) == _canonicalize(name):
 			return distro
 
 	raise DistributionNotFoundError(name)
@@ -330,28 +330,3 @@ class DistributionNotFoundError(ValueError):
 	"""
 	Raised when a distribution cannot be located.
 	"""
-
-
-def _parse_wheel_filename(filename: PathPlus) -> Tuple[str, Version]:
-	# From https://github.com/pypa/packaging
-	# This software is made available under the terms of *either* of the licenses
-	# found in LICENSE.APACHE or LICENSE.BSD. Contributions to this software is made
-	# under the terms of *both* these licenses.
-
-	if not filename.suffix == ".whl":
-		raise InvalidWheelFilename(f"Invalid wheel filename (extension must be '.whl'): {filename}")
-
-	stem = filename.stem
-	dashes = stem.count('-')
-	if dashes not in (4, 5):
-		raise InvalidWheelFilename(f"Invalid wheel filename (wrong number of parts): {filename}")
-
-	parts = stem.split('-', dashes - 2)
-	name = parts[0]
-	# See PEP 427 for the rules on escaping the project name
-	if "__" in name or re.match(r"^[\w\d._]*$", name, re.UNICODE) is None:
-		raise InvalidWheelFilename(f"Invalid project name: {name!r}")
-
-	version = Version(parts[1])
-
-	return name, version

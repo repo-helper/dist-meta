@@ -40,6 +40,7 @@ Parser and emitter for ``entry_points.txt``.
 #
 
 # stdlib
+import functools
 import importlib
 import itertools
 import re
@@ -125,6 +126,7 @@ def lazy_load(filename: PathLike) -> EntryPointIterator:
 	return lazy_loads(filename.read_text())
 
 
+@functools.lru_cache()
 def loads(rawtext: str) -> EntryPointMap:
 	"""
 	Parse the entry points from the given text.
