@@ -62,6 +62,7 @@ extensions = [
     "sphinx_toolbox_experimental.needspace",
     "sphinx_toolbox_experimental.succinct_seealso",
     "sphinx_toolbox_experimental.peps",
+    "local_extension",
 ]
 sphinxemoji_style = "twemoji"
 gitstamp_fmt = "%d %b %Y"

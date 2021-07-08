@@ -7,7 +7,7 @@
 .. caution::
 
 	These are pretty low-level classes. You probably don't need to use these directly
-	unless you're customising the ``METADATA`` file creation.
+	unless you're customising the ``METADATA`` file creation or parsing.
 
 """
 #
@@ -288,6 +288,7 @@ class MetadataEmitter(StringList):
 	:param fields: The fields the file is being constructed from.
 
 	.. autosummary-widths:: 1/3
+		:html: 3/10
 	"""
 
 	def __init__(self, fields: MetadataMapping):

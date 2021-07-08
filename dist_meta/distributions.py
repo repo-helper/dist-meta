@@ -3,6 +3,11 @@
 #  distributions.py
 """
 Iterate over installed distributions.
+
+Third-party distributions are installed into Python's ``site-packages`` directory with tools such as pip_.
+Distributions must a ``*.dist-info`` directory (as defined by :pep:`566`) to be discoverable.
+
+.. _pip: https://pypi.org/project/pip/
 """
 #
 #  Copyright © 2021 Dominic Davis-Foster <dominic@davis-foster.co.uk>
@@ -121,7 +126,7 @@ class Distribution(NamedTuple):
 
 		.. code-block:: python
 
-			for name, epstr in distro.get_entry_points().get("console_scripts", {}):
+			for name, epstr in distro.get_entry_points().get("console_scripts", {}).items():
 				EntryPoint(name, epstr)
 		"""
 
@@ -262,7 +267,7 @@ class WheelDistribution(NamedTuple):
 
 		.. code-block:: python
 
-			for name, epstr in distro.get_entry_points().get("console_scripts", {}):
+			for name, epstr in distro.get_entry_points().get("console_scripts", {}).items():
 				EntryPoint(name, epstr)
 		"""
 

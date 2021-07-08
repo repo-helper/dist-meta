@@ -46,6 +46,14 @@ extra_sphinx_extensions:
  - sphinx_toolbox_experimental.needspace
  - sphinx_toolbox_experimental.succinct_seealso
  - sphinx_toolbox_experimental.peps
+ - local_extension
 
 exclude_files:
  - contributing
+
+
+intersphinx_mapping:
+ - "'shippinglabel': ('https://shippinglabel.readthedocs.io/en/latest/', None)"
+ - "'entrypoints': ('https://entrypoints.readthedocs.io/en/latest/', None)"
+
+preserve_custom_theme: true

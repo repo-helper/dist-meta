@@ -152,6 +152,7 @@ Contents
 	:maxdepth: 3
 	:glob:
 
+	usage
 	api/*
 
 .. sidebar-links::

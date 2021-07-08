@@ -153,7 +153,7 @@ def loads(rawtext: str) -> EntryPointMap:
 
 		.. code-block:: python
 
-			for name, epstr in distro.get_entry_points().get("console_scripts", {}):
+			for name, epstr in distro.get_entry_points().get("console_scripts", {}).items():
 				EntryPoint(name, epstr)
 	"""
 
@@ -175,7 +175,7 @@ def load(filename: PathLike) -> EntryPointMap:
 
 		.. code-block:: python
 
-			for name, epstr in distro.get_entry_points().get("console_scripts", {}):
+			for name, epstr in distro.get_entry_points().get("console_scripts", {}).items():
 				EntryPoint(name, epstr)
 	"""
 
@@ -334,7 +334,6 @@ class EntryPoint(NamedTuple):
 		Returns the list of extras associated with the entry point.
 		"""
 
-		print(self.value)
 		match = _entry_point_pattern.match(self.value)
 		if not match:
 			raise ValueError(f"Malformed entry point {self.value!r}")
@@ -349,8 +348,10 @@ class EntryPoint(NamedTuple):
 	@property
 	def module(self) -> str:
 		"""
-		The module component of :attr:`self.value <~.EntryPoint.value`>.
+		The module component of :class:`self.value <.EntryPoint>`.
 		"""
+
+		# TODO: proper xref
 
 		match = _entry_point_pattern.match(self.value)
 		if not match:
@@ -361,8 +362,10 @@ class EntryPoint(NamedTuple):
 	@property
 	def attr(self) -> str:
 		"""
-		The object/attribute component of :attr:`self.value <~.EntryPoint.value`>.
+		The object/attribute component of :class:`self.value <.EntryPoint>`.
 		"""
+
+		# TODO: proper xref
 
 		match = _entry_point_pattern.match(self.value)
 		if not match:
