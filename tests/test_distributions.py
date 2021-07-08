@@ -8,6 +8,7 @@ from typing import List, Optional
 # 3rd party
 import handy_archives
 import pytest
+from coincidence.params import param
 from coincidence.regressions import AdvancedDataRegressionFixture, AdvancedFileRegressionFixture
 from domdf_python_tools.paths import PathPlus
 from first import first
@@ -18,12 +19,12 @@ from shippinglabel.checksum import get_sha256_hash
 # this package
 from dist_meta import distributions
 
-if "wheel" not in shutil._UNPACK_FORMATS:  # type: ignore
-	shutil.register_unpack_format(
-			name="wheel",
-			extensions=[".whl"],
-			function=shutil._unpack_zipfile,  # type: ignore
-			)
+_wheels_glob = (PathPlus(__file__).parent / "wheels").glob("*.whl")
+
+
+@pytest.fixture(params=(param(w, key=lambda t: t[0].name) for w in _wheels_glob))
+def example_wheel(tmp_pathplus: PathPlus, request):
+	return shutil.copy2(request.param, tmp_pathplus)
 
 
 class TestDistribution:

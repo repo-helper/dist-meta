@@ -44,19 +44,7 @@ import functools
 import importlib
 import itertools
 import re
-from typing import (
-		Dict,
-		Iterable,
-		Iterator,
-		List,
-		Mapping,
-		NamedTuple,
-		Optional,
-		Sequence,
-		Tuple,
-		TypeVar,
-		Union
-		)
+from typing import Dict, Iterable, Iterator, List, Mapping, NamedTuple, Optional, Sequence, Tuple, TypeVar, Union
 
 # 3rd party
 from domdf_python_tools.paths import PathPlus

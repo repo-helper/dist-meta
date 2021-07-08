@@ -1,11 +1,9 @@
 # stdlib
-import shutil
 from typing import List
 
 # 3rd party
 import handy_archives
 import pytest
-from coincidence.params import param
 from domdf_python_tools.paths import PathPlus
 
 pytest_plugins = ("coincidence", "tests.yaml_packaging")
@@ -16,11 +14,6 @@ _original_wheel_directory = PathPlus(__file__).parent / "wheels"
 @pytest.fixture(scope="session")
 def wheel_directory() -> PathPlus:
 	return _original_wheel_directory
-
-
-@pytest.fixture(params=(param(w, key=lambda t: t[0].name) for w in _original_wheel_directory.glob("*.whl")))
-def example_wheel(tmp_pathplus: PathPlus, request):
-	return shutil.copy2(request.param, tmp_pathplus)
 
 
 @pytest.fixture()
