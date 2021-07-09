@@ -43,7 +43,7 @@ __all__ = ["dump", "dumps", "load", "loads"]
 
 def loads(rawtext: str) -> MetadataMapping:
 	"""
-	Parse a ``WHEEL`` file the given string.
+	Parse a ``WHEEL`` file from the given string.
 
 	:param rawtext:
 
@@ -71,7 +71,7 @@ def loads(rawtext: str) -> MetadataMapping:
 
 def load(filename: PathLike) -> MetadataMapping:
 	"""
-	Parse a ``WHEEL`` file the given file.
+	Parse a ``WHEEL`` file from the given file.
 
 	:param filename:
 
@@ -119,6 +119,7 @@ def dump(fields: MetadataMapping, filename: PathLike) -> int:
 
 	:param fields: May be a conventional mapping, with ``Root-Is-Purelib`` as a boolean
 		and ``Tag`` as a list of strings.
+	:param filename:
 	"""
 
 	filename = PathPlus(filename)
