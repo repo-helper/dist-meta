@@ -1,0 +1,38 @@
+diff --git a/importlib_metadata/__init__.py b/importlib_metadata/__init__.py
+--- a/importlib_metadata/__init__.py
++++ b/importlib_metadata/__init__.py
+@@ -22,7 +22,6 @@
+     PyPy_repr,
+     install,
+ )
+-from ._functools import method_cache
+ from ._itertools import unique_everseen
+ from ._meta import PackageMetadata, SimplePath
+
+@@ -751,7 +750,6 @@
+     children.
+     """
+
+-    @functools.lru_cache()  # type: ignore
+     def __new__(cls, root):
+         return super().__new__(cls)
+
+@@ -782,9 +780,7 @@
+     def mtime(self):
+         with suppress(OSError):
+             return os.stat(self.root).st_mtime
+-        self.lookup.cache_clear()
+
+-    @method_cache
+     def lookup(self, mtime):
+         return Lookup(self)
+
+@@ -888,7 +884,7 @@
+         )
+
+     def invalidate_caches(cls):
+-        FastPath.__new__.cache_clear()
++        pass
+
+
+ class PathDistribution(Distribution):
