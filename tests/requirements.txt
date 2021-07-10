@@ -9,6 +9,7 @@ importlib-metadata>=3.6.0
 pytest>=6.0.0
 pytest-cov>=2.8.1
 pytest-randomly>=3.7.0
+pytest-rerunfailures>=10.1
 pytest-timeout>=1.4.2
 shippinglabel>=0.16.0
 sphinx==4.0.2

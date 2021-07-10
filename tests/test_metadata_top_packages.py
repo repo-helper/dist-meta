@@ -124,6 +124,7 @@ cache_dir = PathPlus(tempfile.gettempdir()) / "wheel-cache"
 cache_dir.maybe_make(parents=True)
 
 
+@pytest.mark.flaky(reruns=1, reruns_delay=30)
 @pytest.mark.parametrize("package", top_packages)
 def test_loads(package: str):
 
