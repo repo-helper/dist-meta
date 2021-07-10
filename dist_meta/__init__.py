@@ -26,6 +26,10 @@ Parse and create Python distribution metadata.
 #  OR OTHER DEALINGS IN THE SOFTWARE.
 #
 
+# this package
+from dist_meta.distributions import get_distribution, iter_distributions
+from dist_meta.entry_points import get_all_entry_points, get_entry_points
+
 __author__: str = "Dominic Davis-Foster"
 __copyright__: str = "2021 Dominic Davis-Foster"
 __license__: str = "MIT License"
