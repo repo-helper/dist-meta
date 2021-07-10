@@ -82,7 +82,7 @@ def _parse_wheel_filename(filename: PathPlus) -> Tuple[str, Version]:
 
 def _iter_dist_infos(basedir: PathPlus) -> Iterator[os.DirEntry]:
 	subdir: os.DirEntry
-	with os.scandir(basedir) as sd:
+	with os.scandir(os.fspath(basedir)) as sd:
 		for subdir in sd:
 			if not subdir.is_dir():
 				continue
