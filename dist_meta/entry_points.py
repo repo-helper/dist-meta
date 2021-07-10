@@ -53,6 +53,7 @@ from domdf_python_tools.typing import PathLike
 from domdf_python_tools.utils import divide
 
 # this package
+from dist_meta._utils import _cache
 from dist_meta.distributions import Distribution
 
 __all__ = [
@@ -126,7 +127,7 @@ def lazy_load(filename: PathLike) -> EntryPointIterator:
 	return lazy_loads(filename.read_text())
 
 
-@functools.lru_cache()
+@_cache
 def loads(rawtext: str) -> EntryPointMap:
 	"""
 	Parse the entry points from the given text.

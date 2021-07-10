@@ -39,13 +39,22 @@ from packaging.version import Version
 
 _escaped_name_re = re.compile(r"^[\w\d._]*$", re.UNICODE)
 
+SHOULD_CACHE = int(os.environ.get("DIST_META_CACHE", 1))
 
-@functools.lru_cache()
+
+def _cache(func):
+	if SHOULD_CACHE:
+		return functools.lru_cache()(func)
+	else:
+		return func
+
+
+@_cache
 def _canonicalize(name: str) -> str:
 	return canonicalize_name(name)
 
 
-@functools.lru_cache()
+@_cache
 def _parse_wheel_filename(filename: PathPlus) -> Tuple[str, Version]:
 	# From https://github.com/pypa/packaging
 	# This software is made available under the terms of *either* of the licenses
@@ -84,6 +93,6 @@ def _iter_dist_infos(basedir: PathPlus) -> Iterator[os.DirEntry]:
 			yield subdir
 
 
-@functools.lru_cache()
+@_cache
 def _parse_version(version: str) -> Version:
 	return Version(version)
