@@ -47,6 +47,7 @@ known_third_party = [
     "pytest",
     "pytest_cov",
     "pytest_randomly",
+    "pytest_rerunfailures",
     "pytest_timeout",
     "shippinglabel",
     "sphinx",
