@@ -118,7 +118,7 @@ def to_pure_dict(
 		data: Union[entry_points.EntryPointMap, Dict[str, Sequence[entry_points.EntryPoint]]],
 		) -> entry_points.EntryPointMap:
 
-	output = {}
+	output: entry_points.EntryPointMap = {}
 
 	for group in data:
 		output[group] = {}
@@ -127,7 +127,7 @@ def to_pure_dict(
 			if isinstance(name, entry_points.EntryPoint):
 				output[group][name.name] = name.value
 			else:
-				output[group][name] = data[group][name]
+				output[group][name] = data[group][name]  # type: ignore
 
 	return output
 
