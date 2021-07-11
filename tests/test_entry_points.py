@@ -1,7 +1,9 @@
 # stdlib
+from configparser import ConfigParser
+from io import StringIO
 from operator import attrgetter, itemgetter
 from textwrap import dedent
-from typing import Dict, Iterator, List
+from typing import Dict, Iterator, List, Sequence, Union
 
 # 3rd party
 import pytest
@@ -29,6 +31,13 @@ def test_loads(advanced_data_regression: AdvancedDataRegressionFixture):
 			)
 
 	assert entry_points.loads(entry_points_content) == expected_load_output
+
+	cp = ConfigParser()
+	cp.read_string(entry_points_content)
+
+	for section in cp.sections():
+		assert section in expected_load_output
+		assert cp.options(section) == list(expected_load_output[section].keys())
 
 
 def test_load(tmp_pathplus, advanced_data_regression: AdvancedDataRegressionFixture):
@@ -105,6 +114,24 @@ def test_loads_bad_syntax(advanced_data_regression: AdvancedDataRegressionFixtur
 	assert entry_points.loads(entry_points_content) == {}
 
 
+def to_pure_dict(
+		data: Union[entry_points.EntryPointMap, Dict[str, Sequence[entry_points.EntryPoint]]],
+		) -> entry_points.EntryPointMap:
+
+	output = {}
+
+	for group in data:
+		output[group] = {}
+
+		for name in data[group]:
+			if isinstance(name, entry_points.EntryPoint):
+				output[group][name.name] = name.value
+			else:
+				output[group][name] = data[group][name]
+
+	return output
+
+
 @pytest.mark.parametrize(
 		"ep_dict",
 		[
@@ -140,6 +167,24 @@ def test_loads_bad_syntax(advanced_data_regression: AdvancedDataRegressionFixtur
 		)
 def test_dumps(advanced_file_regression: AdvancedFileRegressionFixture, ep_dict):
 	advanced_file_regression.check(entry_points.dumps(ep_dict))
+
+	pure_ep_dict = to_pure_dict(ep_dict)
+
+	cp = ConfigParser()
+	cp.read_dict(pure_ep_dict)
+	output = StringIO()
+	cp.write(output)
+	advanced_file_regression.check(output.getvalue())
+
+	for section in cp.sections():
+		assert section in ep_dict
+		assert cp.options(section) == list(pure_ep_dict[section].keys())
+
+	cp = ConfigParser()
+	cp.read_string(entry_points.dumps(ep_dict))
+	output = StringIO()
+	cp.write(output)
+	advanced_file_regression.check(output.getvalue())
 
 
 @pytest.mark.parametrize(
