@@ -113,7 +113,7 @@ def dumps(fields: Union[Mapping[str, Any], MetadataMapping]) -> str:
 	return str(output)
 
 
-def dump(fields: MetadataMapping, filename: PathLike) -> int:
+def dump(fields: Union[Mapping[str, Any], MetadataMapping], filename: PathLike) -> int:
 	"""
 	Construct a ``WHEEL`` file from the given fields, and write it to ``filename``.
 
