@@ -192,32 +192,35 @@ def dumps(fields: MetadataMapping) -> str:
 	if version >= 2.2:
 		output.add_multiple("Dynamic")
 
-	output.add_multiple("Platform")
-	output.add_multiple("Supported-Platform")
+	# General Meta
 	output.add_single("Summary")
-
-	output.add_single("Description-Content-Type")
-	output.add_single("Keywords")
-	output.add_single("Home-page")
-	output.add_single("Download-URL")
-
-	output.add_multiple("Project-URL")
-
 	output.add_single("Author")
 	output.add_single("Author-email")
 	output.add_single("Maintainer")
 	output.add_single("Maintainer-email")
 	output.add_single("License")
+	output.add_single("Keywords")
 
+	# URLs
+	output.add_single("Home-page")
+	output.add_single("Download-URL")
+	output.add_multiple("Project-URL")
+
+	# Platforms
+	output.add_multiple("Platform")
+	output.add_multiple("Supported-Platform")
 	output.add_multiple("Classifier")
 
+	# Requirements
 	output.add_single("Requires-Python")
-
 	output.add_multiple("Requires-Dist")
 	output.add_multiple("Provides-Extra")
 	output.add_multiple("Requires-External")
 	output.add_multiple("Provides-Dist")
 	output.add_multiple("Obsoletes-Dist")
+
+	# Description
+	output.add_single("Description-Content-Type")
 
 	if "Description" in fields:
 		output.add_body(fields["Description"])
