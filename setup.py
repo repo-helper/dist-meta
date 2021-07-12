@@ -23,7 +23,6 @@ setup(
 		install_requires=install_requires,
 		name="dist-meta",
 		py_modules=[],
-		version=__version__,
 		)
 
 shutil.rmtree("dist_meta.egg-info", ignore_errors=True)
