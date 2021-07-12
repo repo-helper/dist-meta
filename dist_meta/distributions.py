@@ -263,6 +263,8 @@ class WheelDistribution(NamedTuple):
 
 		Entry points in the group are contained in a dictionary mapping entry point names to objects.
 
+		.. latex:clearpage::
+
 		:class:`dist_meta.entry_points.EntryPoint` objects can be constructed as follows:
 
 		.. code-block:: python

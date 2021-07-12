@@ -6,3 +6,4 @@
 	:html: 3/10
 
 .. automodule:: dist_meta.metadata_mapping
+	:member-order: bysource

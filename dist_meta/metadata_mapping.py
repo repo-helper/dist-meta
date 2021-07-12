@@ -300,8 +300,6 @@ class MetadataEmitter(StringList):
 		Add a single value for the field with the given name.
 
 		:param field_name:
-
-		.. latex:clearpage::
 		"""
 
 		if field_name in self.fields:

@@ -352,6 +352,10 @@ class EntryPoint(NamedTuple):
 	def attr(self) -> str:
 		"""
 		The object/attribute component of :class:`self.value <.EntryPoint>`.
+
+		:rtype:
+
+		.. latex:clearpage::
 		"""
 
 		# TODO: proper xref

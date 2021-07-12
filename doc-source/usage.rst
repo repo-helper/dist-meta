@@ -188,6 +188,7 @@ This returns a mapping of group names (as strings) to a mapping of entry point n
 	{'console_scripts': {'wheel': 'wheel.cli:main'},
 	 'distutils.commands': {'bdist_wheel': 'wheel.bdist_wheel:bdist_wheel'}}
 
+.. latex:clearpage::
 
 :class:`dist_meta.entry_points.EntryPoint` objects can be constructed as follows:
 

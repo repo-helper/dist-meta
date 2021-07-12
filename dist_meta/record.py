@@ -73,6 +73,8 @@ class RecordEntry(pathlib.PurePosixPath):
 
 		Path operations (:meth:`~.pathlib.PurePath.joinpath`, :data:`~.pathlib.PurePath.parent` etc.)
 		will return a standard :class:`pathlib.PurePosixPath` object without the extended attributes of this class.
+
+	.. latex:vspace:: -10px
 	"""
 
 	__slots__ = ("hash", "size", "distro")
@@ -151,6 +153,10 @@ class RecordEntry(pathlib.PurePosixPath):
 		return (self.distro.path.parent / self).read_bytes()
 
 	def __repr__(self) -> str:
+		"""
+		Return a string representation of the :class:`~.RecordEntry`.
+		"""
+
 		parts = DelimitedList([f"{os.fspath(self)!r}"])
 		if self.hash is not None:
 			parts.append(f"hash={self.hash!r}")
