@@ -173,7 +173,7 @@ class Distribution(NamedTuple):
 			for line in csv.reader(content):
 				name, hash_, size_str, *_ = line
 				entry = RecordEntry(
-						name,
+						name.strip(),
 						hash=FileHash.from_string(hash_) if hash_ else None,
 						size=int(size_str) if size_str else None,
 						distro=self,
