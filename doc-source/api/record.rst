@@ -18,5 +18,3 @@
 
 .. autonamedtuple:: dist_meta.record.FileHash
 	:exclude-members: __repr__
-
-.. autotypevar:: dist_meta.record._FH

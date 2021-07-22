@@ -54,7 +54,7 @@ else:
 		except ImportError:
 			pass
 
-__all__ = ["FileHash", "RecordEntry", "_FH"]
+__all__ = ["FileHash", "RecordEntry"]
 
 _RE = TypeVar("_RE", bound="RecordEntry")
 _FH = TypeVar("_FH", bound="FileHash")
@@ -199,6 +199,8 @@ class RecordEntry(pathlib.PurePosixPath):
 
 		:param entry:
 		:param distro: The distribution the ``RECORD`` file belongs to. Optional.
+
+		:rtype: :class:`~.RecordEntry`
 		"""
 
 		entry = entry.strip()
@@ -240,6 +242,10 @@ class FileHash(NamedTuple):
 	def from_string(cls: Type[_FH], string: str) -> _FH:
 		"""
 		Constructs a  :class:`~.FileHash` from a  string in the form ``<name>=<value>``.
+
+		:param string:
+
+		:rtype: :class:`~.FileHash`
 		"""
 
 		name, _, value = string.partition('=')
@@ -279,6 +285,7 @@ class FileHash(NamedTuple):
 		:param the_hash:
 		:type the_hash: :mod:`hashlib.HASH <hashlib>`
 
+		:rtype: :class:`~.FileHash`
 		"""
 
 		name = the_hash.name
