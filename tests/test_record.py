@@ -1,7 +1,7 @@
 # 3rd party
 import handy_archives
 import pytest
-from coincidence import AdvancedFileRegressionFixture
+from coincidence import AdvancedDataRegressionFixture, AdvancedFileRegressionFixture
 from domdf_python_tools.paths import PathPlus
 from shippinglabel.checksum import get_sha256_hash
 
@@ -103,3 +103,24 @@ def test_record_entry_no_attributes(
 	assert license_record.as_record_entry() == "domdf_python_tools-2.9.1.dist-info/RECORD,,"
 
 	advanced_file_regression.check(repr(license_record))
+
+
+@pytest.mark.parametrize(
+		"record_string",
+		[
+				pytest.param("apeye-1.0.1.dist-info/INSTALLER,sha256=zuuue4knoyJ-UwPPXg8fezS7VCrXJQrAP7zeNuwvFQg,4", id="INSTALLER"),
+				pytest.param("apeye/__pycache__/email_validator.cpython-38.pyc,,", id="__pycache__"),
+				pytest.param("apeye/cache.py,sha256=NIQAPrl-YG2wYo-xomLJhy9Iyq9NM6hMSeYoxJBtI28,4158", id="cache.py"),
+				pytest.param("apeye/public_suffix_list.dat,sha256=sIQS28R2dRmXsqHy1dLS2poPCw9luJPejevcHnhvCME,233455", id="public_suffix_list.dat"),
+				pytest.param("apeye/py.typed,sha256=47DEQpj8HBSa-_TImW-5JCeuQeRkm5NMpJWZG3hSuFU,0", id="py.typed"),
+				]
+		)
+def test_from_record_entry_string(record_string: str, advanced_data_regression: AdvancedDataRegressionFixture):
+	record = RecordEntry.from_record_entry(record_string)
+	assert record.as_record_entry() == record_string
+	advanced_data_regression.check({"path": record, "size": record.size, "hash": record.hash})
+
+	fake_distro = object()
+	record = RecordEntry.from_record_entry(record_string, distro=fake_distro)  # type: ignore
+	assert record.as_record_entry() == record_string
+	assert record.distro is fake_distro

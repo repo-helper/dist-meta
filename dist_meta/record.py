@@ -27,6 +27,7 @@ Classes to model parts of ``RECORD`` files.
 #
 
 # stdlib
+import csv
 import os
 import pathlib
 from base64 import urlsafe_b64decode, urlsafe_b64encode
@@ -184,6 +185,44 @@ class RecordEntry(pathlib.PurePosixPath):
 			parts.append('')
 
 		return ','.join(parts)
+
+	@classmethod
+	def from_record_entry(
+			cls: Type[_RE],
+			entry: str,
+			distro: Optional["Distribution"] = None,
+			) -> _RE:
+		"""
+		Construct a :class:`~.RecordEntry` from a line in a ``RECORD`` file, in the form ``<name>,<hash>,<size>``.
+
+		.. versionadded:: 0.2.0
+
+		:param entry:
+		:param distro: The distribution the ``RECORD`` file belongs to. Optional.
+		"""
+
+		entry = entry.strip()
+		lines = entry.splitlines()
+
+		if len(lines) != 1:
+			raise ValueError("'entry' must be a single-line entry.")
+
+		entry = lines[0]
+
+		if '"' in entry:
+			name, hash_, size_str, *_ = next(csv.reader((entry, )))
+		else:
+			name, hash_, size_str, *_ = entry.split(',')
+
+		hash_ = hash_.strip()
+		size_str = size_str.strip()
+
+		return cls(
+				name.strip(),
+				hash=FileHash.from_string(hash_) if hash_ else None,
+				size=int(size_str) if size_str else None,
+				distro=distro,
+				)
 
 
 class FileHash(NamedTuple):
