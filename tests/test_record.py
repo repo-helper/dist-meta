@@ -108,10 +108,18 @@ def test_record_entry_no_attributes(
 @pytest.mark.parametrize(
 		"record_string",
 		[
-				pytest.param("apeye-1.0.1.dist-info/INSTALLER,sha256=zuuue4knoyJ-UwPPXg8fezS7VCrXJQrAP7zeNuwvFQg,4", id="INSTALLER"),
+				pytest.param(
+						"apeye-1.0.1.dist-info/INSTALLER,sha256=zuuue4knoyJ-UwPPXg8fezS7VCrXJQrAP7zeNuwvFQg,4",
+						id="INSTALLER"
+						),
 				pytest.param("apeye/__pycache__/email_validator.cpython-38.pyc,,", id="__pycache__"),
-				pytest.param("apeye/cache.py,sha256=NIQAPrl-YG2wYo-xomLJhy9Iyq9NM6hMSeYoxJBtI28,4158", id="cache.py"),
-				pytest.param("apeye/public_suffix_list.dat,sha256=sIQS28R2dRmXsqHy1dLS2poPCw9luJPejevcHnhvCME,233455", id="public_suffix_list.dat"),
+				pytest.param(
+						"apeye/cache.py,sha256=NIQAPrl-YG2wYo-xomLJhy9Iyq9NM6hMSeYoxJBtI28,4158", id="cache.py"
+						),
+				pytest.param(
+						"apeye/public_suffix_list.dat,sha256=sIQS28R2dRmXsqHy1dLS2poPCw9luJPejevcHnhvCME,233455",
+						id="public_suffix_list.dat"
+						),
 				pytest.param("apeye/py.typed,sha256=47DEQpj8HBSa-_TImW-5JCeuQeRkm5NMpJWZG3hSuFU,0", id="py.typed"),
 				]
 		)
