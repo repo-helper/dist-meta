@@ -9,7 +9,6 @@ from typing import List, Set
 import handy_archives
 import pytest
 from apeye.requests_url import RequestsURL
-from consolekit.utils import coloured_diff
 from domdf_python_tools.paths import PathPlus
 from first import first
 from shippinglabel.pypi import get_metadata
