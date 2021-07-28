@@ -85,7 +85,7 @@ class TestDistribution:
 		distro = distributions.Distribution.from_path(filename)
 		record = distro.get_record()
 		assert record is not None
-		assert len(record)
+		assert len(record)  # pylint: disable=len-as-condition
 
 		for file in record:
 			assert (distro.path.parent / file).exists()
@@ -141,7 +141,7 @@ class TestWheelDistribution:
 		distro = distributions.WheelDistribution.from_path(example_wheel)
 		record = distro.get_record()
 		assert record is not None
-		assert len(record)
+		assert len(record)  # pylint: disable=len-as-condition
 
 		for file in record:
 
