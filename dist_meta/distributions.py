@@ -5,7 +5,7 @@
 Iterate over installed distributions.
 
 Third-party distributions are installed into Python's ``site-packages`` directory with tools such as pip_.
-Distributions must a ``*.dist-info`` directory (as defined by :pep:`566`) to be discoverable.
+Distributions must have a ``*.dist-info`` directory (as defined by :pep:`566`) to be discoverable.
 
 .. _pip: https://pypi.org/project/pip/
 """
@@ -36,10 +36,13 @@ Distributions must a ``*.dist-info`` directory (as defined by :pep:`566`) to be 
 #
 
 # stdlib
+import abc
 import csv
 import posixpath
 import sys
-from typing import Dict, Iterable, Iterator, List, NamedTuple, Optional, Type, TypeVar, Union
+from contextlib import suppress
+from operator import itemgetter
+from typing import TYPE_CHECKING, Any, Callable, Dict, Iterable, Iterator, List, Optional, Tuple, Type, TypeVar
 
 # 3rd party
 import handy_archives
@@ -54,26 +57,39 @@ from dist_meta._utils import _canonicalize, _iter_dist_infos, _parse_version, _p
 from dist_meta.metadata_mapping import MetadataMapping
 from dist_meta.record import FileHash, RecordEntry
 
+_tuplegetter = lambda index, doc: property(itemgetter(index), doc=doc)
+
+if not TYPE_CHECKING:
+	with suppress(ImportError):
+		# 3rd party
+		from _collections import _tuplegetter
+
 __all__ = [
 		"get_distribution",
 		"iter_distributions",
+		"DistributionType",
 		"Distribution",
 		"WheelDistribution",
-		"DistributionType",
 		"DistributionNotFoundError",
-		"_D",
-		"_WD",
+		"_DT",
 		]
 
+_DT = TypeVar("_DT", bound="DistributionType")
 _D = TypeVar("_D", bound="Distribution")
 _WD = TypeVar("_WD", bound="WheelDistribution")
 
 
-class Distribution(NamedTuple):
+class DistributionType(abc.ABC):
 	"""
-	Represents an installed Python distribution.
+	:class:`typing.Protocol` for :class:`~.Distribution`-like objects.
 
-	:param name: The name of the distribution.
+	.. versionchanged:: 0.3.0
+
+		Previously was a :py:obj:`~.typing.Union` representing :class:`~.Distribution` and :class:`~.WheelDistribution`.
+		Now a common base class for those two classes, and custom classes providing the same API
+
+	This class implements most of the :func:`collections.namedtuple` API.
+	Subclasses must implement ``_fields``, as a tuple of field names.
 	"""
 
 	#: The name of the distribution. No normalization is performed.
@@ -82,22 +98,37 @@ class Distribution(NamedTuple):
 	#: The version number of the distribution.
 	version: Version
 
-	#: The path to the ``*.dist-info`` directory in the file system.
-	path: PathPlus
+	_fields: Tuple[str, ...]  # actually a ClassVar, but need to support older Pythons
+	_field_defaults: Dict[str, Any]
+	__iter__: Callable
+	__getitem__: Callable
 
-	@classmethod
-	def from_path(cls: Type[_D], path: PathLike) -> _D:
-		"""
-		Construct a :class:`~.Distribution` from a filesystem path to the ``*.dist-info`` directory.
+	def __init_subclass__(cls: Type["DistributionType"], **kwargs):
 
-		:param path:
-		"""
+		ns = cls.__dict__
+		print(cls.__dict__)
 
-		path = PathPlus(path)
-		distro_name_version = path.stem
-		name, version = divide(distro_name_version, '-')
-		return cls(name, _parse_version(version), path)
+		field_defaults = getattr(cls, "_field_defaults", {})
 
+		for index, name in enumerate(cls._fields):
+			if name in ns:
+				field_defaults[name] = ns[name]
+
+		if not cls._fields:
+			raise ValueError("'_fields' cannot be empty.")
+
+		if cls._fields[0] != "name":
+			raise ValueError("The first item in '_fields' must be 'name'")
+		elif cls._fields[1] != "version":
+			raise ValueError("The second item in '_fields' must be 'version'")
+
+		for index, name in enumerate(cls._fields):
+			doc = sys.intern(f'Alias for field number {index}')
+			setattr(cls, name, _tuplegetter(index, doc))
+
+		cls._field_defaults = field_defaults
+
+	@abc.abstractmethod
 	def read_file(self, filename: str) -> str:
 		"""
 		Read a file from the ``*.dist-info`` directory and return its content.
@@ -105,8 +136,9 @@ class Distribution(NamedTuple):
 		:param filename:
 		"""
 
-		return (self.path / filename).read_text()
+		raise NotImplementedError
 
+	@abc.abstractmethod
 	def has_file(self, filename: str) -> bool:
 		"""
 		Returns whether the ``*.dist-info`` directory contains a file named ``filename``.
@@ -114,7 +146,44 @@ class Distribution(NamedTuple):
 		:param filename:
 		"""
 
-		return (self.path / filename).is_file()
+		raise NotImplementedError
+
+	def _asdict(self) -> Dict[str, Any]:
+		"""
+		Return a new dict which maps field names to their values.
+		"""
+
+		return dict(zip(self._fields, self))
+
+	def __getnewargs__(self) -> Tuple:
+		"""
+		Return self as a plain tuple. Used by copy and pickle.
+		"""
+
+		return tuple(self)
+
+	def _replace(self: _DT, **kwargs) -> _DT:
+		"""
+		Make a new :class:`~.DistributionType` object, of the same type as this one,
+		replacing the specified fields with new values.
+
+		:param iterable:
+		"""  # noqa: D400
+
+		result = self._make(map(kwargs.pop, self._fields, self))
+		if kwargs:
+			raise ValueError(f'Got unexpected field names: {list(kwargs)!r}')
+		return result
+
+	@classmethod
+	def _make(cls: Type[_DT], iterable) -> _DT:
+		"""
+		Make a new :class:`~.DistributionType` object, of the same type as this one, from a sequence or iterable.
+
+		:param iterable:
+		"""
+
+		return cls(*iterable)
 
 	def get_entry_points(self) -> Dict[str, Dict[str, str]]:  # -> EntryPointMap
 		"""
@@ -176,7 +245,6 @@ class Distribution(NamedTuple):
 						name.strip(),
 						hash=FileHash.from_string(hash_) if hash_ else None,
 						size=int(size_str) if size_str else None,
-						distro=self,
 						)
 				output.append(entry)
 
@@ -186,13 +254,108 @@ class Distribution(NamedTuple):
 
 	def __repr__(self):
 		"""
-		Returns a string representation of the :class:`~.Distribution`.
+		Returns a string representation of the :class:`~.DistributionType`.
 		"""
 
 		return f"<{self.__class__.__name__}({self.name!r}, {self.version!r})>"
 
 
-class WheelDistribution(NamedTuple):
+class Distribution(DistributionType, Tuple[str, Version, PathPlus]):
+	"""
+	Represents an installed Python distribution.
+
+	:param name: The name of the distribution.
+	"""
+
+	#: The name of the distribution. No normalization is performed.
+	name: str
+
+	#: The version number of the distribution.
+	version: Version
+
+	#: The path to the ``*.dist-info`` directory in the file system.
+	path: PathPlus
+
+	__slots__ = ()
+	_fields = ("name", "version", "path")
+
+	def __new__(
+			cls: Type[_D],
+			name: str,
+			version: Version,
+			path: PathPlus,
+			) -> _D:
+		"""
+		Construct a new :class:`~.Distribution` object.
+
+		:rtype: :class:`~.Distribution`
+		"""
+
+		# If this is super().__new__ it breaks on PyPy
+		return tuple.__new__(cls, (name, version, path))
+
+	@classmethod
+	def from_path(cls: Type[_D], path: PathLike) -> _D:
+		"""
+		Construct a :class:`~.Distribution` from a filesystem path to the ``*.dist-info`` directory.
+
+		:param path:
+
+		:rtype: :class:`~.Distribution`
+		"""
+
+		path = PathPlus(path)
+		distro_name_version = path.stem
+		name, version = divide(distro_name_version, '-')
+		return cls(name, _parse_version(version), path)
+
+	def read_file(self, filename: str) -> str:
+		"""
+		Read a file from the ``*.dist-info`` directory and return its content.
+
+		:param filename:
+		"""
+
+		return (self.path / filename).read_text()
+
+	def has_file(self, filename: str) -> bool:
+		"""
+		Returns whether the ``*.dist-info`` directory contains a file named ``filename``.
+
+		:param filename:
+		"""
+
+		return (self.path / filename).is_file()
+
+	def get_record(self) -> Optional[List[RecordEntry]]:
+		"""
+		Returns the parsed content of the ``*.dist-info/RECORD`` file, or :py:obj:`None` if the file does not exist.
+
+		:returns: A :class:`dist_meta.record.RecordEntry` object for each line in the record
+			(i.e. each file in the distribution).
+			This includes files in the ``*.dist-info`` directory.
+		"""  # noqa: RST399
+
+		if self.has_file("RECORD"):
+			content = self.read_file("RECORD").splitlines()
+			output = []
+
+			for line in csv.reader(content):
+				name, hash_, size_str, *_ = line
+				entry = RecordEntry(
+						name.strip(),
+						hash=FileHash.from_string(hash_) if hash_ else None,
+						size=int(size_str) if size_str else None,
+						distro=self,
+						)
+				output.append(entry)
+
+			return output
+		else:
+			return None
+
+
+class WheelDistribution(DistributionType, Tuple[str, Version, PathPlus, handy_archives.ZipFile]):
 	"""
 	Represents a Python distribution in :pep:`wheel <427>` form.
 
@@ -216,6 +379,25 @@ class WheelDistribution(NamedTuple):
 	#: The opened zip file.
 	wheel_zip: handy_archives.ZipFile
 
+	__slots__ = ()
+	_fields = ("name", "version", "path", "wheel_zip")
+
+	def __new__(
+			cls: Type[_WD],
+			name: str,
+			version: Version,
+			path: PathPlus,
+			wheel_zip: handy_archives.ZipFile,
+			) -> _WD:
+		"""
+		Construct a new :class:`~.WheelDistribution` object.
+
+		:rtype: :class:`~.WheelDistribution`
+		"""
+
+		# If this is super().__new__ it breaks on PyPy
+		return tuple.__new__(cls, (name, version, path, wheel_zip))
+
 	@classmethod
 	def from_path(cls: Type[_WD], path: PathLike, **kwargs) -> _WD:
 		r"""
@@ -223,6 +405,8 @@ class WheelDistribution(NamedTuple):
 
 		:param path:
 		:param \*\*kwargs: Additional keyword arguments passed to :class:`zipfile.ZipFile`.
+
+		:rtype: :class:`~.WheelDistribution`
 		"""
 
 		path = PathPlus(path)
@@ -257,37 +441,6 @@ class WheelDistribution(NamedTuple):
 		dist_info = f"{self.name}-{self.version}.dist-info"
 		return posixpath.join(dist_info, filename) in self.wheel_zip.namelist()
 
-	def get_entry_points(self) -> Dict[str, Dict[str, str]]:  # -> EntryPointMap
-		"""
-		Returns a mapping of entry point groups to entry points.
-
-		Entry points in the group are contained in a dictionary mapping entry point names to objects.
-
-		.. latex:clearpage::
-
-		:class:`dist_meta.entry_points.EntryPoint` objects can be constructed as follows:
-
-		.. code-block:: python
-
-			for name, epstr in distro.get_entry_points().get("console_scripts", {}).items():
-				EntryPoint(name, epstr)
-		"""
-
-		# this package
-		from dist_meta import entry_points
-
-		if self.has_file("entry_points.txt"):
-			return entry_points.loads(self.read_file("entry_points.txt"))
-		else:
-			return {}
-
-	def get_metadata(self) -> MetadataMapping:
-		"""
-		Returns the content of the ``*.dist-info/METADATA`` file.
-		"""
-
-		return metadata.loads(self.read_file("METADATA"))
-
 	def get_wheel(self) -> MetadataMapping:
 		"""
 		Returns the content of the ``*.dist-info/WHEEL`` file.
@@ -296,13 +449,6 @@ class WheelDistribution(NamedTuple):
 		"""
 
 		return wheel.loads(self.read_file("WHEEL"))
-
-	def __repr__(self):
-		"""
-		Returns a string representation of the :class:`~.WheelDistribution`.
-		"""
-
-		return f"<{self.__class__.__name__}({self.name!r}, {self.version!r})>"
 
 	def get_record(self) -> List[RecordEntry]:
 		"""
@@ -328,10 +474,6 @@ class WheelDistribution(NamedTuple):
 			output.append(entry)
 
 		return output
-
-
-#: Type hint for functions that accept either a :class:`~.Distribution` or a :class:`~.WheelDistribution`.
-DistributionType = Union[Distribution, WheelDistribution]
 
 
 def iter_distributions(path: Optional[Iterable[PathLike]] = None) -> Iterator[Distribution]:
