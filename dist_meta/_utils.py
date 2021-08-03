@@ -29,6 +29,7 @@ Private utility functions.
 # stdlib
 import functools
 import os
+import pathlib
 import re
 from typing import Iterator, Tuple
 
@@ -55,7 +56,7 @@ def _canonicalize(name: str) -> str:
 
 
 @_cache
-def _parse_wheel_filename(filename: PathPlus) -> Tuple[str, Version]:
+def _parse_wheel_filename(filename: pathlib.PurePath) -> Tuple[str, Version]:
 	# From https://github.com/pypa/packaging
 	# This software is made available under the terms of *either* of the licenses
 	# found in LICENSE.APACHE or LICENSE.BSD. Contributions to this software is made
