@@ -81,7 +81,7 @@ _WD = TypeVar("_WD", bound="WheelDistribution")
 
 class DistributionType(abc.ABC):
 	"""
-	:class:`typing.Protocol` for :class:`~.Distribution`-like objects.
+	Abstract base class for :class:`~.Distribution`-like objects.
 
 	.. versionchanged:: 0.3.0
 
@@ -89,7 +89,8 @@ class DistributionType(abc.ABC):
 		Now a common base class for those two classes, and custom classes providing the same API
 
 	This class implements most of the :func:`collections.namedtuple` API.
-	Subclasses must implement ``_fields``, as a tuple of field names.
+	Subclasses must implement ``_fields`` (as a tuple of field names)
+	and the :class:`tuple` interface (specifically ``__iter__`` and ``__getitem__``).
 	"""
 
 	#: The name of the distribution. No normalization is performed.
@@ -98,8 +99,14 @@ class DistributionType(abc.ABC):
 	#: The version number of the distribution.
 	version: Version
 
+	#: A tuple of field names for the "namedtuple".
 	_fields: Tuple[str, ...]  # actually a ClassVar, but need to support older Pythons
+
+	#: A mapping of field names to default values.
 	_field_defaults: Dict[str, Any]
+
+	# These must be implemented by subclasses, but they can't be abstractmethods
+	# otherwise mypy gets confused
 	__iter__: Callable
 	__getitem__: Callable
 
