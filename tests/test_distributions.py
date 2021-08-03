@@ -100,6 +100,8 @@ class TestDistribution:
 
 
 class TestWheelDistribution:
+	cls = distributions.WheelDistribution
+	repr_filename = "_wd.repr"
 
 	def test_distribution(
 			self,
@@ -107,7 +109,7 @@ class TestWheelDistribution:
 			advanced_file_regression: AdvancedFileRegressionFixture,
 			advanced_data_regression: AdvancedDataRegressionFixture,
 			):
-		wd = distributions.WheelDistribution.from_path(example_wheel)
+		wd = self.cls.from_path(example_wheel)
 
 		advanced_data_regression.check({
 				"filename": PathPlus(example_wheel).name,
@@ -120,7 +122,7 @@ class TestWheelDistribution:
 				"top_level": wd.read_file("top_level.txt"),
 				})
 
-		advanced_file_regression.check(repr(wd), extension="_wd.repr")
+		advanced_file_regression.check(repr(wd), extension=self.repr_filename)
 		advanced_file_regression.check(wd.path.name, extension="_wd.path")
 
 		assert isinstance(wd.wheel_zip, zipfile.ZipFile)
@@ -128,7 +130,7 @@ class TestWheelDistribution:
 
 	def test_get_record(self, example_wheel):
 
-		distro = distributions.WheelDistribution.from_path(example_wheel)
+		distro = self.cls.from_path(example_wheel)
 		record = distro.get_record()
 		assert record is not None
 		assert len(record)  # pylint: disable=len-as-condition
@@ -155,9 +157,7 @@ class TestWheelDistribution:
 			advanced_file_regression: AdvancedFileRegressionFixture,
 			advanced_data_regression: AdvancedDataRegressionFixture,
 			):
-		wd = distributions.WheelDistribution.from_path(
-				wheel_directory / "domdf_python_tools-2.9.1-py3-none-any.whl"
-				)
+		wd = self.cls.from_path(wheel_directory / "domdf_python_tools-2.9.1-py3-none-any.whl")
 
 		assert isinstance(wd.wheel_zip, zipfile.ZipFile)
 		assert isinstance(wd.wheel_zip, handy_archives.ZipFile)
@@ -356,61 +356,9 @@ class TestCustomDistribution:
 		assert made == expected
 
 
-class TestCustomSubclass:
-
-	def test_distribution(
-			self,
-			example_wheel,
-			advanced_file_regression: AdvancedFileRegressionFixture,
-			advanced_data_regression: AdvancedDataRegressionFixture,
-			):
-		wd = CustomSubclass.from_path(example_wheel)
-
-		advanced_data_regression.check({
-				"filename": PathPlus(example_wheel).name,
-				"name": wd.name,
-				"version": str(wd.version),
-				"wheel": list(wd.get_wheel().items()),
-				"metadata": list(wd.get_metadata().items()),
-				"entry_points": wd.get_entry_points(),
-				"has_license": wd.has_file("LICENSE"),
-				"top_level": wd.read_file("top_level.txt"),
-				})
-
-		advanced_file_regression.check(repr(wd), extension="_cs.repr")
-		advanced_file_regression.check(wd.path.name, extension="_wd.path")
-
-		assert isinstance(wd.wheel_zip, zipfile.ZipFile)
-		assert isinstance(wd.wheel_zip, handy_archives.ZipFile)
-
-	def test_get_record(
-			self,
-			example_wheel,
-			tmp_pathplus: PathPlus,
-			advanced_file_regression: AdvancedFileRegressionFixture,
-			advanced_data_regression: AdvancedDataRegressionFixture,
-			):
-
-		distro = CustomSubclass.from_path(example_wheel)
-		record = distro.get_record()
-		assert record is not None
-		assert len(record)  # pylint: disable=len-as-condition
-
-		for file in record:
-
-			if file.hash is None:
-				assert file.name == "RECORD"
-			else:
-				with distro.wheel_zip.open(os.fspath(file)) as fp:
-					assert get_sha256_hash(fp).hexdigest() == file.hash.hexdigest()
-
-			if file.size is not None:
-				assert distro.wheel_zip.getinfo(os.fspath(file)).file_size == file.size
-
-			assert file.distro is None
-
-			with pytest.raises(ValueError, match="Cannot read files with 'self.distro = None'"):
-				file.read_bytes()
+class TestCustomSubclass(TestWheelDistribution):
+	cls = CustomSubclass
+	repr_filename = "_cs.repr"
 
 	def test_wheel_distribution_zip(
 			self,
