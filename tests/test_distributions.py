@@ -71,14 +71,7 @@ class TestDistribution:
 		(filename / "RECORD").unlink()
 		assert distro.get_record() is None
 
-	def test_get_record(
-			self,
-			example_wheel,
-			tmp_pathplus: PathPlus,
-			advanced_file_regression: AdvancedFileRegressionFixture,
-			advanced_data_regression: AdvancedDataRegressionFixture,
-			):
-
+	def test_get_record(self, example_wheel, tmp_pathplus: PathPlus):
 		(tmp_pathplus / "site-packages").mkdir()
 		handy_archives.unpack_archive(example_wheel, tmp_pathplus / "site-packages")
 
@@ -133,13 +126,7 @@ class TestWheelDistribution:
 		assert isinstance(wd.wheel_zip, zipfile.ZipFile)
 		assert isinstance(wd.wheel_zip, handy_archives.ZipFile)
 
-	def test_get_record(
-			self,
-			example_wheel,
-			tmp_pathplus: PathPlus,
-			advanced_file_regression: AdvancedFileRegressionFixture,
-			advanced_data_regression: AdvancedDataRegressionFixture,
-			):
+	def test_get_record(self, example_wheel):
 
 		distro = distributions.WheelDistribution.from_path(example_wheel)
 		record = distro.get_record()
@@ -306,13 +293,7 @@ class TestCustomDistribution:
 		assert isinstance(wd.wheel_zip, zipfile.ZipFile)
 		assert isinstance(wd.wheel_zip, handy_archives.ZipFile)
 
-	def test_get_record(
-			self,
-			example_wheel,
-			tmp_pathplus: PathPlus,
-			advanced_file_regression: AdvancedFileRegressionFixture,
-			advanced_data_regression: AdvancedDataRegressionFixture,
-			):
+	def test_get_record(self, example_wheel):
 
 		distro = CustomDistribution.from_path(example_wheel)
 		record = distro.get_record()

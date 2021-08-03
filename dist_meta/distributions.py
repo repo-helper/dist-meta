@@ -112,17 +112,15 @@ class DistributionType(abc.ABC):
 
 	def __init_subclass__(cls: Type["DistributionType"], **kwargs):
 
-		ns = cls.__dict__
-		print(cls.__dict__)
+		if not getattr(cls, "_fields", ()):
+			raise ValueError("'_fields' cannot be empty.")
 
+		ns = cls.__dict__
 		field_defaults = getattr(cls, "_field_defaults", {})
 
 		for index, name in enumerate(cls._fields):
 			if name in ns:
 				field_defaults[name] = ns[name]
-
-		if not cls._fields:
-			raise ValueError("'_fields' cannot be empty.")
 
 		if cls._fields[0] != "name":
 			raise ValueError("The first item in '_fields' must be 'name'")

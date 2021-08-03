@@ -51,7 +51,6 @@ extra_sphinx_extensions:
 exclude_files:
  - contributing
 
-
 intersphinx_mapping:
  - "'shippinglabel': ('https://shippinglabel.readthedocs.io/en/latest/', None)"
  - "'entrypoints': ('https://entrypoints.readthedocs.io/en/latest/', None)"
