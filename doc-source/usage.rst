@@ -169,7 +169,7 @@ for discovery and used by other code. For example:
 
 Entry points are arranged into groups, such as ``console_scripts`` or ``whey.builder``.
 
-To obtain the entry points for a :class:`~.Distribution`, call its :meth:`~.Distribution.get_entry_points` method:
+To obtain the entry points for a :class:`~.Distribution`, call its :meth:`~.DistributionType.get_entry_points` method:
 
 .. code-block:: pycon
 
