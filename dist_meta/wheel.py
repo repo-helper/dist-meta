@@ -50,18 +50,16 @@ def loads(rawtext: str) -> MetadataMapping:
 	:returns: A mapping of the metadata fields, and the long description
 	"""
 
-	file_content: List[str] = rawtext.split('\n')
+	file_content: List[str] = rawtext.splitlines()
 	file_content.reverse()
 
 	fields: MetadataMapping = MetadataMapping()
 
 	while file_content:
 		line = file_content.pop()
-		if not line:
-			continue
-
-		field_name, field_value = divide(line, ':')
-		fields[field_name] = field_value.lstrip()
+		if line.strip():
+			field_name, field_value = divide(line, ':')
+			fields[field_name] = field_value.lstrip()
 
 	if "Wheel-Version" not in fields:
 		raise MissingFieldError(f"No 'Wheel-Version' field was provided.")

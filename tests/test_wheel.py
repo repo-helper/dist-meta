@@ -20,7 +20,7 @@ def test_loads():
 	Root-Is-Purelib: true
 	Tag: py3-none-any
 	Tag: py2-none-any
-	"""
+	\r"""
 			)
 
 	fields = wheel.loads(wheel_content)
