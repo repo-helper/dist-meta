@@ -16,6 +16,9 @@
 - name: appdirs
   path: python3.8/site-packages/appdirs-1.4.4.dist-info
   version: 1.4.4
+- name: buildbot_gitea
+  path: python3.8/site-packages/buildbot_gitea-1.7.0.dist-info
+  version: 1.7.0
 - name: cawdrey
   path: python3.8/site-packages/cawdrey-0.4.2.dist-info
   version: 0.4.2
@@ -34,6 +37,9 @@
 - name: packaging
   path: python3.8/site-packages/packaging-20.9.dist-info
   version: '20.9'
+- name: pyathena
+  path: python3.8/site-packages/pyathena-2.3.0.dist-info
+  version: 2.3.0
 - name: sphinxcontrib_applehelp
   path: python3.8/site-packages/sphinxcontrib_applehelp-1.0.2.dist-info
   version: 1.0.2

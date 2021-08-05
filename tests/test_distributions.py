@@ -30,8 +30,21 @@ def example_wheel(tmp_pathplus: PathPlus, request):
 	return shutil.copy2(request.param, tmp_pathplus)
 
 
+def _name_param(params):
+	wheel = params[0]
+	if wheel.name == "PyAthena-2.3.0-py3-none-any.whl":
+		# PyAthena has a CamelCase filename but lowercase metadata
+		return "PyAthena-2.3.0-py3-none-any.whl_Distribution"
+	else:
+		return wheel.name
+
+
 class TestDistribution:
 
+	@pytest.mark.parametrize(
+			"example_wheel",
+			[param(w, key=_name_param) for w in (PathPlus(__file__).parent / "wheels").glob("*.whl")],
+			)
 	def test_distribution(
 			self,
 			example_wheel,
@@ -213,25 +226,8 @@ class CustomDistribution(DistributionType, Tuple[str, Version, PathPlus, handy_a
 
 		return cls(name, version, path, wheel_zip)
 
-	def read_file(self, filename: str) -> str:
-		"""
-		Read a file from the ``*.dist-info`` directory and return its content.
-
-		:param filename:
-		"""
-
-		dist_info = f"{self.name}-{self.version}.dist-info"
-		return self.wheel_zip.read_text(posixpath.join(dist_info, filename))
-
-	def has_file(self, filename: str) -> bool:
-		"""
-		Returns whether the ``*.dist-info`` directory contains a file named ``filename``.
-
-		:param filename:
-		"""
-
-		dist_info = f"{self.name}-{self.version}.dist-info"
-		return posixpath.join(dist_info, filename) in self.wheel_zip.namelist()
+	read_file = distributions.WheelDistribution.read_file
+	has_file = distributions.WheelDistribution.has_file
 
 
 class CustomSubclass(distributions.WheelDistribution):

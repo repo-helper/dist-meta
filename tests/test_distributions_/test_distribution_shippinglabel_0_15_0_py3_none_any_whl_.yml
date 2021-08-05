@@ -138,9 +138,6 @@ metadata:
     * Then install\n\n\t.. code-block:: bash\n\n\t\t$ conda install shippinglabel\n\
     \n.. end installation\n"
 name: shippinglabel
-top_level: 'shippinglabel
-
-  '
 version: 0.15.0
 wheel:
 - - Wheel-Version

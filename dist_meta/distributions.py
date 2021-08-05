@@ -39,10 +39,24 @@ Distributions must have a ``*.dist-info`` directory (as defined by :pep:`566`) t
 import abc
 import csv
 import posixpath
+import re
 import sys
 from contextlib import suppress
 from operator import itemgetter
-from typing import TYPE_CHECKING, Any, Callable, Dict, Iterable, Iterator, List, Optional, Tuple, Type, TypeVar
+from typing import (
+		TYPE_CHECKING,
+		Any,
+		Callable,
+		Dict,
+		Iterable,
+		Iterator,
+		List,
+		Optional,
+		Tuple,
+		Type,
+		TypeVar,
+		cast
+		)
 
 # 3rd party
 import handy_archives
@@ -434,7 +448,14 @@ class WheelDistribution(DistributionType, Tuple[str, Version, PathPlus, handy_ar
 		"""
 
 		dist_info = f"{self.name}-{self.version}.dist-info"
-		return self.wheel_zip.read_text(posixpath.join(dist_info, filename))
+		try:
+			return self.wheel_zip.read_text(posixpath.join(dist_info, filename))
+		except FileNotFoundError:
+			filenames = _get_case_insensitive_matches(filename, self)
+			if not filenames:
+				raise
+
+			return self.wheel_zip.read_text(filenames[0])
 
 	def has_file(self, filename: str) -> bool:
 		"""
@@ -444,7 +465,11 @@ class WheelDistribution(DistributionType, Tuple[str, Version, PathPlus, handy_ar
 		"""
 
 		dist_info = f"{self.name}-{self.version}.dist-info"
-		return posixpath.join(dist_info, filename) in self.wheel_zip.namelist()
+
+		if posixpath.join(dist_info, filename) in self.wheel_zip.namelist():
+			return True
+		else:
+			return bool(_get_case_insensitive_matches(filename, self))
 
 	def get_wheel(self) -> MetadataMapping:
 		"""
@@ -539,3 +564,22 @@ class DistributionNotFoundError(ValueError):
 	"""
 	Raised when a distribution cannot be located.
 	"""
+
+
+def _get_case_insensitive_matches(filename: str, distribution: DistributionType) -> List[str]:
+	"""
+	Return a list of matching filenames for a case insentitive search of ``*.dist-info`` directories.
+
+	Some backends, e.g. poetry, allow CamelCase for the wheel filename
+	but use lowercase for the ``*.dist-info`` directory
+
+	:param filename:
+	:param distribution:
+	"""
+
+	cre = re.compile(
+			rf"^(?i:{re.escape(distribution.name)})-"
+			rf"{re.escape(str(distribution.version))}\.dist-info/{re.escape(filename)}$"
+			)
+	namelist = cast(WheelDistribution, distribution).wheel_zip.namelist()
+	return [fn for fn in namelist if cre.match(fn)]

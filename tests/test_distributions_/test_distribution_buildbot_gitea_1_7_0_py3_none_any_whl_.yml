@@ -1,0 +1,131 @@
+entry_points:
+  buildbot.reporters:
+    GiteaStatusPush: buildbot_gitea.reporter:GiteaStatusPush
+  buildbot.steps:
+    Gitea: buildbot_gitea.step_source:Gitea
+  buildbot.util:
+    GiteaAuth: buildbot_gitea.auth:GiteaAuth
+  buildbot.webhooks:
+    gitea: buildbot_gitea.webhook:gitea
+filename: buildbot_gitea-1.7.0-py3-none-any.whl
+has_license: true
+metadata:
+- - Metadata-Version
+  - '2.1'
+- - Name
+  - buildbot-gitea
+- - Version
+  - 1.7.0
+- - Summary
+  - buildbot plugin for integration with Gitea.
+- - Home-page
+  - https://github.com/lab132/buildbot-gitea
+- - Author
+  - Marvin Pohl
+- - Author-email
+  - hello@lab132.com
+- - License
+  - UNKNOWN
+- - Platform
+  - UNKNOWN
+- - Classifier
+  - 'Development Status :: 5 - Production/Stable'
+- - Classifier
+  - 'Environment :: Plugins'
+- - Classifier
+  - 'Intended Audience :: Developers'
+- - Classifier
+  - 'License :: OSI Approved :: MIT License'
+- - Classifier
+  - 'Operating System :: Microsoft :: Windows'
+- - Classifier
+  - 'Operating System :: MacOS'
+- - Classifier
+  - 'Operating System :: POSIX :: Linux'
+- - Classifier
+  - 'Topic :: Software Development :: Build Tools'
+- - Description-Content-Type
+  - text/markdown
+- - Requires-Dist
+  - buildbot (>=3.0.0)
+- - Description
+  - "# Buildbot Gitea Plugin\n\n\n[![PyPI version](https://badge.fury.io/py/buildbot-gitea.svg)](https://badge.fury.io/py/buildbot-gitea)\n\
+    ![GitHub](https://img.shields.io/github/license/lab132/buildbot-gitea)\n\nThis\
+    \ plugin for buildbot adds integration support with gitea, featuring push hooks,\
+    \ commit status updates and a change source.\n\n# Installation\n```\npip install\
+    \ buildbot_gitea\n```\n\nThis installs itself into the plugin discovery of buildbot,\
+    \ so no extra imports are required to get buildbot to find the plugin.\n\n# Configuration\n\
+    \nThe following configuration shows how the different parts of the plugin can\
+    \ be set-up in the buildbot master.cfg:\n\n```py\n\nfrom buildbot.plugins import\
+    \ *\n\nc = BuildbotMasterConfig = {}\nc['www'] = {\n    'change_hook_dialects':\
+    \ {\n        'gitea': {\n            'secret': '<SecretToEnterInGitea>',\n   \
+    \         'onlyIncludePushCommit': True\n        }\n    },\n}\n\nc['services']\
+    \ = [\n    # Report status back to gitea, verbose flag enables verbose output\
+    \ in logging for debugging\n    reporters.GiteaStatusPush(\n        'https://example.com',\
+    \ \"SECRET\", verbose=True)\n]\n\nbuildFactory = util.BuildFactory()\n\nfactory.addStep(steps.Gitea(\n\
+    \    repourl=\"ssh://git@example.com/example_user/example_project.git\",\n   \
+    \ mode='incremental',\n    workdir=\"build\",\n    branch=\"master\",\n    codebase='example_codebase',\n\
+    \    progress=True,\n    logEnviron=False,\n))\n```\n\nThe webhook currently supports\
+    \ pushes and pull requests by default, but you can\nsubclass `buildbot_gitea.webhook.GiteaHandler`\
+    \ to add supports for other events,\nand then use your subclass by setting the\
+    \ `class` parameter:\n\n```py\n# myhook.py\n\nfrom buildbot_gitea.webhook import\
+    \ GiteaHandler\nclass MyGiteaHook(GiteaHandler)\n    def process_whatever(self,\
+    \ payload, event_type, codebase):\n        # This should be a list of dicts\n\
+    \        changes = []\n\n        return changes\n\n# master.cfg\n\nfrom myhook\
+    \ import MyGiteaHook\n\nc['www'] = {\n    'change_hook_dialects': {\n        'gitea':\
+    \ {\n            'class': MyGiteaHook,\n            # ...\n        }\n    }\n\
+    }\n```\n\nNote that the handlers need to be named according to the scheme:\n`process_{event}`\
+    \ (e.g., `process_create`, etc).\n\n# Parameters\n\n## Change Hook\n\nThe change\
+    \ hook is set as part of the `www` section in the `change_hook_dialects` named\
+    \ `gitea`.\n\n| Parameter | Description |\n| --- | --- |\n| `secret` | The secret,\
+    \ which needs to be set in gitea |\n| `onlyIncludePushCommit` | A push may have\
+    \ more than one commit associated with it. If this is true, only the newest (latest)\
+    \ commit of all received will be added as a change to buildbot. If this is set\
+    \ to false, all commits will inside the push will be added. |\n| `class` | Set\
+    \ this if you want to use your own handler class (see above for details) |\n\n\
+    In gitea in your project or organization and add a new webhook of type gitea.\n\
+    Set the parameters as follows:\n\n| Parameter | Value |\n| --- | --- |\n| Target\
+    \ URL  | https://example.com/change_hook/gitea/ |\n| HTTP Method  | `POST` |\n\
+    | POST Content Type  | `application/json` |\n| Secret  | The `secret` from above\
+    \ |\n\n## Change Source\n\nThe change source is part build step to clone a gitea\
+    \ repository. It includes features to build a pull request, if the pull request\
+    \ can be merged without conflicts. This needs to be used in conjunction with a\
+    \ gitea `change_hook` and have it send pull request updates in order to be able\
+    \  to handle pull requests.\n\nThe parameters for this are identical to the default\
+    \ [`git`](http://docs.buildbot.net/latest/manual/configuration/buildsteps.html#git)\
+    \ step from buildbot. It just uses information provided by the gitea `change_hook`\
+    \ to be able to handle pull requests.\n\n## Reporter\n\nThe reporter sets the\
+    \ commit status of a commit inside of gitea, so in gitea a small icon will be\
+    \ displayed next to the commit message, indicating the build status.\n\nThe `GiteaStatusPush`\
+    \ is added to the `services` section of the global master config.\n\nThe parameters\
+    \ are as follows:\n\n| Parameter | Value |\n| --- | --- |\n| URL | The URL to\
+    \ the gitea instance. |\n| `token` | Generate an access token in the profile you\
+    \ want the buildbot to impersonate. Make sure the account in gitea has access\
+    \ to the repositories. |\n| `context` | `Renderable` The context is an identifier\
+    \ for this status, allowing to identify from which builder this came, defaults\
+    \ to `Interpolate('buildbot/%(prop:buildername)s')` |\n| `context_pr` | `Renderable`\
+    \ The context message to use, when building on a pull request, allowing to identify\
+    \ from which builder this came, defaults to `Interpolate('buildbot/pull_request/%(prop:buildername)s')`\
+    \ |\n| `warningAsSuccess` | Treat warnings as build as success to set in the build\
+    \ status of gitea. If false, warnings will be displayed as warnings. |\n| `verbose`\
+    \ | Perform verbose output |\n\n## Authentication\n\nGitea supports OAuth2 authentication\
+    \ so it is possible to have buildbot communicate to Gitea to authenticate the\
+    \ user.\n\n`./master.cfg`\n\n```py\nfrom buildbot.plugins import util\nc['www']['auth']\
+    \ = util.GiteaAuth(\n    endpoint=\"https://your-gitea-host\",\n    client_id='oauth2-client-id',\n\
+    \    client_secret='oauth2-client-secret')\n```\n\n| Parameter | Value |\n| ---\
+    \ | --- |\n| `endpoint` | The URL to your Gitea app. Something like `https://gitea.example.com/`\
+    \ |\n| `client_id` | The OAuth2 Client ID `GUID`, can be a `Secret`. |\n| `client_secret`\
+    \ | The OAuth2 Client Secret provided, when creating the OAuth application in\
+    \ gitea. Can be a `Secret`. |\n\nResources:\n\n+ [Gitea OAuth2 Provider documentation](https://docs.gitea.io/en-us/oauth2-provider/)\n\
+    + [Buildbot OAuth2 documentation](https://docs.buildbot.net/current/developer/cls-auth.html?highlight=oauth2#buildbot.www.oauth2.OAuth2Auth)\n"
+name: buildbot_gitea
+version: 1.7.0
+wheel:
+- - Wheel-Version
+  - '1.0'
+- - Generator
+  - bdist_wheel (0.33.6)
+- - Root-Is-Purelib
+  - 'true'
+- - Tag
+  - py3-none-any

@@ -61,6 +61,50 @@ babel.extractors:
   module: babel.messages.extract
   name: python
   value: babel.messages.extract:extract_python
+buildbot.reporters:
+- attr: GiteaStatusPush
+  distro:
+    name: buildbot_gitea
+    path: python3.8/site-packages/buildbot_gitea-1.7.0.dist-info
+    version: 1.7.0
+  extras: []
+  group: buildbot.reporters
+  module: buildbot_gitea.reporter
+  name: GiteaStatusPush
+  value: buildbot_gitea.reporter:GiteaStatusPush
+buildbot.steps:
+- attr: Gitea
+  distro:
+    name: buildbot_gitea
+    path: python3.8/site-packages/buildbot_gitea-1.7.0.dist-info
+    version: 1.7.0
+  extras: []
+  group: buildbot.steps
+  module: buildbot_gitea.step_source
+  name: Gitea
+  value: buildbot_gitea.step_source:Gitea
+buildbot.util:
+- attr: GiteaAuth
+  distro:
+    name: buildbot_gitea
+    path: python3.8/site-packages/buildbot_gitea-1.7.0.dist-info
+    version: 1.7.0
+  extras: []
+  group: buildbot.util
+  module: buildbot_gitea.auth
+  name: GiteaAuth
+  value: buildbot_gitea.auth:GiteaAuth
+buildbot.webhooks:
+- attr: gitea
+  distro:
+    name: buildbot_gitea
+    path: python3.8/site-packages/buildbot_gitea-1.7.0.dist-info
+    version: 1.7.0
+  extras: []
+  group: buildbot.webhooks
+  module: buildbot_gitea.webhook
+  name: gitea
+  value: buildbot_gitea.webhook:gitea
 console_scripts:
 - attr: main
   distro:
@@ -185,3 +229,14 @@ sphinx.html_themes:
   module: alabaster
   name: alabaster
   value: alabaster
+sqlalchemy.dialects:
+- attr: AthenaDialect
+  distro:
+    name: pyathena
+    path: python3.8/site-packages/pyathena-2.3.0.dist-info
+    version: 2.3.0
+  extras: []
+  group: sqlalchemy.dialects
+  module: pyathena.sqlalchemy_athena
+  name: awsathena.rest
+  value: pyathena.sqlalchemy_athena:AthenaDialect

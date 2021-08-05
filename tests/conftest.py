@@ -44,6 +44,8 @@ def fake_virtualenv(
 			"wheel_filename-1.3.0-py3-none-any.whl",
 			"typing_extensions-3.10.0.0-py3-none-any.whl",
 			"domdf_python_tools-2.2.0-py3-none-any.whl",
+			"PyAthena-2.3.0-py3-none-any.whl",
+			"buildbot_gitea-1.7.0-py3-none-any.whl",
 			]:
 
 		handy_archives.unpack_archive(str(wheel_directory / filename), site_packages)
