@@ -135,9 +135,6 @@ metadata:
 
     '
 name: trove_classifiers
-top_level: 'trove_classifiers
-
-  '
 version: 2021.4.5
 wheel:
 - - Wheel-Version

@@ -104,9 +104,6 @@ metadata:
     \ * Report bugs at: https://github.com/python/importlib_metadata/issues\n * Code\
     \ hosting: https://github.com/python/importlib_metadata\n * Documentation: https://importlib_metadata.readthedocs.io/\n"
 name: importlib_metadata
-top_level: 'importlib_metadata
-
-  '
 version: 4.5.0
 wheel:
 - - Wheel-Version

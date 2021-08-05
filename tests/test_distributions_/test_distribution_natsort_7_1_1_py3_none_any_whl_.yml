@@ -329,9 +329,6 @@ metadata:
     `on GitHub <https://github.com/SethMMorton/natsort/blob/master/CHANGELOG.md>`_\
     \ or\n`in the documentation <https://natsort.readthedocs.io/en/master/changelog.html>`_.\n"
 name: natsort
-top_level: 'natsort
-
-  '
 version: 7.1.1
 wheel:
 - - Wheel-Version

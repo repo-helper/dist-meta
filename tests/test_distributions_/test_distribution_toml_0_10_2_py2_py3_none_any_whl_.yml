@@ -136,9 +136,6 @@ metadata:
     \ object ``o``\n\n\n\nLicensing\n=========\n\nThis project is released under the\
     \ terms of the MIT Open Source License. View\n*LICENSE.txt* for more information.\n"
 name: toml
-top_level: 'toml
-
-  '
 version: 0.10.2
 wheel:
 - - Wheel-Version

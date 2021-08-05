@@ -322,9 +322,6 @@ metadata:
     \ timezones:\nhttp://www.twinsun.com/tz/tz-link.htm\n\n\nContact\n~~~~~~~\n\n\
     Stuart Bishop <stuart@stuartbishop.net>\n"
 name: pytz
-top_level: 'pytz
-
-  '
 version: '2021.1'
 wheel:
 - - Wheel-Version

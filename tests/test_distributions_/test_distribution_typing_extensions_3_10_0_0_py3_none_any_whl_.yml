@@ -87,9 +87,6 @@ metadata:
 
     '
 name: typing_extensions
-top_level: 'typing_extensions
-
-  '
 version: 3.10.0.0
 wheel:
 - - Wheel-Version

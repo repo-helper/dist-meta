@@ -156,9 +156,6 @@ metadata:
     \ (used by\n`PyPM <http://code.activestate.com/pypm/>`_ in `ActivePython\n<http://www.activestate.com/activepython>`_).\
     \ This is basically a fork of\napplib.py 1.0.1 and applib/location.py 1.0.1.\n"
 name: appdirs
-top_level: 'appdirs
-
-  '
 version: 1.4.4
 wheel:
 - - Wheel-Version

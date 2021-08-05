@@ -77,9 +77,6 @@ metadata:
 
     '
 name: sphinxcontrib_qthelp
-top_level: 'sphinxcontrib
-
-  '
 version: 1.0.3
 wheel:
 - - Wheel-Version

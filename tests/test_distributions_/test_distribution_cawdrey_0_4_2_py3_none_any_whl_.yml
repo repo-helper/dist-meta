@@ -152,9 +152,6 @@ metadata:
     * Then install\n\n\t.. code-block:: bash\n\n\t\t$ conda install cawdrey\n\n..\
     \ end installation\n\n\n\nAnd Finally:\n==============\n\n`Why \"Cawdrey\"? <https://en.wikipedia.org/wiki/Robert_Cawdrey>`_\n"
 name: cawdrey
-top_level: 'cawdrey
-
-  '
 version: 0.4.2
 wheel:
 - - Wheel-Version

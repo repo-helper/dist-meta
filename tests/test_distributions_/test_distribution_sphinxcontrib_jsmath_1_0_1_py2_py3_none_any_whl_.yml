@@ -75,9 +75,6 @@ metadata:
 
     '
 name: sphinxcontrib_jsmath
-top_level: 'sphinxcontrib
-
-  '
 version: 1.0.1
 wheel:
 - - Wheel-Version

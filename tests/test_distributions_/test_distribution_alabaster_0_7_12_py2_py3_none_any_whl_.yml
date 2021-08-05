@@ -70,9 +70,6 @@ metadata:
     \ see http://alabaster.readthedocs.io.\n\n.. note::\n    You can install the development\
     \ version via ``pip install -e\n    git+https://github.com/bitprophet/alabaster/#egg=alabaster``.\n"
 name: alabaster
-top_level: 'alabaster
-
-  '
 version: 0.7.12
 wheel:
 - - Wheel-Version

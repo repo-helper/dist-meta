@@ -156,9 +156,6 @@ metadata:
     \ http://conda.anaconda.org/conda-forge\n\n\t* Then install\n\n\t.. code-block::\
     \ bash\n\n\t\t$ conda install domdf_python_tools\n\n.. end installation\n"
 name: domdf_python_tools
-top_level: 'domdf_python_tools
-
-  '
 version: 1.7.0
 wheel:
 - - Wheel-Version

@@ -72,9 +72,6 @@ metadata:
     \ https://zipp.readthedocs.io/en/latest/?badge=latest\n\n\nA pathlib-compatible\
     \ Zipfile object wrapper. A backport of the\n`Path object <https://docs.python.org/3.8/library/zipfile.html#path-objects>`_.\n"
 name: zipp
-top_level: 'zipp
-
-  '
 version: 3.4.1
 wheel:
 - - Wheel-Version

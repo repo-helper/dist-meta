@@ -616,9 +616,6 @@ metadata:
     ----------------\n\n* Added unit tests.\n* Bug fixes.\n\n\n0.1 (2008-11-16)\n\
     ----------------\n\n* First release.\n"
 name: urllib3
-top_level: 'urllib3
-
-  '
 version: 1.26.5
 wheel:
 - - Wheel-Version

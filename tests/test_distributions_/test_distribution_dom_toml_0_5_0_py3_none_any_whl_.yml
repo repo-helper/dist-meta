@@ -124,9 +124,6 @@ metadata:
     \ channels https://conda.anaconda.org/domdfcoding\n\n\t* Then install\n\n\t..\
     \ code-block:: bash\n\n\t\t$ conda install dom_toml\n\n.. end installation\n"
 name: dom_toml
-top_level: 'dom_toml
-
-  '
 version: 0.5.0
 wheel:
 - - Wheel-Version

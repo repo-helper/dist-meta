@@ -90,9 +90,6 @@ metadata:
     \nSee CHANGES file.\n\n.. |Build Status| image:: https://travis-ci.org/pyparsing/pyparsing.svg?branch=master\n\
     \   :target: https://travis-ci.org/pyparsing/pyparsing\n"
 name: pyparsing
-top_level: 'pyparsing
-
-  '
 version: 2.4.7
 wheel:
 - - Wheel-Version

@@ -77,9 +77,6 @@ metadata:
 
     '
 name: Babel
-top_level: 'babel
-
-  '
 version: 2.9.1
 wheel:
 - - Wheel-Version

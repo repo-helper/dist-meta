@@ -83,9 +83,6 @@ metadata:
 
     '
 name: sphinxcontrib_htmlhelp
-top_level: 'sphinxcontrib
-
-  '
 version: 2.0.0
 wheel:
 - - Wheel-Version

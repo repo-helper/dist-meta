@@ -56,7 +56,6 @@ class TestDistribution:
 				"metadata": list(distro.get_metadata().items()),
 				"entry_points": distro.get_entry_points(),
 				"has_license": distro.has_file("LICENSE"),
-				"top_level": distro.read_file("top_level.txt"),
 				})
 
 		advanced_file_regression.check(repr(distro), extension="_distro.repr")
@@ -119,7 +118,6 @@ class TestWheelDistribution:
 				"metadata": list(wd.get_metadata().items()),
 				"entry_points": wd.get_entry_points(),
 				"has_license": wd.has_file("LICENSE"),
-				"top_level": wd.read_file("top_level.txt"),
 				})
 
 		advanced_file_regression.check(repr(wd), extension=self.repr_filename)
@@ -284,7 +282,6 @@ class TestCustomDistribution:
 				"metadata": list(wd.get_metadata().items()),
 				"entry_points": wd.get_entry_points(),
 				"has_license": wd.has_file("LICENSE"),
-				"top_level": wd.read_file("top_level.txt"),
 				})
 
 		advanced_file_regression.check(repr(wd), extension="_cd.repr")

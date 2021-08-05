@@ -80,9 +80,6 @@ metadata:
 
     '
 name: sphinxcontrib_serializinghtml
-top_level: 'sphinxcontrib
-
-  '
 version: 1.1.5
 wheel:
 - - Wheel-Version

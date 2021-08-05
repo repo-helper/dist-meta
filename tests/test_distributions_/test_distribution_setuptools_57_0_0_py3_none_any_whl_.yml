@@ -193,13 +193,6 @@ metadata:
     \ please use the\n`Tidelift security contact <https://tidelift.com/security>`_.\n\
     Tidelift will coordinate the fix and disclosure.\n"
 name: setuptools
-top_level: '_distutils_hack
-
-  pkg_resources
-
-  setuptools
-
-  '
 version: 57.0.0
 wheel:
 - - Wheel-Version

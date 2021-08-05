@@ -205,9 +205,6 @@ metadata:
     \ on it's PEP 440\n  validity.\n\n\n14.0 - 2014-09-05\n~~~~~~~~~~~~~~~~~\n\n*\
     \ Initial release.\n\n\n.. _`master`: https://github.com/pypa/packaging/\n"
 name: packaging
-top_level: 'packaging
-
-  '
 version: '20.9'
 wheel:
 - - Wheel-Version

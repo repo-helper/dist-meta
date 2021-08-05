@@ -84,9 +84,6 @@ metadata:
     \ https://palletsprojects.com/p/markupsafe/\n-   Twitter: https://twitter.com/PalletsTeam\n\
     -   Chat: https://discord.gg/pallets\n"
 name: MarkupSafe
-top_level: 'markupsafe
-
-  '
 version: 2.0.1
 wheel:
 - - Wheel-Version

@@ -99,9 +99,6 @@ metadata:
     \   to ``parse_wheel_filename()``.  It has a ``filename`` attribute containing\n\
     \   the basename of the invalid filename.\n"
 name: wheel_filename
-top_level: 'wheel_filename
-
-  '
 version: 1.3.0
 wheel:
 - - Wheel-Version

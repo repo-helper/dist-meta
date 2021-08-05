@@ -96,9 +96,6 @@ metadata:
     -   Website: https://palletsprojects.com/p/jinja/\n-   Twitter: https://twitter.com/PalletsTeam\n\
     -   Chat: https://discord.gg/pallets\n"
 name: Jinja2
-top_level: 'jinja2
-
-  '
 version: 3.0.1
 wheel:
 - - Wheel-Version

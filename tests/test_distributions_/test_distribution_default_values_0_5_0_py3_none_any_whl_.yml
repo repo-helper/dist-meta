@@ -137,9 +137,6 @@ metadata:
     * Then install\n\n\t.. code-block:: bash\n\n\t\t$ conda install default_values\n\
     \n.. end installation\n"
 name: default_values
-top_level: 'sphinxcontrib
-
-  '
 version: 0.5.0
 wheel:
 - - Wheel-Version

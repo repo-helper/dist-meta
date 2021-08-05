@@ -72,9 +72,6 @@ metadata:
     \nCopyright 2006-2021 by the Pygments team, see ``AUTHORS``.\nLicensed under the\
     \ BSD, see ``LICENSE`` for details.\n"
 name: Pygments
-top_level: 'pygments
-
-  '
 version: 2.9.0
 wheel:
 - - Wheel-Version

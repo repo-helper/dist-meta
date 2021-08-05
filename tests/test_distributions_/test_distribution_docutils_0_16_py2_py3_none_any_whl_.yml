@@ -129,9 +129,6 @@ metadata:
 
     '
 name: docutils
-top_level: 'docutils
-
-  '
 version: '0.16'
 wheel:
 - - Wheel-Version

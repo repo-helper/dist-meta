@@ -196,9 +196,6 @@ metadata:
 
     '
 name: requests
-top_level: 'requests
-
-  '
 version: 2.25.1
 wheel:
 - - Wheel-Version

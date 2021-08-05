@@ -153,9 +153,6 @@ metadata:
     \ module requires the ``limiter`` extra to be installed:\n\n\t.. code-block::\
     \ bash\n\n\t\t$ python -m pip install apeye[limiter]\n"
 name: apeye
-top_level: 'apeye
-
-  '
 version: 1.0.1
 wheel:
 - - Wheel-Version

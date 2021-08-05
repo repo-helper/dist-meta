@@ -164,9 +164,6 @@ metadata:
     \ \"\n\n.. code-block:: bash\n\n   $ python testapp.py English \"sentences...\
     \ \"\n"
 name: snowballstemmer
-top_level: 'snowballstemmer
-
-  '
 version: 2.1.0
 wheel:
 - - Wheel-Version

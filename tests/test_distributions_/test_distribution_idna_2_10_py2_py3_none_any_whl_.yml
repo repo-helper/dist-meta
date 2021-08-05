@@ -158,9 +158,6 @@ metadata:
     \nThe tests are run automatically on each commit at Travis CI:\n\n.. image:: https://travis-ci.org/kjd/idna.svg?branch=master\n\
     \   :target: https://travis-ci.org/kjd/idna\n"
 name: idna
-top_level: 'idna
-
-  '
 version: '2.10'
 wheel:
 - - Wheel-Version

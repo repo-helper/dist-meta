@@ -92,9 +92,6 @@ metadata:
     `charade <https://github.com/sigmavirus24/charade>`_ fork, so now we have one\n\
     coherent version that works for Python 2.7+ and 3.4+.\n\n:maintainer: Dan Blanchard\n"
 name: chardet
-top_level: 'chardet
-
-  '
 version: 4.0.0
 wheel:
 - - Wheel-Version
