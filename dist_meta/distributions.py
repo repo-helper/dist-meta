@@ -252,7 +252,7 @@ class DistributionType(abc.ABC):
 		:returns: A :class:`dist_meta.record.RecordEntry` object for each line in the record
 			(i.e. each file in the distribution).
 			This includes files in the ``*.dist-info`` directory.
-		"""  # noqa: RST399
+		"""
 
 		if self.has_file("RECORD"):
 			content = self.read_file("RECORD").splitlines()
@@ -353,7 +353,7 @@ class Distribution(DistributionType, Tuple[str, Version, PathPlus]):
 		:returns: A :class:`dist_meta.record.RecordEntry` object for each line in the record
 			(i.e. each file in the distribution).
 			This includes files in the ``*.dist-info`` directory.
-		"""  # noqa: RST399
+		"""
 
 		if self.has_file("RECORD"):
 			content = self.read_file("RECORD").splitlines()
