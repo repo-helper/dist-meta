@@ -40,7 +40,7 @@ def test_loads(advanced_data_regression: AdvancedDataRegressionFixture):
 		assert cp.options(section) == list(expected_load_output[section].keys())
 
 
-def test_load(tmp_pathplus, advanced_data_regression: AdvancedDataRegressionFixture):
+def test_load(tmp_pathplus):
 	(tmp_pathplus / "entry_points.txt").write_lines([
 			"[console_scripts]",
 			"py.test = pytest:console_main",
@@ -59,7 +59,7 @@ def test_load_longer(tmp_pathplus, advanced_data_regression: AdvancedDataRegress
 	advanced_data_regression.check(entry_points.load(tmp_pathplus / "entry_points.txt"))
 
 
-def test_lazy_loads(advanced_data_regression: AdvancedDataRegressionFixture):
+def test_lazy_loads():
 	entry_points_content = dedent(
 			"""
 			[console_scripts]
@@ -84,7 +84,7 @@ def test_lazy_loads(advanced_data_regression: AdvancedDataRegressionFixture):
 	assert {k: dict(v) for k, v in eps} == expected_load_output
 
 
-def test_lazy_load(tmp_pathplus, advanced_data_regression: AdvancedDataRegressionFixture):
+def test_lazy_load(tmp_pathplus):
 	(tmp_pathplus / "entry_points.txt").write_lines([
 			'',
 			"[console_scripts]",
@@ -109,7 +109,7 @@ def test_lazy_load(tmp_pathplus, advanced_data_regression: AdvancedDataRegressio
 	assert {k: dict(v) for k, v in eps} == expected_load_output
 
 
-def test_loads_bad_syntax(advanced_data_regression: AdvancedDataRegressionFixture):
+def test_loads_bad_syntax():
 	entry_points_content = '\n'.join(["py.test = pytest:console_main", "pytest = pytest:console_main"])
 	assert entry_points.loads(entry_points_content) == {}
 
@@ -313,7 +313,6 @@ def test_entry_point_class_malformed(value):
 def test_get_entry_points(
 		fake_virtualenv: List[PathPlus],
 		tmp_pathplus: PathPlus,
-		advanced_file_regression: AdvancedFileRegressionFixture,
 		advanced_data_regression: AdvancedDataRegressionFixture,
 		):
 
@@ -336,7 +335,6 @@ def test_get_entry_points(
 def test_get_all_entry_points(
 		fake_virtualenv: List[PathPlus],
 		tmp_pathplus: PathPlus,
-		advanced_file_regression: AdvancedFileRegressionFixture,
 		advanced_data_regression: AdvancedDataRegressionFixture,
 		):
 

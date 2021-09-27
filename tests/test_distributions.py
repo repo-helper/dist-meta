@@ -166,7 +166,6 @@ class TestWheelDistribution:
 			self,
 			wheel_directory,
 			advanced_file_regression: AdvancedFileRegressionFixture,
-			advanced_data_regression: AdvancedDataRegressionFixture,
 			):
 		wd = self.cls.from_path(wheel_directory / "domdf_python_tools-2.9.1-py3-none-any.whl")
 
@@ -357,7 +356,6 @@ class TestCustomSubclass(TestWheelDistribution):
 			self,
 			wheel_directory,
 			advanced_file_regression: AdvancedFileRegressionFixture,
-			advanced_data_regression: AdvancedDataRegressionFixture,
 			):
 		wd = CustomSubclass.from_path(wheel_directory / "domdf_python_tools-2.9.1-py3-none-any.whl")
 
@@ -394,7 +392,6 @@ class TestCustomSubclass(TestWheelDistribution):
 def test_iter_distributions(
 		fake_virtualenv: List[PathPlus],
 		tmp_pathplus: PathPlus,
-		advanced_file_regression: AdvancedFileRegressionFixture,
 		advanced_data_regression: AdvancedDataRegressionFixture,
 		):
 

@@ -89,7 +89,6 @@ def test_record_entry_no_distro(
 
 
 def test_record_entry_no_attributes(
-		wheel_directory: PathPlus,
 		tmp_pathplus: PathPlus,
 		advanced_file_regression: AdvancedFileRegressionFixture,
 		):
