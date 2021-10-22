@@ -1,7 +1,7 @@
 # stdlib
 import os
-import posixpath
 import shutil
+import sys
 import zipfile
 from operator import itemgetter
 from typing import List, Optional, Tuple
@@ -9,6 +9,7 @@ from typing import List, Optional, Tuple
 # 3rd party
 import handy_archives
 import pytest
+from coincidence import min_version
 from coincidence.params import param
 from coincidence.regressions import AdvancedDataRegressionFixture, AdvancedFileRegressionFixture
 from domdf_python_tools.paths import PathPlus
@@ -450,3 +451,14 @@ def test_parse_wheel_filename_errors():
 
 	with pytest.raises(InvalidWheelFilename, match=r"Invalid project name: '\?\?\?'"):
 		_utils._parse_wheel_filename(PathPlus("???-0.0.0-py3-none-any.whl"))
+
+
+@min_version(3.7)
+def test_hpy_pypy():
+	distro = distributions.get_distribution("hpy")
+	assert distro.name == "hpy"
+
+	if sys.implementation.name == "pypy":
+		assert distro.version == Version("0.0.0")
+	else:
+		assert distro.version == Version("0.0.3")

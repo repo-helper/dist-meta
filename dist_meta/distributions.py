@@ -325,7 +325,14 @@ class Distribution(DistributionType, Tuple[str, Version, PathPlus]):
 
 		path = PathPlus(path)
 		distro_name_version = path.stem
-		name, version = divide(distro_name_version, '-')
+
+		# Check works around https://foss.heptapod.net/pypy/pypy/-/issues/3579
+
+		if sys.implementation.name == "pypy" and distro_name_version == "hpy":
+			name, version = "hpy", "0.0.0"
+		else:
+			name, version = divide(distro_name_version, '-')
+
 		return cls(name, _parse_version(version), path)
 
 	def read_file(self, filename: str) -> str:
