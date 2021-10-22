@@ -453,8 +453,10 @@ def test_parse_wheel_filename_errors():
 		_utils._parse_wheel_filename(PathPlus("???-0.0.0-py3-none-any.whl"))
 
 
-@min_version(3.7)
+@min_version(3.7, reason="hpy on PyPy requires Python 3.7 or greater.")
 def test_hpy_pypy():
+	pytest.importorskip("hpy")
+
 	distro = distributions.get_distribution("hpy")
 	assert distro.name == "hpy"
 
