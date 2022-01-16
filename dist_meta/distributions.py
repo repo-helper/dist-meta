@@ -575,7 +575,7 @@ class DistributionNotFoundError(ValueError):
 
 def _get_case_insensitive_matches(filename: str, distribution: DistributionType) -> List[str]:
 	"""
-	Return a list of matching filenames for a case insentitive search of ``*.dist-info`` directories.
+	Return a list of matching filenames for a case-insensitive search of ``*.dist-info`` directories.
 
 	Some backends, e.g. poetry, allow CamelCase for the wheel filename
 	but use lowercase for the ``*.dist-info`` directory
