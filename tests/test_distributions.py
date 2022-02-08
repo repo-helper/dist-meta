@@ -409,6 +409,31 @@ def test_iter_distributions(
 	advanced_data_regression.check(sorted(all_dists, key=itemgetter("name")))
 
 
+def test_iter_distributions_pip_tmpdir(
+		fake_virtualenv: List[PathPlus],
+		tmp_pathplus: PathPlus,
+		advanced_data_regression: AdvancedDataRegressionFixture,
+		):
+
+	site_packages = fake_virtualenv[0]
+	shutil.move(
+			os.fspath(site_packages / "alabaster-0.7.12.dist-info"),
+			site_packages / "~-abaster-0.7.12.dist-info",
+			)
+
+	all_dists = []
+
+	for dist in distributions.iter_distributions(path=fake_virtualenv):
+		assert dist.path.is_dir()
+		assert dist.has_file("METADATA")
+		assert dist.has_file("WHEEL")
+		as_dict = dist._asdict()
+		as_dict["path"] = as_dict["path"].relative_to(tmp_pathplus)
+		all_dists.append(as_dict)
+
+	advanced_data_regression.check(sorted(all_dists, key=itemgetter("name")))
+
+
 @pytest.mark.parametrize(
 		"name, expected",
 		[

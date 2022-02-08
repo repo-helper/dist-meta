@@ -324,6 +324,11 @@ class Distribution(DistributionType, Tuple[str, Version, PathPlus]):
 		"""
 
 		path = PathPlus(path)
+		if path.name[0] == '~':
+			raise ValueError(
+					"Directory path starts with a tilde (~). "
+					"This may be a temporary directory created by pip.",
+					)
 		distro_name_version = path.stem
 
 		# Check works around https://foss.heptapod.net/pypy/pypy/-/issues/3579
@@ -534,6 +539,11 @@ def iter_distributions(path: Optional[Iterable[PathLike]] = None) -> Iterator[Di
 			continue
 
 		for subdir in _iter_dist_infos(folder):
+
+			if subdir.name[0] == '~':
+				# Temporary directory created by pip
+				continue
+
 			distro = Distribution.from_path(subdir)
 
 			normalized_name = _canonicalize(distro.name)
