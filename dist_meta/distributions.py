@@ -119,8 +119,7 @@ class DistributionType(abc.ABC):
 	#: A mapping of field names to default values.
 	_field_defaults: Dict[str, Any]
 
-	# These must be implemented by subclasses, but they can't be abstractmethods
-	# otherwise mypy gets confused
+	# These must be implemented by subclasses
 	__iter__: Callable
 	__getitem__: Callable
 
@@ -191,7 +190,7 @@ class DistributionType(abc.ABC):
 
 		result = self._make(map(kwargs.pop, self._fields, self))
 		if kwargs:
-			raise ValueError(f'Got unexpected field names: {list(kwargs)!r}')
+			raise ValueError(f"Got unexpected field names: {list(kwargs)!r}")
 		return result
 
 	@classmethod
