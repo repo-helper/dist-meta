@@ -84,6 +84,12 @@ class TestDistribution:
 		(filename / "RECORD").unlink()
 		assert distro.get_record() is None
 
+	def test_from_path_pip_tmpdir(self):
+		msg = r"Directory path starts with a tilde \(~\). This may be a temporary directory created by pip."
+
+		with pytest.raises(ValueError, match=msg):
+			distributions.Distribution.from_path("/some/directory/~-ippinglabel.1.1.1.post1.dist-info")
+
 	def test_get_record(self, example_wheel, tmp_pathplus: PathPlus):
 		(tmp_pathplus / "site-packages").mkdir()
 		handy_archives.unpack_archive(example_wheel, tmp_pathplus / "site-packages")
@@ -334,6 +340,9 @@ class TestCustomDistribution:
 		assert dist._replace(version=Version("4.5.6")).version == Version("4.5.6")
 		assert dist._replace(version=Version("4.5.6")).name == "demo"
 
+		with pytest.raises(ValueError, match=r"Got unexpected field names: \['foo', 'bar'\]"):
+			dist._replace(foo="abc", bar=123)
+
 		expected = CustomDistribution(
 				"demo",
 				Version("1.2.3"),
@@ -489,3 +498,21 @@ def test_hpy_pypy():
 		assert distro.version == Version("0.0.0")
 	else:
 		assert distro.version == Version("0.0.3")
+
+
+def test_abc_bad_subclass():
+
+	with pytest.raises(ValueError, match="'_fields' cannot be empty."):
+
+		class BadSubclass1(distributions.DistributionType):
+			_fields = ()
+
+	with pytest.raises(ValueError, match="The first item in '_fields' must be 'name'"):
+
+		class BadSubclass2(distributions.DistributionType):
+			_fields = ("version", "name")
+
+	with pytest.raises(ValueError, match="The second item in '_fields' must be 'version'"):
+
+		class BadSubclass3(distributions.DistributionType):
+			_fields = ("name", "build_number")
