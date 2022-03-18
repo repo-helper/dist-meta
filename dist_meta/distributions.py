@@ -332,8 +332,13 @@ class Distribution(DistributionType, Tuple[str, Version, PathPlus]):
 
 		# Check works around https://foss.heptapod.net/pypy/pypy/-/issues/3579
 
-		if sys.implementation.name == "pypy" and distro_name_version == "hpy":
-			name, version = "hpy", "0.0.0"
+		if sys.implementation.name == "pypy":
+			if distro_name_version == "hpy":
+				name, version = "hpy", "0.0.0"
+			elif distro_name_version == "cffi":
+				name, version = "cffi", "0.0.0"
+			else:
+				name, version = divide(distro_name_version, '-')
 		else:
 			name, version = divide(distro_name_version, '-')
 
