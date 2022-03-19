@@ -143,6 +143,8 @@ def test_loads(package: str):
 			wheel_filename.write_bytes(release_url.get().content)
 			assert wheel_filename.is_file()
 
+		release_url.session.close()
+
 		with handy_archives.ZipFile(wheel_filename, 'r') as wheel_zip:
 			metadata_filename = first(wheel_zip.namelist(), key=lambda x: x.endswith(".dist-info/METADATA"))
 			assert metadata_filename is not None
@@ -190,6 +192,8 @@ def test_loads_sdist(package: str):
 		if not wheel_filename.is_file():
 			wheel_filename.write_bytes(release_url.get().content)
 			assert wheel_filename.is_file()
+
+		release_url.session.close()
 
 		with handy_archives.TarFile.open(wheel_filename) as sdist_tar:
 			metadata_filename = first(sdist_tar.getnames(), key=lambda x: x.endswith("PKG-INFO"))
