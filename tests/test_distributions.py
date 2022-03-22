@@ -500,6 +500,7 @@ def test_hpy_pypy():
 		assert distro.version == Version("0.0.3")
 
 
+@min_version(3.7)
 def test_cffi_pypy():
 	pytest.importorskip("cffi")
 
