@@ -500,6 +500,18 @@ def test_hpy_pypy():
 		assert distro.version == Version("0.0.3")
 
 
+def test_cffi_pypy():
+	pytest.importorskip("cffi")
+
+	distro = distributions.get_distribution("cffi")
+	assert distro.name == "cffi"
+
+	if sys.implementation.name == "pypy":
+		assert distro.version == Version("0.0.0")
+	# else:
+	# 	assert distro.version == Version("0.0.3")
+
+
 def test_abc_bad_subclass():
 
 	with pytest.raises(ValueError, match="'_fields' cannot be empty."):
