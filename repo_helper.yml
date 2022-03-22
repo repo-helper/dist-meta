@@ -16,15 +16,16 @@ docs_fail_on_warning: true
 sphinx_html_theme: furo
 
 python_versions:
- - '3.6'
- - '3.7'
- - '3.8'
- - '3.9'
- - "3.10"
- - 3.11-dev
- - pypy36
- - pypy37
- - pypy38
+ '3.6':
+ '3.7':
+ '3.8':
+ '3.9':
+ "3.10":
+ 3.11-dev:
+ pypy36:
+ pypy37:
+  experimental: False
+ pypy38:
 
 conda_channels:
  - conda-forge
