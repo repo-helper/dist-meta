@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "dist-meta"
-version = "0.3.3"
+version = "0.3.4"
 description = "Parse and create Python distribution metadata."
 readme = "README.rst"
 keywords = [ "dist-info", "metadata", "packaging", "pypi",]
