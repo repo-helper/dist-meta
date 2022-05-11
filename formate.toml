@@ -45,6 +45,7 @@ known_third_party = [
     "hpy",
     "importlib_metadata",
     "packaging",
+    "pypi_json",
     "pytest",
     "pytest_cov",
     "pytest_randomly",
