@@ -11,7 +11,7 @@ import pytest
 from apeye.requests_url import RequestsURL
 from domdf_python_tools.paths import PathPlus
 from first import first
-from shippinglabel.pypi import get_metadata
+from pypi_json import PyPIJSON
 
 # this package
 from dist_meta import metadata
@@ -127,11 +127,12 @@ cache_dir.maybe_make(parents=True)
 @pytest.mark.parametrize("package", top_packages)
 def test_loads(package: str):
 
-	meta = get_metadata(package)
+	with PyPIJSON() as client:
+		meta = client.get_metadata(package)
 
-	latest_version = meta["info"]["version"]
+	latest_version = meta.info["version"]
 	for release_artifact in filter(
-			lambda x: x.endswith(".whl"), map(itemgetter("url"), meta["releases"][latest_version])
+			lambda x: x.endswith(".whl"), map(itemgetter("url"), meta.releases[latest_version])
 			):
 
 		release_url = RequestsURL(release_artifact)
@@ -177,11 +178,13 @@ def test_loads(package: str):
 @pytest.mark.parametrize("package", top_packages)
 def test_loads_sdist(package: str):
 
-	meta = get_metadata(package)
+	with PyPIJSON() as client:
+		meta = client.get_metadata(package)
 
-	latest_version = meta["info"]["version"]
+	latest_version = meta.info["version"]
 	for release_artifact in filter(
-			lambda x: x.endswith(".tar.gz"), map(itemgetter("url"), meta["releases"][latest_version])
+			lambda x: x.endswith(".tar.gz"),
+			map(itemgetter("url"), meta.releases[latest_version]),
 			):
 
 		release_url = RequestsURL(release_artifact)
