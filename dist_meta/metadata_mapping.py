@@ -84,12 +84,14 @@ class MetadataMapping(MutableMapping[str, str]):
 		"""
 		Get a field value.
 
+		.. latex:vspace:: -10px
+
 		.. note::
 
 			If the field appears multiple times, exactly which occurrence gets returned is undefined.
 			Use the :meth:`~.MetadataMapping.get_all` method to get all values matching a field name.
 
-		.. latex:vspace:: -10px
+		.. latex:vspace:: -20px
 
 		:param name:
 		"""
@@ -288,7 +290,6 @@ class MetadataEmitter(StringList):
 	:param fields: The fields the file is being constructed from.
 
 	.. autosummary-widths:: 1/3
-		:html: 3/10
 	"""
 
 	def __init__(self, fields: MetadataMapping):

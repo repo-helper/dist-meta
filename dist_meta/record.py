@@ -74,8 +74,6 @@ class RecordEntry(pathlib.PurePosixPath):
 
 		Path operations (:meth:`~.pathlib.PurePath.joinpath`, :data:`~.pathlib.PurePath.parent` etc.)
 		will return a standard :class:`pathlib.PurePosixPath` object without the extended attributes of this class.
-
-	.. latex:vspace:: -10px
 	"""
 
 	__slots__ = ("hash", "size", "distro")

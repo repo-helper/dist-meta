@@ -2,8 +2,7 @@
 :mod:`dist_meta.metadata_mapping`
 =================================
 
-.. autosummary-widths:: 4/10
-	:html: 3/10
+.. autosummary-widths:: 1/3
 
 .. automodule:: dist_meta.metadata_mapping
 	:member-order: bysource

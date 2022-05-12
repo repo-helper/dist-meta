@@ -35,6 +35,7 @@ sphinx_conf_epilogue:
  - from dist_meta.distributions import Distribution
  - import dist_meta.record
  - dist_meta.record.__dict__["Distribution"] = Distribution
+ - needspace_amount = r"5\baselineskip"
 
 keywords:
  - packaging
@@ -43,10 +44,9 @@ keywords:
  - pypi
 
 extra_sphinx_extensions:
- - sphinx_toolbox_experimental.autosummary_widths
- - sphinx_toolbox_experimental.needspace
- - sphinx_toolbox_experimental.succinct_seealso
- - sphinx_toolbox_experimental.peps
+ - sphinx_toolbox.more_autosummary.column_widths
+ - sphinx_toolbox.latex.succinct_seealso
+ - sphinx_packaging.peps
  - local_extension
 
 exclude_files:

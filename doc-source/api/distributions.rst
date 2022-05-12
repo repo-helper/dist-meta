@@ -3,7 +3,6 @@
 =================================
 
 .. autosummary-widths:: 6/16
-	:html: 4/10
 
 .. automodule:: dist_meta.distributions
 	:no-members:
