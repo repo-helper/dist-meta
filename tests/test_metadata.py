@@ -114,6 +114,22 @@ def test_dumps(advanced_file_regression: AdvancedFileRegressionFixture):
 	advanced_file_regression.check(metadata.dumps(fields), extension='')
 
 
+def test_dumps_license_expression_file(advanced_file_regression: AdvancedFileRegressionFixture):
+	fields = MetadataMapping()
+	fields["Metadata-Version"] = "2.1"
+	fields["Name"] = "cawdrey"
+	fields["Version"] = "0.4.2"
+	fields["Home-page"] = "https://github.com/domdfcoding/cawdrey"
+	fields["Platform"] = "Windows"
+	fields["Platform"] = "macOS"
+	fields["Platform"] = "Linux"
+	fields["License-Expression"] = "MIT OR Apache-2.0"
+	fields["License-File"] = "LICENSE"
+	fields["License-File"] = "COPYING"
+
+	advanced_file_regression.check(metadata.dumps(fields), extension='')
+
+
 def test_dumps_description(advanced_file_regression: AdvancedFileRegressionFixture):
 	fields = MetadataMapping()
 	fields["Metadata-Version"] = "2.1"
