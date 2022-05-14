@@ -176,6 +176,8 @@ def dumps(fields: MetadataMapping) -> str:
 	.. versionchanged:: 0.4.0
 
 		Added support for the License-Expression and License-File options proposed by :pep:`639`.
+
+	.. latex:clearpage::
 	"""
 
 	output = MetadataEmitter(fields)
