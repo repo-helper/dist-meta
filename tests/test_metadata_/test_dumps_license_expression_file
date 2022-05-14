@@ -1,0 +1,10 @@
+Metadata-Version: 2.1
+Name: cawdrey
+Version: 0.4.2
+License-Expression: MIT OR Apache-2.0
+License-File: LICENSE
+License-File: COPYING
+Home-page: https://github.com/domdfcoding/cawdrey
+Platform: Windows
+Platform: macOS
+Platform: Linux

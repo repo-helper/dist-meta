@@ -170,6 +170,12 @@ def dumps(fields: MetadataMapping) -> str:
 	Construct Python core metadata from the given fields.
 
 	:param fields:
+
+	:rtype:
+
+	.. versionchanged:: $VERSION
+
+		Added support for the License-Expression and License-File options proposed by :pep:`639`.
 	"""
 
 	output = MetadataEmitter(fields)
@@ -199,6 +205,8 @@ def dumps(fields: MetadataMapping) -> str:
 	output.add_single("Maintainer")
 	output.add_single("Maintainer-email")
 	output.add_single("License")
+	output.add_single("License-Expression")
+	output.add_multiple("License-File")
 	output.add_single("Keywords")
 
 	# URLs
