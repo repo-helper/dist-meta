@@ -612,7 +612,7 @@ def _get_dist_info_path(dist: WheelDistribution) -> str:
 			# Might be the directory we're looking for
 			with suppress(Exception):
 				# Ignore parsing errors
-				dist_info_dir = filename.split("/", 1)[0]
+				dist_info_dir = filename.split('/', 1)[0]
 				distro_name_version, extension = posixpath.splitext(dist_info_dir)
 				if extension != ".dist-info":
 					continue

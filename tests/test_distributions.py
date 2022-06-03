@@ -12,7 +12,7 @@ import pytest
 from coincidence import min_version
 from coincidence.params import param
 from coincidence.regressions import AdvancedDataRegressionFixture, AdvancedFileRegressionFixture
-from domdf_python_tools.paths import in_directory, PathPlus
+from domdf_python_tools.paths import PathPlus, in_directory
 from domdf_python_tools.typing import PathLike
 from first import first
 from packaging.utils import InvalidWheelFilename
@@ -533,7 +533,7 @@ def test_abc_bad_subclass():
 
 def test_wheel_no_dist_info(tmp_pathplus: PathPlus):
 	with in_directory(tmp_pathplus):
-		handy_archives.ZipFile("foo-1.2.3-py3-none-any.whl", "w").close()
+		handy_archives.ZipFile("foo-1.2.3-py3-none-any.whl", 'w').close()
 
 	wd = distributions.WheelDistribution.from_path(tmp_pathplus / "foo-1.2.3-py3-none-any.whl")
 	assert wd.name == "foo"
@@ -547,7 +547,7 @@ def test_wheel_no_dist_info(tmp_pathplus: PathPlus):
 
 def test_wheel_no_quite_dist_info(tmp_pathplus: PathPlus):
 	with in_directory(tmp_pathplus):
-		with handy_archives.ZipFile("foo-1.2.3-py3-none-any.whl", "w") as fake_wheel:
+		with handy_archives.ZipFile("foo-1.2.3-py3-none-any.whl", 'w') as fake_wheel:
 			fake_wheel.writestr("foo-1.2.3.dist-information", '')
 
 	wd = distributions.WheelDistribution.from_path(tmp_pathplus / "foo-1.2.3-py3-none-any.whl")
@@ -562,7 +562,7 @@ def test_wheel_no_quite_dist_info(tmp_pathplus: PathPlus):
 
 def test_wheel_wrong_dist_info(tmp_pathplus: PathPlus):
 	with in_directory(tmp_pathplus):
-		with handy_archives.ZipFile("foo-1.2.3-py3-none-any.whl", "w") as fake_wheel:
+		with handy_archives.ZipFile("foo-1.2.3-py3-none-any.whl", 'w') as fake_wheel:
 			fake_wheel.writestr("bar-4.5.6.dist-info/WHEEL", '')
 
 	wd = distributions.WheelDistribution.from_path(tmp_pathplus / "foo-1.2.3-py3-none-any.whl")
