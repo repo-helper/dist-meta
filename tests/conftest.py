@@ -46,6 +46,8 @@ def fake_virtualenv(
 			"domdf_python_tools-2.2.0-py3-none-any.whl",
 			"PyAthena-2.3.0-py3-none-any.whl",
 			"buildbot_gitea-1.7.0-py3-none-any.whl",
+			"maturin-0.12.18_beta.1-py3-none-manylinux_2_12_x86_64.manylinux2010_x86_64.musllinux_1_1_x86_64.whl",
+			"maturin-0.12.18_beta.2-py3-none-manylinux_2_12_x86_64.manylinux2010_x86_64.musllinux_1_1_x86_64.whl",
 			]:
 
 		handy_archives.unpack_archive(str(wheel_directory / filename), site_packages)

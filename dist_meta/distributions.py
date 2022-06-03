@@ -38,8 +38,8 @@ Distributions must have a ``*.dist-info`` directory (as defined by :pep:`566`) t
 # stdlib
 import abc
 import csv
+import functools
 import posixpath
-import re
 import sys
 from contextlib import suppress
 from operator import itemgetter
@@ -466,12 +466,13 @@ class WheelDistribution(DistributionType, Tuple[str, Version, PathPlus, handy_ar
 		dist_info = f"{self.name}-{self.version}.dist-info"
 		try:
 			return self.wheel_zip.read_text(posixpath.join(dist_info, filename))
-		except FileNotFoundError:
-			filenames = _get_case_insensitive_matches(filename, self)
-			if not filenames:
-				raise
+		except FileNotFoundError as fnf_e:
+			try:
+				dist_info = _get_dist_info_path(self)
+			except _NoDistInfoFound:
+				raise fnf_e
 
-			return self.wheel_zip.read_text(filenames[0])
+			return self.wheel_zip.read_text(posixpath.join(dist_info, filename))
 
 	def has_file(self, filename: str) -> bool:
 		"""
@@ -485,7 +486,12 @@ class WheelDistribution(DistributionType, Tuple[str, Version, PathPlus, handy_ar
 		if posixpath.join(dist_info, filename) in self.wheel_zip.namelist():
 			return True
 		else:
-			return bool(_get_case_insensitive_matches(filename, self))
+			try:
+				dist_info = _get_dist_info_path(self)
+			except _NoDistInfoFound:
+				return False
+			else:
+				return posixpath.join(dist_info, filename) in self.wheel_zip.namelist()
 
 	def get_wheel(self) -> MetadataMapping:
 		"""
@@ -587,20 +593,36 @@ class DistributionNotFoundError(ValueError):
 	"""
 
 
-def _get_case_insensitive_matches(filename: str, distribution: DistributionType) -> List[str]:
+class _NoDistInfoFound(Exception):
+	pass
+
+
+@functools.lru_cache()
+def _get_dist_info_path(dist: WheelDistribution) -> str:
 	"""
-	Return a list of matching filenames for a case-insensitive search of ``*.dist-info`` directories.
+	Find the name of the dist-info directory, case insensitive and allowing unnormalised versions.
 
-	Some backends, e.g. poetry, allow CamelCase for the wheel filename
-	but use lowercase for the ``*.dist-info`` directory
+	:param dist:
 
-	:param filename:
-	:param distribution:
+	:raises _NoDistInfoFound: If no dist-info directory is found, or the version/name don't match.
 	"""
 
-	cre = re.compile(
-			rf"^(?i:{re.escape(distribution.name)})-"
-			rf"{re.escape(str(distribution.version))}\.dist-info/{re.escape(filename)}$"
-			)
-	namelist = cast(WheelDistribution, distribution).wheel_zip.namelist()
-	return [fn for fn in namelist if cre.match(fn)]
+	for filename in dist.wheel_zip.namelist():
+		if ".dist-info" in filename:
+			# Might be the directory we're looking for
+			with suppress(Exception):
+				# Ignore parsing errors
+				dist_info_dir = filename.split("/", 1)[0]
+				distro_name_version, extension = posixpath.splitext(dist_info_dir)
+				if extension != ".dist-info":
+					continue
+
+				name, version = divide(distro_name_version, '-')
+				if name.casefold() == dist.name.casefold():
+					actual_version = _parse_version(version)
+					if actual_version == dist.version:
+						dist_info = f"{name}-{version}.dist-info"
+						return dist_info
+
+	# path not found
+	raise _NoDistInfoFound
