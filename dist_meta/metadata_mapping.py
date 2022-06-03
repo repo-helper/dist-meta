@@ -160,7 +160,7 @@ class MetadataMapping(MutableMapping[str, str]):
 		for field, value in self._fields:
 			yield field
 
-	def keys(self) -> List[str]:  # type: ignore
+	def keys(self) -> List[str]:  # type: ignore[override]
 		"""
 		Return a list of all field *names*.
 
@@ -170,7 +170,7 @@ class MetadataMapping(MutableMapping[str, str]):
 
 		return [k for k, v in self._fields]
 
-	def values(self) -> List[str]:  # type: ignore
+	def values(self) -> List[str]:  # type: ignore[override]
 		"""
 		Return a list of all field *values*.
 
@@ -180,7 +180,7 @@ class MetadataMapping(MutableMapping[str, str]):
 
 		return [v for k, v in self._fields]
 
-	def items(self) -> List[Tuple[str, str]]:  # type: ignore
+	def items(self) -> List[Tuple[str, str]]:  # type: ignore[override]
 		"""
 		Get all the fields and their values.
 

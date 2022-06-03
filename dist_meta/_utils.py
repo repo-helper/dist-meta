@@ -45,7 +45,7 @@ SHOULD_CACHE = int(os.environ.get("DIST_META_CACHE", 1))
 
 def _cache(func):
 	if SHOULD_CACHE:
-		return functools.lru_cache()(func)
+		return functools.lru_cache()(func)  # type: ignore[return-value]
 	else:  # pragma: no cover
 		return func
 

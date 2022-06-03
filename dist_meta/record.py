@@ -110,7 +110,7 @@ class RecordEntry(pathlib.PurePosixPath):
 		Construct a :class:`RecordEntry` from one a string or an existing :class:`pathlib.PurePath` object.
 		"""
 
-		self = cls._from_parts((path, ))  # type: ignore
+		self = cls._from_parts((path, ))  # type: ignore[attr-defined]
 		self.hash = hash
 		self.size = size
 		self.distro = distro

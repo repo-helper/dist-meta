@@ -68,7 +68,7 @@ fields["Tag"] = "py3-none-any"
 fields["Tag"] = "py2-none-any"
 
 fields_no_root_is_purelib = MetadataMapping()
-fields_no_root_is_purelib["Wheel-Version"] = 1.0  # type: ignore
+fields_no_root_is_purelib["Wheel-Version"] = 1.0  # type: ignore[assignment]
 fields_no_root_is_purelib["Generator"] = "bdist_wheel (0.36.2)"
 fields_no_root_is_purelib["Tag"] = "py3-none-any"
 fields_no_root_is_purelib["Tag"] = "py2-none-any"

@@ -190,7 +190,7 @@ def dumps(entry_points: Union[EntryPointMap, Dict[str, Sequence["EntryPoint"]]])
 			if isinstance(name, EntryPoint):
 				output.append(f"{name.name} = {name.value}")
 			else:
-				output.append(f"{name} = {entry_points[group][name]}")  # type: ignore
+				output.append(f"{name} = {entry_points[group][name]}")  # type: ignore[call-overload]
 
 		output.blankline(ensure_single=True)
 

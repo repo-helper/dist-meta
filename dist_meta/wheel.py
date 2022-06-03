@@ -88,7 +88,7 @@ def dumps(fields: Union[Mapping[str, Any], MetadataMapping]) -> str:
 		and ``Tag`` as a list of strings.
 	"""
 
-	output = MetadataEmitter(fields)  # type: ignore
+	output = MetadataEmitter(fields)  # type: ignore[arg-type]
 
 	if "Wheel-Version" in fields:
 		output.append(f"Wheel-Version: {float(fields['Wheel-Version'])}")

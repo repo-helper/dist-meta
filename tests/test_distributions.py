@@ -283,7 +283,7 @@ class TestCustomDistribution:
 				"wheel": list(wd.get_wheel().items()),
 				"metadata": list(wd.get_metadata().items()),
 				"entry_points": wd.get_entry_points(),
-				"has_license": wd.has_file("LICENSE"),
+				"has_license": wd.has_file("LICENSE"),  # type: ignore[misc]
 				})
 
 		advanced_file_regression.check(repr(wd), extension="_cd.repr")
@@ -320,7 +320,7 @@ class TestCustomDistribution:
 				"demo",
 				Version("1.2.3"),
 				PathPlus("foo/bar/baz.whl"),
-				None,  # type: ignore
+				None,  # type: ignore[arg-type]
 				)
 		assert dist._asdict() == {
 				"name": "demo",
@@ -347,7 +347,7 @@ class TestCustomDistribution:
 				"demo",
 				Version("1.2.3"),
 				PathPlus("foo/bar/baz.whl"),
-				None,  # type: ignore
+				None,  # type: ignore[arg-type]
 				)
 		made = CustomDistribution._make((
 				"demo",
