@@ -1,5 +1,6 @@
 # stdlib
 import os
+import platform
 import shutil
 import sys
 import zipfile
@@ -12,6 +13,7 @@ import pytest
 from coincidence import min_version
 from coincidence.params import param
 from coincidence.regressions import AdvancedDataRegressionFixture, AdvancedFileRegressionFixture
+from domdf_python_tools.compat import PYPY36
 from domdf_python_tools.paths import PathPlus, in_directory
 from domdf_python_tools.typing import PathLike
 from first import first
@@ -53,6 +55,9 @@ class TestDistribution:
 			advanced_file_regression: AdvancedFileRegressionFixture,
 			advanced_data_regression: AdvancedDataRegressionFixture,
 			):
+
+		if PYPY36 and platform.system() == "Windows":
+			pytest.skip("Fails due to internal error on PyPy 3.6 on Windows")
 
 		(tmp_pathplus / "site-packages").mkdir()
 		handy_archives.unpack_archive(example_wheel, tmp_pathplus / "site-packages")
