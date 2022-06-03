@@ -3,7 +3,7 @@ import inspect
 import tempfile
 from email.parser import HeaderParser
 from operator import itemgetter
-from typing import List, Set
+from typing import List
 
 # 3rd party
 import handy_archives

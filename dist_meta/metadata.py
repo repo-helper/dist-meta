@@ -27,10 +27,8 @@ Parse and create ``*dist-info/METADATA`` files.
 #
 
 # stdlib
-import inspect
 import re
 import sys
-import textwrap
 from typing import List
 
 # 3rd party

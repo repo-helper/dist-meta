@@ -40,7 +40,6 @@ Parser and emitter for ``entry_points.txt``.
 #
 
 # stdlib
-import functools
 import importlib
 import itertools
 import re

@@ -27,8 +27,8 @@ Parse and create Python distribution metadata.
 #
 
 # this package
-from dist_meta.distributions import get_distribution, iter_distributions
-from dist_meta.entry_points import get_all_entry_points, get_entry_points
+from dist_meta.distributions import get_distribution, iter_distributions  # noqa: F401
+from dist_meta.entry_points import get_all_entry_points, get_entry_points  # noqa: F401
 
 __author__: str = "Dominic Davis-Foster"
 __copyright__: str = "2021 Dominic Davis-Foster"
