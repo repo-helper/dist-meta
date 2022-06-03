@@ -35,8 +35,8 @@
   path: python3.8/site-packages/importlib_metadata-4.5.0.dist-info
   version: 4.5.0
 - name: maturin
-  path: python3.8/site-packages/maturin-0.12.18_beta.1.dist-info
-  version: 0.12.18b1
+  path: python3.8/site-packages/maturin-0.12.18_beta.2.dist-info
+  version: 0.12.18b2
 - name: packaging
   path: python3.8/site-packages/packaging-20.9.dist-info
   version: '20.9'
