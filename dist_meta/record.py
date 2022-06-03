@@ -137,7 +137,7 @@ class RecordEntry(pathlib.PurePosixPath):
 
 		return (self.distro.path.parent / self).read_text(encoding=encoding, errors=errors)
 
-	def read_bytes(self):
+	def read_bytes(self) -> bytes:
 		"""
 		Open the file in bytes mode, read it, and close the file.
 
@@ -165,7 +165,7 @@ class RecordEntry(pathlib.PurePosixPath):
 			parts.append(f"distro={self.distro!r}")
 		return f"{self.__class__.__name__}({parts:, })"
 
-	def as_record_entry(self):
+	def as_record_entry(self) -> str:
 		"""
 		Returns an entry for a ``RECORD`` file, in the form ``<name>,<hash>,<size>``.
 		"""

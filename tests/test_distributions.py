@@ -27,11 +27,11 @@ _wheels_glob = (PathPlus(__file__).parent / "wheels").glob("*.whl")
 
 
 @pytest.fixture(params=(param(w, key=lambda t: t[0].name) for w in _wheels_glob))
-def example_wheel(tmp_pathplus: PathPlus, request):
+def example_wheel(tmp_pathplus: PathPlus, request) -> PathPlus:
 	return shutil.copy2(request.param, tmp_pathplus)
 
 
-def _name_param(params):
+def _name_param(params):  # noqa: MAN001,MAN002
 	wheel = params[0]
 	if wheel.name == "PyAthena-2.3.0-py3-none-any.whl":
 		# PyAthena has a CamelCase filename but lowercase metadata
@@ -48,7 +48,7 @@ class TestDistribution:
 			)
 	def test_distribution(
 			self,
-			example_wheel,
+			example_wheel: PathPlus,
 			tmp_pathplus: PathPlus,
 			advanced_file_regression: AdvancedFileRegressionFixture,
 			advanced_data_regression: AdvancedDataRegressionFixture,
@@ -62,11 +62,14 @@ class TestDistribution:
 
 		distro = distributions.Distribution.from_path(filename)
 
+		wheel = distro.get_wheel()
+		assert wheel is not None
+
 		advanced_data_regression.check({
 				"filename": PathPlus(example_wheel).name,
 				"name": distro.name,
 				"version": str(distro.version),
-				"wheel": list(distro.get_wheel().items()),  # type: ignore
+				"wheel": list(wheel.items()),
 				"metadata": list(distro.get_metadata().items()),
 				"entry_points": distro.get_entry_points(),
 				"has_license": distro.has_file("LICENSE"),
@@ -90,7 +93,7 @@ class TestDistribution:
 		with pytest.raises(ValueError, match=msg):
 			distributions.Distribution.from_path("/some/directory/~-ippinglabel.1.1.1.post1.dist-info")
 
-	def test_get_record(self, example_wheel, tmp_pathplus: PathPlus):
+	def test_get_record(self, example_wheel: PathPlus, tmp_pathplus: PathPlus):
 		(tmp_pathplus / "site-packages").mkdir()
 		handy_archives.unpack_archive(example_wheel, tmp_pathplus / "site-packages")
 
@@ -124,7 +127,7 @@ class TestWheelDistribution:
 
 	def test_distribution(
 			self,
-			example_wheel,
+			example_wheel: PathPlus,
 			advanced_file_regression: AdvancedFileRegressionFixture,
 			advanced_data_regression: AdvancedDataRegressionFixture,
 			):
@@ -146,7 +149,7 @@ class TestWheelDistribution:
 		assert isinstance(wd.wheel_zip, zipfile.ZipFile)
 		assert isinstance(wd.wheel_zip, handy_archives.ZipFile)
 
-	def test_get_record(self, example_wheel):
+	def test_get_record(self, example_wheel: PathPlus):
 
 		distro = self.cls.from_path(example_wheel)
 		record = distro.get_record()
@@ -171,7 +174,7 @@ class TestWheelDistribution:
 
 	def test_wheel_distribution_zip(
 			self,
-			wheel_directory,
+			wheel_directory: PathPlus,
 			advanced_file_regression: AdvancedFileRegressionFixture,
 			):
 		wd = self.cls.from_path(wheel_directory / "domdf_python_tools-2.9.1-py3-none-any.whl")
@@ -218,7 +221,7 @@ class CustomDistribution(DistributionType, Tuple[str, Version, PathPlus, handy_a
 		return tuple.__new__(cls, (name, version, path, wheel_zip))
 
 	@classmethod
-	def from_path(cls, path: PathLike, **kwargs):
+	def from_path(cls, path: PathLike, **kwargs) -> "CustomDistribution":
 		r"""
 		Construct a :class:`~.WheelDistribution` from a filesystem path to the ``.whl`` file.
 
@@ -262,7 +265,7 @@ class CustomSubclass(distributions.WheelDistribution):
 		self.extra_attribute = "EXTRA"
 		return self
 
-	def extra_method(self):
+	def extra_method(self):  # noqa: MAN002
 		raise NotImplementedError("extra_method")
 
 
@@ -270,17 +273,20 @@ class TestCustomDistribution:
 
 	def test_distribution(
 			self,
-			example_wheel,
+			example_wheel: PathPlus,
 			advanced_file_regression: AdvancedFileRegressionFixture,
 			advanced_data_regression: AdvancedDataRegressionFixture,
 			):
 		wd = CustomDistribution.from_path(example_wheel)
 
+		wheel = wd.get_wheel()
+		assert wheel is not None
+
 		advanced_data_regression.check({
 				"filename": PathPlus(example_wheel).name,
 				"name": wd.name,
 				"version": str(wd.version),
-				"wheel": list(wd.get_wheel().items()),
+				"wheel": list(wheel.items()),
 				"metadata": list(wd.get_metadata().items()),
 				"entry_points": wd.get_entry_points(),
 				"has_license": wd.has_file("LICENSE"),  # type: ignore[misc]
@@ -292,7 +298,7 @@ class TestCustomDistribution:
 		assert isinstance(wd.wheel_zip, zipfile.ZipFile)
 		assert isinstance(wd.wheel_zip, handy_archives.ZipFile)
 
-	def test_get_record(self, example_wheel):
+	def test_get_record(self, example_wheel: PathPlus):
 
 		distro = CustomDistribution.from_path(example_wheel)
 		record = distro.get_record()
@@ -364,7 +370,7 @@ class TestCustomSubclass(TestWheelDistribution):
 
 	def test_wheel_distribution_zip(
 			self,
-			wheel_directory,
+			wheel_directory: PathPlus,
 			advanced_file_regression: AdvancedFileRegressionFixture,
 			):
 		wd = CustomSubclass.from_path(wheel_directory / "domdf_python_tools-2.9.1-py3-none-any.whl")
@@ -379,7 +385,7 @@ class TestCustomSubclass(TestWheelDistribution):
 
 		assert wd.wheel_zip.fp is None
 
-	def test_subclass(self, wheel_directory):
+	def test_subclass(self, wheel_directory: PathPlus):
 		wd = CustomSubclass.from_path(wheel_directory / "domdf_python_tools-2.9.1-py3-none-any.whl")
 
 		wd2 = distributions.WheelDistribution.from_path(
@@ -454,7 +460,7 @@ def test_iter_distributions_pip_tmpdir(
 				("sphinxcontrib.applehelp", "sphinxcontrib_applehelp"),
 				]
 		)
-def test_get_distribution(name, expected, fake_virtualenv: List[PathPlus]):
+def test_get_distribution(name: str, expected: str, fake_virtualenv: List[PathPlus]):
 	assert distributions.get_distribution(name, path=fake_virtualenv).name == expected
 
 

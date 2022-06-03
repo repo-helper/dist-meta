@@ -43,20 +43,7 @@ import posixpath
 import sys
 from contextlib import suppress
 from operator import itemgetter
-from typing import (
-		TYPE_CHECKING,
-		Any,
-		Callable,
-		Dict,
-		Iterable,
-		Iterator,
-		List,
-		Optional,
-		Tuple,
-		Type,
-		TypeVar,
-		cast
-		)
+from typing import TYPE_CHECKING, Any, Callable, Dict, Iterable, Iterator, List, Optional, Tuple, Type, TypeVar
 
 # 3rd party
 import handy_archives
@@ -194,7 +181,7 @@ class DistributionType(abc.ABC):
 		return result
 
 	@classmethod
-	def _make(cls: Type[_DT], iterable) -> _DT:
+	def _make(cls: Type[_DT], iterable) -> _DT:  # noqa: MAN001
 		"""
 		Make a new :class:`~.DistributionType` object, of the same type as this one, from a sequence or iterable.
 
@@ -270,7 +257,7 @@ class DistributionType(abc.ABC):
 		else:
 			return None
 
-	def __repr__(self):
+	def __repr__(self) -> str:
 		"""
 		Returns a string representation of the :class:`~.DistributionType`.
 		"""
@@ -453,7 +440,7 @@ class WheelDistribution(DistributionType, Tuple[str, Version, PathPlus, handy_ar
 	def __enter__(self: _WD) -> _WD:
 		return self
 
-	def __exit__(self, exc_type, exc_val, exc_tb):
+	def __exit__(self, exc_type, exc_val, exc_tb) -> None:
 		self.wheel_zip.close()
 
 	def read_file(self, filename: str) -> str:

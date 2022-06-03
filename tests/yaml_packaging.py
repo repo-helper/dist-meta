@@ -11,7 +11,7 @@ from pytest_regressions.data_regression import RegressionYamlDumper
 
 
 @_representer_for(str, Version, Requirement, Marker, SpecifierSet)
-def represent_packaging_types(
+def represent_packaging_types(  # noqa: MAN002
 		dumper: RegressionYamlDumper,
 		data: Union[Version, Requirement, Marker, SpecifierSet],
 		):

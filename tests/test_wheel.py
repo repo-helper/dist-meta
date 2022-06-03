@@ -31,7 +31,7 @@ def test_loads():
 	assert fields.get_all("Tag") == ["py3-none-any", "py2-none-any"]
 
 
-def test_load(tmp_pathplus):
+def test_load(tmp_pathplus: PathPlus):
 	(tmp_pathplus / "WHEEL").write_lines([
 			"Wheel-Version: 1.0",
 			"Generator: bdist_wheel (0.36.2)",
@@ -48,7 +48,7 @@ def test_load(tmp_pathplus):
 	assert fields.get_all("Tag") == ["py3-none-any", "py2-none-any"]
 
 
-def test_load_no_version(tmp_pathplus):
+def test_load_no_version(tmp_pathplus: PathPlus):
 	(tmp_pathplus / "WHEEL").write_lines([
 			"Generator: bdist_wheel (0.36.2)",
 			"Root-Is-Purelib: true",
@@ -96,7 +96,7 @@ fields_dict_no_root_is_purelib = {
 				pytest.param(fields_dict_no_root_is_purelib, id="fields_dict_no_root_is_purelib"),
 				]
 		)
-def test_dumps(fields, advanced_file_regression: AdvancedFileRegressionFixture):
+def test_dumps(fields: MetadataMapping, advanced_file_regression: AdvancedFileRegressionFixture):
 	advanced_file_regression.check(wheel.dumps(fields), extension='')
 
 
@@ -110,7 +110,7 @@ def test_dumps(fields, advanced_file_regression: AdvancedFileRegressionFixture):
 				]
 		)
 def test_dump(
-		fields,
+		fields: MetadataMapping,
 		tmp_pathplus: PathPlus,
 		advanced_file_regression: AdvancedFileRegressionFixture,
 		):
@@ -118,7 +118,7 @@ def test_dump(
 	advanced_file_regression.check_file(tmp_pathplus / "WHEEL")
 
 
-def test_dump_no_version(tmp_pathplus):
+def test_dump_no_version(tmp_pathplus: PathPlus):
 	fields = MetadataMapping()
 	fields["Generator"] = "bdist_wheel (0.36.2)"
 	fields["Root-Is-Purelib"] = "true"

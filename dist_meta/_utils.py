@@ -31,7 +31,7 @@ import functools
 import os
 import pathlib
 import re
-from typing import Iterator, Tuple
+from typing import Callable, Iterator, Tuple, TypeVar
 
 # 3rd party
 from domdf_python_tools.paths import PathPlus
@@ -42,8 +42,10 @@ _escaped_name_re = re.compile(r"^[\w\d._]*$", re.UNICODE)
 
 SHOULD_CACHE = int(os.environ.get("DIST_META_CACHE", 1))
 
+_C = TypeVar("_C", bound=Callable)
 
-def _cache(func):
+
+def _cache(func: _C) -> _C:
 	if SHOULD_CACHE:
 		return functools.lru_cache()(func)  # type: ignore[return-value]
 	else:  # pragma: no cover

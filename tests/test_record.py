@@ -128,6 +128,6 @@ def test_from_record_entry_string(record_string: str, advanced_data_regression: 
 	advanced_data_regression.check({"path": record, "size": record.size, "hash": record.hash})
 
 	fake_distro = object()
-	record = RecordEntry.from_record_entry(record_string, distro=fake_distro)  # type: ignore
+	record = RecordEntry.from_record_entry(record_string, distro=fake_distro)  # type: ignore[arg-type]
 	assert record.as_record_entry() == record_string
 	assert record.distro is fake_distro

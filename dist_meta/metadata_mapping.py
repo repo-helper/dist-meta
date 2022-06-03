@@ -196,7 +196,7 @@ class MetadataMapping(MutableMapping[str, str]):
 	@overload
 	def get(self, name: str, default: Union[str, _T]) -> Union[str, _T]: ...
 
-	def get(self, name: str, default=None):
+	def get(self, name: str, default=None) -> str:  # noqa: MAN001
 		"""
 		Get a field value.
 
@@ -232,7 +232,7 @@ class MetadataMapping(MutableMapping[str, str]):
 	@overload
 	def get_all(self, name: str, default: Union[str, _T]) -> Union[List[str], _T]: ...
 
-	def get_all(self, name: str, default=None):
+	def get_all(self, name: str, default=None):  # noqa: MAN001,MAN002
 		"""
 		Return a list of all the values for the named field.
 
@@ -268,7 +268,7 @@ class MetadataMapping(MutableMapping[str, str]):
 
 		return f"<{self.__class__.__name__}({as_dict})>"
 
-	def replace(self, name: str, value: str):
+	def replace(self, name: str, value: str) -> None:
 		"""
 		Replace the value of the first matching field, retaining header order and case.
 
@@ -296,7 +296,7 @@ class MetadataEmitter(StringList):
 		self.fields = fields
 		super().__init__()
 
-	def add_single(self, field_name: str):
+	def add_single(self, field_name: str) -> None:
 		"""
 		Add a single value for the field with the given name.
 
@@ -306,7 +306,7 @@ class MetadataEmitter(StringList):
 		if field_name in self.fields:
 			self.append(f"{field_name}: {self.fields[field_name]}")
 
-	def add_multiple(self, field_name: str):
+	def add_multiple(self, field_name: str) -> None:
 		"""
 		Add all values for the "multiple use" field with the given name.
 
@@ -317,7 +317,7 @@ class MetadataEmitter(StringList):
 			for value in self.fields.get_all(field_name, ()):
 				self.append(f"{field_name}: {value}")
 
-	def add_body(self, body: str):
+	def add_body(self, body: str) -> None:
 		"""
 		Add a body to the file.
 

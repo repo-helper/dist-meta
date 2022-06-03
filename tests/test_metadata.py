@@ -13,12 +13,12 @@ from dist_meta.metadata_mapping import MetadataMapping
 
 
 @pytest.fixture()
-def example_metadata():
+def example_metadata() -> str:
 	return (PathPlus(__file__).parent / "example_metadata").read_text()
 
 
 def test_loads(
-		example_metadata,
+		example_metadata: str,
 		advanced_data_regression: AdvancedDataRegressionFixture,
 		advanced_file_regression: AdvancedFileRegressionFixture,
 		):
@@ -53,7 +53,7 @@ def test_loads(
 
 
 def test_load(
-		example_metadata,
+		example_metadata: str,
 		tmp_pathplus: PathPlus,
 		advanced_data_regression: AdvancedDataRegressionFixture,
 		advanced_file_regression: AdvancedFileRegressionFixture,
@@ -89,7 +89,7 @@ def test_load(
 	advanced_file_regression.check(fields["Description"])
 
 
-def test_load_no_version(tmp_pathplus):
+def test_load_no_version(tmp_pathplus: PathPlus):
 	(tmp_pathplus / "METADATA").write_lines([
 			"Generator: bdist_wheel (0.36.2)",
 			"Name: cawdrey",

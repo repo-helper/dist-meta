@@ -17,7 +17,7 @@ expected_load_output = {"console_scripts": {"py.test": "pytest:console_main", "p
 
 
 @pytest.fixture()
-def example_metadata():
+def example_metadata() -> str:
 	return (PathPlus(__file__).parent / "example_entry_points.txt").read_text()
 
 
@@ -40,7 +40,7 @@ def test_loads(advanced_data_regression: AdvancedDataRegressionFixture):
 		assert cp.options(section) == list(expected_load_output[section].keys())
 
 
-def test_load(tmp_pathplus):
+def test_load(tmp_pathplus: PathPlus):
 	(tmp_pathplus / "entry_points.txt").write_lines([
 			"[console_scripts]",
 			"py.test = pytest:console_main",
@@ -50,11 +50,18 @@ def test_load(tmp_pathplus):
 	assert entry_points.load(tmp_pathplus / "entry_points.txt") == expected_load_output
 
 
-def test_loads_longer(advanced_data_regression: AdvancedDataRegressionFixture, example_metadata):
+def test_loads_longer(
+		advanced_data_regression: AdvancedDataRegressionFixture,
+		example_metadata: str,
+		):
 	advanced_data_regression.check(entry_points.loads(example_metadata))
 
 
-def test_load_longer(tmp_pathplus, advanced_data_regression: AdvancedDataRegressionFixture, example_metadata):
+def test_load_longer(
+		tmp_pathplus: PathPlus,
+		advanced_data_regression: AdvancedDataRegressionFixture,
+		example_metadata: str,
+		):
 	(tmp_pathplus / "entry_points.txt").write_text(example_metadata)
 	advanced_data_regression.check(entry_points.load(tmp_pathplus / "entry_points.txt"))
 
@@ -84,7 +91,7 @@ def test_lazy_loads():
 	assert {k: dict(v) for k, v in eps} == expected_load_output
 
 
-def test_lazy_load(tmp_pathplus):
+def test_lazy_load(tmp_pathplus: PathPlus):
 	(tmp_pathplus / "entry_points.txt").write_lines([
 			'',
 			"[console_scripts]",
@@ -127,7 +134,7 @@ def to_pure_dict(
 			if isinstance(name, entry_points.EntryPoint):
 				output[group][name.name] = name.value
 			else:
-				output[group][name] = data[group][name]  # type: ignore
+				output[group][name] = data[group][name]  # type: ignore[call-overload]
 
 	return output
 
@@ -165,7 +172,10 @@ def to_pure_dict(
 								id="complex_obj"),
 				]
 		)
-def test_dumps(advanced_file_regression: AdvancedFileRegressionFixture, ep_dict):
+def test_dumps(
+		advanced_file_regression: AdvancedFileRegressionFixture,
+		ep_dict: Dict[str, Dict[str, str]],
+		):
 	advanced_file_regression.check(entry_points.dumps(ep_dict))
 
 	pure_ep_dict = to_pure_dict(ep_dict)
@@ -206,7 +216,7 @@ def test_dumps(advanced_file_regression: AdvancedFileRegressionFixture, ep_dict)
 def test_dump(
 		tmp_pathplus: PathPlus,
 		advanced_file_regression: AdvancedFileRegressionFixture,
-		ep_dict,
+		ep_dict: Dict[str, Dict[str, str]],
 		):
 	entry_points.dump(ep_dict, tmp_pathplus / "entry_points.txt")
 	advanced_file_regression.check_file(tmp_pathplus / "entry_points.txt")
@@ -287,7 +297,7 @@ def test_entry_point_class_extras():
 
 
 @pytest.mark.parametrize("value", ['', "1:", '-', ":console_main", "foo-bar"])
-def test_entry_point_class_malformed(value):
+def test_entry_point_class_malformed(value: str):
 
 	ep = entry_points.EntryPoint(
 			name="pytest",

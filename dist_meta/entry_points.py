@@ -81,7 +81,7 @@ class _Section:
 	def __init__(self):
 		self.section: Optional[str] = None
 
-	def __call__(self, line) -> Optional[str]:
+	def __call__(self, line: str) -> Optional[str]:
 		if line.startswith('[') and line.endswith(']'):
 			# new section
 			self.section = line.strip("[]")
@@ -295,7 +295,7 @@ class EntryPoint(NamedTuple):
 	#: The distribution the entry point belongs to.
 	distro: Optional["Distribution"] = None
 
-	def load(self):
+	def load(self) -> object:
 		"""
 		Load the object referred to by this entry point.
 

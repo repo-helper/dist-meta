@@ -18,7 +18,7 @@ def wheel_directory() -> PathPlus:
 
 @pytest.fixture()
 def fake_virtualenv(
-		wheel_directory,
+		wheel_directory: PathPlus,
 		tmp_pathplus: PathPlus,
 		) -> List[PathPlus]:
 
