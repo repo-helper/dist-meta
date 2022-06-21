@@ -304,7 +304,7 @@ class MetadataEmitter(StringList):
 		"""
 
 		if field_name in self.fields:
-			for value in self.fields.get_all(field_name, ()):
+			for value in self.fields.get_all(field_name, ()):  # pylint: disable=use-list-copy
 				self.append(f"{field_name}: {value}")
 
 	def add_body(self, body: str) -> None:

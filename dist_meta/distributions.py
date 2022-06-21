@@ -118,7 +118,7 @@ class DistributionType(abc.ABC):
 		ns = cls.__dict__
 		field_defaults = getattr(cls, "_field_defaults", {})
 
-		for index, name in enumerate(cls._fields):
+		for index, name in enumerate(cls._fields):  # pylint: disable=use-dict-comprehension
 			if name in ns:
 				field_defaults[name] = ns[name]
 
@@ -128,8 +128,10 @@ class DistributionType(abc.ABC):
 			raise ValueError("The second item in '_fields' must be 'version'")
 
 		for index, name in enumerate(cls._fields):
+			# pylint: disable=dotted-import-in-loop,loop-global-usage
 			doc = sys.intern(f'Alias for field number {index}')
 			setattr(cls, name, _tuplegetter(index, doc))
+			# pylint: enable=dotted-import-in-loop,loop-global-usage
 
 		cls._field_defaults = field_defaults
 
@@ -600,9 +602,13 @@ def _get_dist_info_path(dist: WheelDistribution) -> str:
 			with suppress(Exception):
 				# Ignore parsing errors
 				dist_info_dir = filename.split('/', 1)[0]
+
+				# pylint: disable=dotted-import-in-loop,loop-invariant-statement
 				distro_name_version, extension = posixpath.splitext(dist_info_dir)
 				if extension != ".dist-info":
 					continue
+
+				# pylint: enable=dotted-import-in-loop,loop-invariant-statement
 
 				name, version = divide(distro_name_version, '-')
 				if name.casefold() == dist.name.casefold():

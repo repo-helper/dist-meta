@@ -115,6 +115,7 @@ def loads(rawtext: str) -> MetadataMapping:
 
 		field_name, field_value = divide(line, ':')
 
+		# pylint: disable=loop-global-usage
 		if field_name.lower() != "description":
 			fields[field_name] = field_value.replace(NEWLINE_MARK, '').lstrip()
 		else:
@@ -123,6 +124,7 @@ def loads(rawtext: str) -> MetadataMapping:
 			description_lines = _clean_desc(description_lines, ' ')
 			description_lines = _clean_desc(description_lines, '\t')
 			description_lines = _clean_desc(description_lines, '|')
+			# pylint: enable=loop-global-usage
 
 			# Remove any trailing or leading blank lines.
 			while description_lines and not description_lines[-1]:

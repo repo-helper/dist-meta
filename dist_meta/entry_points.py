@@ -260,7 +260,7 @@ def get_all_entry_points(path: Optional[Iterable[PathLike]] = None, ) -> Dict[st
 		for group_name in eps:
 			group = grouped_eps.setdefault(group_name, [])
 
-			for name, epstr in eps[group_name].items():
+			for name, epstr in eps[group_name].items():  # pylint: disable=use-list-copy
 				group.append(EntryPoint(name, epstr, group_name, distro))
 
 	return grouped_eps

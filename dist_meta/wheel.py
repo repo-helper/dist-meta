@@ -59,7 +59,7 @@ def loads(rawtext: str) -> MetadataMapping:
 		line = file_content.pop()
 		if line.strip():
 			field_name, field_value = divide(line, ':')
-			fields[field_name] = field_value.lstrip()
+			fields[field_name] = field_value.lstrip()  # pylint: disable=loop-invariant-statement
 
 	if "Wheel-Version" not in fields:
 		raise MissingFieldError(f"No 'Wheel-Version' field was provided.")
@@ -103,7 +103,7 @@ def dumps(fields: Union[Mapping[str, Any], MetadataMapping]) -> str:
 	if "Tag" in fields and isinstance(fields, MetadataMapping):
 		output.add_multiple("Tag")
 	elif "Tag" in fields:
-		for value in fields["Tag"]:
+		for value in fields["Tag"]:  # pylint: disable=use-list-copy
 			output.append(f"Tag: {value}")
 
 	output.add_single("Build")
