@@ -183,14 +183,14 @@ def dumps(entry_points: Union[EntryPointMap, Dict[str, Sequence["EntryPoint"]]])
 
 	output = StringList()
 
-	for group in entry_points:
+	for group, group_data in entry_points.items():
 		output.append(f"[{group}]")
 
-		for name in entry_points[group]:
+		for name in group_data:
 			if isinstance(name, EntryPoint):
 				output.append(f"{name.name} = {name.value}")
 			else:
-				output.append(f"{name} = {entry_points[group][name]}")  # type: ignore[call-overload]
+				output.append(f"{name} = {group_data[name]}")  # type: ignore[call-overload]
 
 		output.blankline(ensure_single=True)
 
