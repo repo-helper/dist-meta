@@ -382,9 +382,4 @@ class EntryPoint(NamedTuple):
 		:param distro: The distribution the entry points belong to.
 		"""
 
-		output = []
-
-		for name, value in mapping.items():
-			output.append(EntryPoint(name, value, group, distro))
-
-		return output
+		return [EntryPoint(name, value, group, distro) for name, value in mapping.items()]

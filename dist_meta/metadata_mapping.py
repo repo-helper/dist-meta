@@ -126,13 +126,7 @@ class MetadataMapping(MutableMapping[str, str]):
 		"""
 
 		name = name.lower()
-		newfields = []
-
-		for k, v in self._fields:
-			if k.lower() != name:
-				newfields.append((k, v))
-
-		self._fields = newfields
+		self._fields = [(k, v) for k, v in self._fields if k.lower() != name]
 
 	def __contains__(self, name: object) -> bool:
 		"""
@@ -246,12 +240,8 @@ class MetadataMapping(MutableMapping[str, str]):
 		:param default:
 		"""
 
-		values = []
 		name = name.lower()
-
-		for key, val in self._fields:
-			if key.lower() == name:
-				values.append(val)
+		values = [val for key, val in self._fields if key.lower() == name]
 
 		if not values:
 			return default
