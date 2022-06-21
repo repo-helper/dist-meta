@@ -41,8 +41,8 @@ Parser and emitter for ``entry_points.txt``.
 
 # stdlib
 import importlib
-import itertools
 import re
+from itertools import groupby
 from typing import Dict, Iterable, Iterator, List, Mapping, NamedTuple, Optional, Sequence, Tuple, TypeVar, Union
 
 # 3rd party
@@ -107,7 +107,7 @@ def lazy_loads(rawtext: str) -> EntryPointIterator:
 
 	lines = filter(None, map(str.strip, rawtext.splitlines()))
 
-	for section, values in itertools.groupby(lines, _Section()):
+	for section, values in groupby(lines, _Section()):
 		if section is not None:
 			yield section, map(_parse_value, values)
 

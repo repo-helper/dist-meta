@@ -37,11 +37,11 @@ Distributions must have a ``*.dist-info`` directory (as defined by :pep:`566`) t
 
 # stdlib
 import abc
-import csv
 import functools
 import posixpath
 import sys
 from contextlib import suppress
+from csv import reader as csv_reader
 from operator import itemgetter
 from typing import TYPE_CHECKING, Any, Callable, Dict, Iterable, Iterator, List, Optional, Tuple, Type, TypeVar
 
@@ -244,7 +244,7 @@ class DistributionType(abc.ABC):
 			content = self.read_file("RECORD").splitlines()
 			output = []
 
-			for line in csv.reader(content):
+			for line in csv_reader(content):
 				name, hash_, size_str, *_ = line
 				entry = RecordEntry(
 						name.strip(),
@@ -362,7 +362,7 @@ class Distribution(DistributionType, Tuple[str, Version, PathPlus]):
 			content = self.read_file("RECORD").splitlines()
 			output = []
 
-			for line in csv.reader(content):
+			for line in csv_reader(content):
 				name, hash_, size_str, *_ = line
 				entry = RecordEntry(
 						name.strip(),
@@ -503,7 +503,7 @@ class WheelDistribution(DistributionType, Tuple[str, Version, PathPlus, handy_ar
 		content = self.read_file("RECORD").splitlines()
 		output = []
 
-		for line in csv.reader(content):
+		for line in csv_reader(content):
 			name, hash_, size_str, *_ = line
 			entry = RecordEntry(
 					name,
