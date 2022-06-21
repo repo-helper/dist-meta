@@ -38,7 +38,7 @@ from domdf_python_tools.utils import divide, strtobool
 from dist_meta.metadata import MetadataEmitter, MissingFieldError
 from dist_meta.metadata_mapping import MetadataMapping
 
-__all__ = ["dump", "dumps", "load", "loads"]
+__all__ = ("dump", "dumps", "load", "loads")
 
 
 def loads(rawtext: str) -> MetadataMapping:

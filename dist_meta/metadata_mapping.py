@@ -45,7 +45,7 @@ from typing import Iterator, List, MutableMapping, Optional, Tuple, TypeVar, Uni
 # 3rd party
 from domdf_python_tools.stringlist import DelimitedList, StringList
 
-__all__ = ["MetadataMapping", "MetadataEmitter"]
+__all__ = ("MetadataMapping", "MetadataEmitter")
 
 _T = TypeVar("_T")
 

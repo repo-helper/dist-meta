@@ -39,7 +39,7 @@ from domdf_python_tools.utils import divide
 # this package
 from dist_meta.metadata_mapping import MetadataEmitter, MetadataMapping
 
-__all__ = ["dump", "dumps", "load", "loads", "MissingFieldError"]
+__all__ = ("dump", "dumps", "load", "loads", "MissingFieldError")
 
 WSP = " \t"
 DELIMITER = "\n\n"

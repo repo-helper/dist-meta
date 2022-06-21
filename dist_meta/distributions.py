@@ -65,7 +65,7 @@ if not TYPE_CHECKING:
 		# 3rd party
 		from _collections import _tuplegetter
 
-__all__ = [
+__all__ = (
 		"get_distribution",
 		"iter_distributions",
 		"DistributionType",
@@ -73,7 +73,7 @@ __all__ = [
 		"WheelDistribution",
 		"DistributionNotFoundError",
 		"_DT",
-		]
+		)
 
 _DT = TypeVar("_DT", bound="DistributionType")
 _D = TypeVar("_D", bound="Distribution")

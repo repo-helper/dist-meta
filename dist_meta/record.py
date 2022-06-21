@@ -54,7 +54,7 @@ else:
 		except ImportError:
 			pass
 
-__all__ = ["FileHash", "RecordEntry"]
+__all__ = ("FileHash", "RecordEntry")
 
 _RE = TypeVar("_RE", bound="RecordEntry")
 _FH = TypeVar("_FH", bound="FileHash")

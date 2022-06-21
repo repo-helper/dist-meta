@@ -55,7 +55,7 @@ from domdf_python_tools.utils import divide
 from dist_meta._utils import _cache
 from dist_meta.distributions import Distribution
 
-__all__ = [
+__all__ = (
 		"lazy_load",
 		"lazy_loads",
 		"load",
@@ -65,7 +65,7 @@ __all__ = [
 		"get_entry_points",
 		"get_all_entry_points",
 		"EntryPoint",
-		]
+		)
 
 _EP = TypeVar("_EP", bound="EntryPoint")
 
