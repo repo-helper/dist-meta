@@ -130,9 +130,14 @@ def test_loads(package: str):
 	with PyPIJSON() as client:
 		meta = client.get_metadata(package)
 
+	releases = meta.releases
+	assert releases is not None  # May be None if a version is passed to `get_metadata``
+
 	latest_version = meta.info["version"]
+
 	for release_artifact in filter(
-			lambda x: x.endswith(".whl"), map(itemgetter("url"), meta.releases[latest_version])
+			lambda x: x.endswith(".whl"),
+			map(itemgetter("url"), releases[latest_version]),
 			):
 
 		release_url = RequestsURL(release_artifact)
@@ -181,10 +186,14 @@ def test_loads_sdist(package: str):
 	with PyPIJSON() as client:
 		meta = client.get_metadata(package)
 
+	releases = meta.releases
+	assert releases is not None  # May be None if a version is passed to `get_metadata``
+
 	latest_version = meta.info["version"]
+
 	for release_artifact in filter(
 			lambda x: x.endswith(".tar.gz"),
-			map(itemgetter("url"), meta.releases[latest_version]),
+			map(itemgetter("url"), releases[latest_version]),
 			):
 
 		release_url = RequestsURL(release_artifact)
