@@ -224,4 +224,9 @@ def test_loads_sdist(package: str):
 			# Check values
 			for stdlib_field, dist_meta_field in zip(parsed_with_stdlib, parsed_with_dist_meta):
 				assert stdlib_field[0] == dist_meta_field[0]
-				assert stdlib_field[1] == dist_meta_field[1]
+
+				if stdlib_field[0] == "License":
+					# remove newlines to match dist-meta output
+					assert stdlib_field[1].replace('\n', '') == dist_meta_field[1]
+				else:
+					assert stdlib_field[1] == dist_meta_field[1]
