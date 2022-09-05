@@ -596,6 +596,8 @@ def _get_dist_info_path(dist: WheelDistribution) -> str:
 	:raises _NoDistInfoFound: If no dist-info directory is found, or the version/name don't match.
 	"""
 
+	casefolded_dist_name = dist.name.casefold()
+
 	for filename in dist.wheel_zip.namelist():
 		if ".dist-info" in filename:
 			# Might be the directory we're looking for
@@ -611,7 +613,7 @@ def _get_dist_info_path(dist: WheelDistribution) -> str:
 				# pylint: enable=dotted-import-in-loop,loop-invariant-statement
 
 				name, version = divide(distro_name_version, '-')
-				if name.casefold() == dist.name.casefold():
+				if name.casefold() == casefolded_dist_name:
 					actual_version = _parse_version(version)
 					if actual_version == dist.version:
 						dist_info = f"{name}-{version}.dist-info"
