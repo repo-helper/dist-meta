@@ -58,8 +58,8 @@ dist-meta
 	:target: https://github.com/repo-helper/dist-meta/actions?query=workflow%3A%22mypy%22
 	:alt: mypy status
 
-.. |requires| image:: https://dependency-dash.herokuapp.com/github/repo-helper/dist-meta/badge.svg
-	:target: https://dependency-dash.herokuapp.com/github/repo-helper/dist-meta/
+.. |requires| image:: https://dependency-dash.repo-helper.uk/github/repo-helper/dist-meta/badge.svg
+	:target: https://dependency-dash.repo-helper.uk/github/repo-helper/dist-meta/
 	:alt: Requirements Status
 
 .. |coveralls| image:: https://img.shields.io/coveralls/github/repo-helper/dist-meta/master?logo=coveralls
