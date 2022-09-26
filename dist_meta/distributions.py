@@ -321,7 +321,7 @@ class Distribution(DistributionType, Tuple[str, Version, PathPlus]):
 
 		# Check works around https://foss.heptapod.net/pypy/pypy/-/issues/3579
 
-		if sys.implementation.name == "pypy":
+		if sys.implementation.name == "pypy":  # pragma: no cover (!PyPy)
 			if distro_name_version == "hpy":
 				name, version = "hpy", "0.0.0"
 			elif distro_name_version == "cffi":

@@ -27,7 +27,7 @@ Parse and create ``*dist-info/WHEEL`` files.
 #
 
 # stdlib
-from typing import Any, List, Mapping, Union
+from typing import Any, List, Mapping, Optional, Tuple, Union
 
 # 3rd party
 from domdf_python_tools.paths import PathPlus
@@ -38,7 +38,7 @@ from domdf_python_tools.utils import divide, strtobool
 from dist_meta.metadata import MetadataEmitter, MissingFieldError
 from dist_meta.metadata_mapping import MetadataMapping
 
-__all__ = ("dump", "dumps", "load", "loads")
+__all__ = ("dump", "dumps", "load", "loads", "parse_generator_string")
 
 
 def loads(rawtext: str) -> MetadataMapping:
@@ -122,3 +122,32 @@ def dump(fields: Union[Mapping[str, Any], MetadataMapping], filename: PathLike) 
 
 	filename = PathPlus(filename)
 	return filename.write_text(dumps(fields))
+
+
+def parse_generator_string(generator: str) -> Tuple[str, Optional[str]]:
+	"""
+	Parse a generator string into its name and version.
+
+	Common forms include:
+
+	* ``name (version)``
+	* ``name version``
+	* ``name``
+
+	.. versionadded:: 0.6.0
+
+	:param generator: The raw generator string (the ``Generator`` field in ``WHEEL``).
+
+	:return: A tuple of the generator name and its version.
+		The version may be :py:obj:`None` if no version could be found.
+	"""
+
+	generator = generator.rstrip()
+
+	if ' ' not in generator:
+		return generator, None
+
+	name, version = generator.split(' ', 1)
+	version = version.lstrip('(').rstrip(')')
+
+	return name, version

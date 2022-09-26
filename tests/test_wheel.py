@@ -1,5 +1,6 @@
 # stdlib
 from textwrap import dedent
+from typing import Tuple
 
 # 3rd party
 import pytest
@@ -129,3 +130,24 @@ def test_dump_no_version(tmp_pathplus: PathPlus):
 		wheel.dump(fields, tmp_pathplus / "WHEEL")
 
 	assert not (tmp_pathplus / "WHEEL").exists()
+
+
+@pytest.mark.parametrize(
+		"generator, expected",
+		[
+				("bdist_wheel (0.34.2)", ("bdist_wheel", "0.34.2")),
+				("bdist_wheel (0.36.2)", ("bdist_wheel", "0.36.2")),
+				("bdist_wheel (0.37.0)", ("bdist_wheel", "0.37.0")),
+				("poetry 1.0.7", ("poetry", "1.0.7")),
+				("poetry-core 1.1.0", ("poetry-core", "1.1.0")),
+				("skbuild 0.15.0", ("skbuild", "0.15.0")),
+				("hatchling 1.10.0", ("hatchling", "1.10.0")),
+				("flit 3.5.1", ("flit", "3.5.1")),
+				("flit 3.7.1", ("flit", "3.7.1")),
+				("act (2.2)", ("act", "2.2")),
+				("foo", ("foo", None)),
+				("pdm-pep517 0.12.7", ("pdm-pep517", "0.12.7")),
+				]
+		)
+def test_parse_generator_string(generator: str, expected: Tuple[str, str]):
+	assert wheel.parse_generator_string(generator) == expected
