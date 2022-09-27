@@ -101,7 +101,7 @@ dist-meta
 .. |language| image:: https://img.shields.io/github/languages/top/repo-helper/dist-meta
 	:alt: GitHub top language
 
-.. |commits-since| image:: https://img.shields.io/github/commits-since/repo-helper/dist-meta/v0.5.0
+.. |commits-since| image:: https://img.shields.io/github/commits-since/repo-helper/dist-meta/v0.6.0
 	:target: https://github.com/repo-helper/dist-meta/pulse
 	:alt: GitHub commits since tagged version
 

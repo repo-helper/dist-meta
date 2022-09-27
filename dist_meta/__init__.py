@@ -33,5 +33,5 @@ from dist_meta.entry_points import get_all_entry_points, get_entry_points  # noq
 __author__: str = "Dominic Davis-Foster"
 __copyright__: str = "2021 Dominic Davis-Foster"
 __license__: str = "MIT License"
-__version__: str = "0.5.0"
+__version__: str = "0.6.0"
 __email__: str = "dominic@davis-foster.co.uk"
