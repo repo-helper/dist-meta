@@ -72,7 +72,7 @@ class RecordEntry(pathlib.PurePosixPath):
 
 	.. note::
 
-		Path operations (:meth:`~.pathlib.PurePath.joinpath`, :data:`~.pathlib.PurePath.parent` etc.)
+		Path operations (:meth:`~.pathlib.PurePath.joinpath`, :attr:`~.pathlib.PurePath.parent` etc.)
 		will return a standard :class:`pathlib.PurePosixPath` object without the extended attributes of this class.
 	"""
 
