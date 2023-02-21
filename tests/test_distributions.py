@@ -38,8 +38,8 @@ def _name_param(params):  # noqa: MAN001,MAN002
 	if wheel.name == "PyAthena-2.3.0-py3-none-any.whl":
 		# PyAthena has a CamelCase filename but lowercase metadata
 		return "PyAthena-2.3.0-py3-none-any.whl_Distribution"
-	else:
-		return wheel.name
+
+	return wheel.name
 
 
 class TestDistribution:

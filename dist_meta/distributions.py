@@ -211,8 +211,8 @@ class DistributionType(abc.ABC):
 
 		if self.has_file("entry_points.txt"):
 			return entry_points.loads(self.read_file("entry_points.txt"))
-		else:
-			return {}
+
+		return {}
 
 	def get_metadata(self) -> MetadataMapping:
 		"""
@@ -230,8 +230,8 @@ class DistributionType(abc.ABC):
 
 		if self.has_file("WHEEL"):
 			return wheel.loads(self.read_file("WHEEL"))
-		else:
-			return None
+
+		return None
 
 	def get_record(self) -> Optional[List[RecordEntry]]:
 		"""
