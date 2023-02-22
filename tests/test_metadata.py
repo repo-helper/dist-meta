@@ -19,8 +19,8 @@ def example_metadata() -> str:
 
 # Symbols ensure the reference file is the same for both cases
 @pytest.mark.parametrize("newline", [
-		pytest.param('\n', id="#"),
-		pytest.param("\r\n", id="/"),
+		pytest.param('\n', id='#'),
+		pytest.param("\r\n", id='/'),
 		])
 def test_loads(
 		example_metadata: str,
