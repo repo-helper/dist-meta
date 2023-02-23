@@ -94,6 +94,7 @@ def loads(rawtext: str) -> MetadataMapping:
 
 	:returns: A mapping of the metadata fields, and the long description
 	"""
+	rawtext = rawtext.replace('\r', '')
 
 	if DELIMITER in rawtext:
 		rawtext, body = rawtext.split(DELIMITER, maxsplit=1)

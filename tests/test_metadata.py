@@ -17,12 +17,18 @@ def example_metadata() -> str:
 	return (PathPlus(__file__).parent / "example_metadata").read_text()
 
 
+# Symbols ensure the reference file is the same for both cases
+@pytest.mark.parametrize("newline", [
+		pytest.param('\n', id='#'),
+		pytest.param("\r\n", id='/'),
+		])
 def test_loads(
 		example_metadata: str,
 		advanced_data_regression: AdvancedDataRegressionFixture,
 		advanced_file_regression: AdvancedFileRegressionFixture,
+		newline: str,
 		):
-	fields = metadata.loads(example_metadata)
+	fields = metadata.loads(example_metadata.replace('\n', newline))
 
 	advanced_data_regression.check(fields.keys())
 	assert fields["Metadata-Version"] == "2.1"
