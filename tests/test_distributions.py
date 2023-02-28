@@ -13,6 +13,7 @@ import pytest
 from coincidence import min_version
 from coincidence.params import param
 from coincidence.regressions import AdvancedDataRegressionFixture, AdvancedFileRegressionFixture
+from coincidence.selectors import not_pypy, only_pypy, only_version
 from domdf_python_tools.compat import PYPY36
 from domdf_python_tools.paths import PathPlus, in_directory
 from domdf_python_tools.typing import PathLike
@@ -23,7 +24,6 @@ from shippinglabel.checksum import get_sha256_hash
 
 # this package
 from dist_meta import _utils, distributions
-from dist_meta.distributions import DistributionType
 
 _wheels_glob = (PathPlus(__file__).parent / "wheels").glob("*.whl")
 
@@ -195,7 +195,7 @@ class TestWheelDistribution:
 		assert wd.wheel_zip.fp is None
 
 
-class CustomDistribution(DistributionType, Tuple[str, Version, PathPlus, handy_archives.ZipFile]):
+class CustomDistribution(distributions.DistributionType, Tuple[str, Version, PathPlus, handy_archives.ZipFile]):
 
 	@property
 	def path(self) -> PathPlus:
@@ -584,3 +584,49 @@ def test_wheel_wrong_dist_info(tmp_pathplus: PathPlus):
 		wd.get_wheel()
 
 	assert not wd.has_file("WHEEL")
+
+
+@pytest.mark.parametrize(
+		"version",
+		[
+				pytest.param(
+						"3.6",
+						marks=[
+								only_version(3.6, reason="Output differs on Python 3.6"),
+								not_pypy("Output differs on PyPy")
+								]
+						),
+				pytest.param(
+						"3.6-pypy",
+						marks=[
+								only_version(3.6, reason="Output differs on Python 3.6"),
+								only_pypy("Output differs on PyPy")
+								]
+						),
+				pytest.param(
+						"cpython",
+						marks=[
+								pytest.mark.skipif(
+										not ((3, 7) <= sys.version_info[:2] <= (3, 10)),
+										reason="Output differs on Python 3.7"
+										),
+								not_pypy("Output differs on PyPy")
+								]
+						),
+				pytest.param(
+						"pypy",
+						marks=[
+								pytest.mark.skipif(
+										not ((3, 7) <= sys.version_info[:2] <= (3, 10)),
+										reason="Output differs on Python 3.7"
+										),
+								only_pypy("Output differs on PyPy")
+								]
+						),
+				pytest.param("3.11", marks=only_version("3.11", reason="Output differs on Python 3.11")),
+				]
+		)
+def test_packages_distributions(advanced_data_regression: AdvancedDataRegressionFixture, version):
+
+	data = distributions.packages_distributions()
+	advanced_data_regression.check({k: list(v) for k, v in data.items()})

@@ -11,6 +11,7 @@
 
 .. autofunction:: dist_meta.distributions.get_distribution
 .. autofunction:: dist_meta.distributions.iter_distributions
+.. autofunction:: dist_meta.distributions.packages_distributions
 
 .. autoclass:: dist_meta.distributions.DistributionType
 	:no-show-inheritance:

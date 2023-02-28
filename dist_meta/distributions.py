@@ -37,13 +37,27 @@ Distributions must have a ``*.dist-info`` directory (as defined by :pep:`566`) t
 
 # stdlib
 import abc
+import collections
 import functools
 import posixpath
 import sys
 from contextlib import suppress
 from csv import reader as csv_reader
 from operator import itemgetter
-from typing import TYPE_CHECKING, Any, Callable, Dict, Iterable, Iterator, List, Optional, Tuple, Type, TypeVar
+from typing import (
+		TYPE_CHECKING,
+		Any,
+		Callable,
+		Dict,
+		Iterable,
+		Iterator,
+		List,
+		Mapping,
+		Optional,
+		Tuple,
+		Type,
+		TypeVar
+		)
 
 # 3rd party
 import handy_archives
@@ -68,6 +82,7 @@ if not TYPE_CHECKING:
 __all__ = (
 		"get_distribution",
 		"iter_distributions",
+		"packages_distributions",
 		"DistributionType",
 		"Distribution",
 		"WheelDistribution",
@@ -621,3 +636,55 @@ def _get_dist_info_path(dist: WheelDistribution) -> str:
 
 	# path not found
 	raise _NoDistInfoFound
+
+
+def packages_distributions(path: Optional[Iterable[PathLike]] = None) -> Mapping[str, List[str]]:
+	"""
+	Returns a mapping of top-level packages to a list of distributions which provide them.
+
+	The same top-level package may be provided by multiple distributions,
+	especially in the case of namespace packages.
+
+	:param path: The directories entries to search for distributions in.
+	:default path: :py:data:`sys.path`
+
+	.. versionadded:: 0.7.0
+
+	:bold-title:`Example:`
+
+	.. code-block:: pycon
+
+		>>> import collections.abc
+		>>> pkgs = packages_distributions()
+		>>> all(isinstance(dist, collections.abc.Sequence) for dist in pkgs.values())
+		True
+
+	"""
+
+	if path is None:  # pragma: no cover
+		path = sys.path
+
+	pkg_to_dist = collections.defaultdict(set)
+
+	for dist in iter_distributions(path):
+		dist_name = dist.get_metadata()["Name"]
+		assert dist_name is not None
+		record = dist.get_record() or ()
+
+		for file in record:
+			if file.suffix == ".py":
+
+				if ".." in file.parts:
+					# File outside of site-packages (e.g. in venv/bin)
+					continue
+
+				if len(file.parts) > 1:
+					# Package
+					pkg = file.parts[0]
+				else:
+					# Single file module
+					pkg = file.stem
+
+				pkg_to_dist[pkg].add(dist_name)
+
+	return {k: sorted(v) for k, v in pkg_to_dist.items()}
