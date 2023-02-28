@@ -87,3 +87,4 @@ from dist_meta.distributions import Distribution
 
 dist_meta.record.__dict__["Distribution"] = Distribution
 needspace_amount = r"5\baselineskip"
+latex_elements["preamble"] = "\n\\usepackage{tcolorbox}"
