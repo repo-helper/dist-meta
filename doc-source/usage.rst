@@ -94,7 +94,7 @@ Some fields may have only a placeholder value [2]_, and others may be absent:
 	Traceback (most recent call last):
 	KeyError: 'Obsoletes-Dist'
 
-.. [2] This is a convention of the build tool and not part of :pep:`566`
+.. [2] This is a convention followed by some build tools and not part of :pep:`566`
 
 
 Requirements
