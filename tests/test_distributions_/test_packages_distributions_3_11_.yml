@@ -10,6 +10,8 @@ apeye:
 - apeye
 apeye_core:
 - apeye-core
+atomicwrites:
+- atomicwrites
 attr:
 - attrs
 attrs:
@@ -24,6 +26,8 @@ click:
 - click
 coincidence:
 - coincidence
+colorama:
+- colorama
 consolekit:
 - consolekit
 coverage:
@@ -42,8 +46,6 @@ dom_toml:
 - dom_toml
 domdf_python_tools:
 - domdf-python-tools
-exceptiongroup:
-- exceptiongroup
 first:
 - first
 flake8:
@@ -104,6 +106,8 @@ pytest_rerunfailures:
 - pytest-rerunfailures
 pytest_timeout:
 - pytest-timeout
+pytz:
+- pytz
 requests:
 - requests
 setuptools:
@@ -123,8 +127,6 @@ sphinxcontrib:
 - sphinxcontrib-serializinghtml
 toml:
 - toml
-tomli:
-- tomli
 typing_extensions:
 - typing_extensions
 urllib3:

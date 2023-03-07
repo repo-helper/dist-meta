@@ -10,6 +10,8 @@ apeye:
 - apeye
 apeye_core:
 - apeye-core
+atomicwrites:
+- atomicwrites
 attr:
 - attrs
 attrs:
@@ -24,6 +26,8 @@ click:
 - click
 coincidence:
 - coincidence
+colorama:
+- colorama
 consolekit:
 - consolekit
 coverage:
