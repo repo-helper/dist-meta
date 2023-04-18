@@ -30,6 +30,7 @@ Classes to model parts of ``RECORD`` files.
 import csv
 import os
 import pathlib
+import sys
 from base64 import urlsafe_b64decode, urlsafe_b64encode
 from typing import TYPE_CHECKING, NamedTuple, Optional, Type, TypeVar
 
@@ -97,7 +98,10 @@ class RecordEntry(pathlib.PurePosixPath):
 			size: Optional[int] = None,
 			distro: Optional["Distribution"] = None,
 			):
-		super().__init__()
+		if sys.version_info < (3, 12):
+			super().__init__()
+		else:
+			super().__init__(path)
 
 	def __new__(
 			cls: Type[_RE],
@@ -110,7 +114,7 @@ class RecordEntry(pathlib.PurePosixPath):
 		Construct a :class:`RecordEntry` from one a string or an existing :class:`pathlib.PurePath` object.
 		"""
 
-		self = cls._from_parts((path, ))  # type: ignore[attr-defined]
+		self = super().__new__(cls, path)
 		self.hash = hash
 		self.size = size
 		self.distro = distro
