@@ -174,7 +174,7 @@ class RecordEntry(pathlib.PurePosixPath):
 		Returns an entry for a ``RECORD`` file, in the form ``<name>,<hash>,<size>``.
 		"""
 
-		parts = [os.fspath(self)]
+		parts = [self.as_posix()]
 
 		if self.hash is not None:
 			parts.append(self.hash.to_string())
