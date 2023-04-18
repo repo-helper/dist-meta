@@ -1,7 +1,7 @@
 # Attrs is required here as pytest no longer depends upon it
 apeye>=1.0.1
 atomicwrites>=1.4.1
-attrs>=23.1.0
+attrs>=22.2.0
 coincidence>=0.2.0
 colorama>=0.4.5
 consolekit>=1.2.3
