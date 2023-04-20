@@ -1,0 +1,2 @@
+domdf-python-tools>=3.2.2.post1
+httpx>=0.22.0
