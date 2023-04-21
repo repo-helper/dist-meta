@@ -102,7 +102,7 @@ class RecordEntry(pathlib.PurePosixPath):
 		if sys.version_info < (3, 12):  # pragma: no cover (py312+)
 			super().__init__()
 		else:  # pragma: no cover (<py312)
-			super().__init__(path)
+			super().__init__(self._coerce_path(path))
 
 	def __new__(
 			cls: Type[_RE],
@@ -113,6 +113,18 @@ class RecordEntry(pathlib.PurePosixPath):
 			) -> _RE:
 		"""
 		Construct a :class:`RecordEntry` from one a string or an existing :class:`pathlib.PurePath` object.
+		"""
+
+		self = super().__new__(cls, cls._coerce_path(path))
+		self.hash = hash
+		self.size = size
+		self.distro = distro
+		return self
+
+	@classmethod
+	def _coerce_path(cls, path: PathLike) -> PathLike:
+		"""
+		Necessary to fix issue in Python 3.12 where path separators are no longer converted.
 		"""
 
 		if os.path.isabs(path):
@@ -126,11 +138,7 @@ class RecordEntry(pathlib.PurePosixPath):
 			if posixpath.isabs(path):
 				raise ValueError("RecordEntry paths cannot be absolute")
 
-		self = super().__new__(cls, path)
-		self.hash = hash
-		self.size = size
-		self.distro = distro
-		return self
+		return path
 
 	def read_text(
 			self,

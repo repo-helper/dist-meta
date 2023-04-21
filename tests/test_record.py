@@ -150,3 +150,8 @@ def test_from_record_entry_string(record_string: str, advanced_data_regression: 
 def test_record_entry_absolute(path: PathLike):
 	with pytest.raises(ValueError, match="RecordEntry paths cannot be absolute"):
 		RecordEntry(path)
+
+
+def test_coercion_windows():
+	assert str(RecordEntry(pathlib.PureWindowsPath("a/b/c"))) == "a/b/c"
+	assert str(RecordEntry(pathlib.PureWindowsPath(r"a\b\c"))) == "a/b/c"
