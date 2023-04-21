@@ -5,7 +5,7 @@ Check files match the checksums given in RECORD.
 # stdlib
 import sys
 import time
-from typing import List, Optional, Tuple
+from typing import Optional, Tuple
 
 # 3rd party
 import click
@@ -70,16 +70,6 @@ def check_distribution(dist_name: str, path: Optional[Tuple[str, ...]] = None) -
 	else:
 		print(" ✔️")
 		return 0
-
-
-def main(argv: List[str]) -> int:
-	"""
-	CLI entry point.
-
-	:param argv: List of arguments à la ``sys.argv``.
-
-	:return:
-	"""
 
 
 @click.option("-p", "--path", required=False, multiple=True)
