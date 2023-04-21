@@ -30,6 +30,7 @@ Classes to model parts of ``RECORD`` files.
 import csv
 import os
 import pathlib
+import posixpath
 import sys
 from base64 import urlsafe_b64decode, urlsafe_b64encode
 from typing import TYPE_CHECKING, NamedTuple, Optional, Type, TypeVar
@@ -98,9 +99,9 @@ class RecordEntry(pathlib.PurePosixPath):
 			size: Optional[int] = None,
 			distro: Optional["Distribution"] = None,
 			):
-		if sys.version_info < (3, 12):
+		if sys.version_info < (3, 12):  # pragma: no cover (py312+)
 			super().__init__()
-		else:
+		else:  # pragma: no cover (<py312)
 			super().__init__(path)
 
 	def __new__(
@@ -113,6 +114,17 @@ class RecordEntry(pathlib.PurePosixPath):
 		"""
 		Construct a :class:`RecordEntry` from one a string or an existing :class:`pathlib.PurePath` object.
 		"""
+
+		if os.path.isabs(path):
+			raise ValueError("RecordEntry paths cannot be absolute")
+
+		if isinstance(path, pathlib.PurePath):
+			if path.is_absolute():
+				# Catch absolute paths from other platform
+				raise ValueError("RecordEntry paths cannot be absolute")
+			path = path.as_posix()
+			if posixpath.isabs(path):
+				raise ValueError("RecordEntry paths cannot be absolute")
 
 		self = super().__new__(cls, path)
 		self.hash = hash

@@ -1,8 +1,12 @@
+# stdlib
+import pathlib
+
 # 3rd party
 import handy_archives
 import pytest
 from coincidence import AdvancedDataRegressionFixture, AdvancedFileRegressionFixture
 from domdf_python_tools.paths import PathPlus
+from domdf_python_tools.typing import PathLike
 from shippinglabel.checksum import get_sha256_hash
 
 # this package
@@ -131,3 +135,18 @@ def test_from_record_entry_string(record_string: str, advanced_data_regression: 
 	record = RecordEntry.from_record_entry(record_string, distro=fake_distro)  # type: ignore[arg-type]
 	assert record.as_record_entry() == record_string
 	assert record.distro is fake_distro
+
+
+@pytest.mark.parametrize(
+		"path",
+		[
+				pathlib.PureWindowsPath(r"c:\a\b\c"),
+				pathlib.PureWindowsPath("/a/b/c"),
+				pathlib.PurePosixPath("/etc/apt/sources.list"),
+				pathlib.Path("/etc/apt/sources.list"),
+				"/etc/apt/sources.list",
+				]
+		)
+def test_record_entry_absolute(path: PathLike):
+	with pytest.raises(ValueError, match="RecordEntry paths cannot be absolute"):
+		RecordEntry(path)
