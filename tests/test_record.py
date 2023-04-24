@@ -138,6 +138,44 @@ def test_from_record_entry_string(record_string: str, advanced_data_regression: 
 
 
 @pytest.mark.parametrize(
+		"record_string",
+		[
+				pytest.param(
+						"\napeye/py.typed,sha256=47DEQpj8HBSa-_TImW-5JCeuQeRkm5NMpJWZG3hSuFU,0",
+						id="newline_before"
+						),
+				pytest.
+				param("apeye/py.typed,sha256=47DEQpj8HBSa-_TImW-5JCeuQeRkm5NMpJWZG3hSuFU,0\n", id="newline_after"),
+				pytest.param(
+						"\napeye/py.typed,sha256=47DEQpj8HBSa-_TImW-5JCeuQeRkm5NMpJWZG3hSuFU,0\n",
+						id="newline_before_and_after"
+						),
+				]
+		)
+def test_from_record_entry_string_multiline(record_string: str):
+	record = RecordEntry.from_record_entry(record_string)
+	assert record.as_record_entry() == "apeye/py.typed,sha256=47DEQpj8HBSa-_TImW-5JCeuQeRkm5NMpJWZG3hSuFU,0"
+	assert record.as_posix() == "apeye/py.typed"
+	assert record.size == 0
+	assert record.hash == ("sha256", "47DEQpj8HBSa-_TImW-5JCeuQeRkm5NMpJWZG3hSuFU")
+
+	fake_distro = object()
+	record = RecordEntry.from_record_entry(record_string, distro=fake_distro)  # type: ignore[arg-type]
+	assert record.as_record_entry() == "apeye/py.typed,sha256=47DEQpj8HBSa-_TImW-5JCeuQeRkm5NMpJWZG3hSuFU,0"
+	assert record.distro is fake_distro
+
+
+def test_from_record_entry_multiline_error():
+	with pytest.raises(ValueError, match="'entry' must be a single-line entry."):
+		RecordEntry.from_record_entry(
+				'\n'.join([
+						"apeye-1.0.1.dist-info/INSTALLER,sha256=zuuue4knoyJ-UwPPXg8fezS7VCrXJQrAP7zeNuwvFQg,4,",
+						"apeye/public_suffix_list.dat,sha256=sIQS28R2dRmXsqHy1dLS2poPCw9luJPejevcHnhvCME,233455,",
+						])
+				)
+
+
+@pytest.mark.parametrize(
 		"path",
 		[
 				pathlib.PureWindowsPath(r"c:\a\b\c"),
