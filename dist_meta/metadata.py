@@ -27,7 +27,6 @@ Parse and create ``*dist-info/METADATA`` files.
 #
 
 # stdlib
-import re
 import sys
 from typing import List
 
@@ -41,11 +40,8 @@ from dist_meta.metadata_mapping import MetadataEmitter, MetadataMapping
 
 __all__ = ("dump", "dumps", "load", "loads", "MissingFieldError")
 
-WSP = " \t"
 DELIMITER = "\n\n"
 NEWLINE_MARK = '\uf8ff'
-
-_unfold_re = re.compile(rf"\n([{WSP}])")
 
 
 def _clean_desc(lines: List[str], wsp: str) -> List[str]:
@@ -94,7 +90,8 @@ def loads(rawtext: str) -> MetadataMapping:
 
 	:returns: A mapping of the metadata fields, and the long description
 	"""
-	rawtext = rawtext.replace('\r', '')
+
+	rawtext = rawtext.replace("\r\n", '\n')
 
 	if DELIMITER in rawtext:
 		rawtext, body = rawtext.split(DELIMITER, maxsplit=1)
@@ -102,15 +99,13 @@ def loads(rawtext: str) -> MetadataMapping:
 		body = ''
 
 	# unfold per RFC 5322 § 2.2.3
-	rawtext = _unfold_re.sub(fr"{NEWLINE_MARK}\1", rawtext)
+	rawtext = rawtext.replace("\n\t", f"{NEWLINE_MARK}\t").replace("\n ", f"{NEWLINE_MARK} ")
 
 	file_content: List[str] = rawtext.split('\n')
-	file_content.reverse()
 
 	fields: MetadataMapping = MetadataMapping()
 
-	while file_content:
-		line = file_content.pop()
+	for line in file_content:
 		if not line:
 			continue
 
@@ -127,15 +122,9 @@ def loads(rawtext: str) -> MetadataMapping:
 			description_lines = _clean_desc(description_lines, '|')
 			# pylint: enable=loop-global-usage
 
-			# Remove any trailing or leading blank lines.
-			while description_lines and not description_lines[-1]:
-				description_lines.pop()
-			while description_lines and not description_lines[0]:
-				description_lines.pop(0)
-
-			field_value = '\n'.join(description_lines).strip() + '\n'
-
-			fields["Description"] = field_value
+			# pylint: disable=loop-invariant-statement
+			fields["Description"] = '\n'.join(description_lines).strip() + '\n'
+			# pylint: enable=loop-invariant-statement
 
 	if body.strip():
 		if "Description" in fields:
