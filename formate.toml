@@ -58,4 +58,4 @@ known_third_party = [
     "shippinglabel",
     "sphinx",
 ]
-known_first_party = "dist_meta"
+known_first_party = [ "dist_meta",]
