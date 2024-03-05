@@ -505,8 +505,10 @@ def test_hpy_pypy():
 	distro = distributions.get_distribution("hpy")
 	assert distro.name == "hpy"
 
-	if sys.implementation.name == "pypy":
+	if sys.implementation.name == "pypy" and sys.version_info < (3, 9):
 		assert distro.version == Version("0.0.0")
+	elif sys.implementation.name == "pypy":
+		assert distro.version == Version("0.9.0")
 	else:
 		assert distro.version == Version("0.0.3")
 
@@ -518,7 +520,7 @@ def test_cffi_pypy():
 	distro = distributions.get_distribution("cffi")
 	assert distro.name == "cffi"
 
-	if sys.implementation.name == "pypy":
+	if sys.implementation.name == "pypy" and sys.version_info < (3, 9):
 		assert distro.version == Version("0.0.0")
 	# else:
 	# 	assert distro.version == Version("0.0.3")
