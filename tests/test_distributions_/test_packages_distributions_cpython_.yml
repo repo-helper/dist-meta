@@ -61,7 +61,7 @@ idna:
 imagesize:
 - imagesize
 importlib_metadata:
-- importlib-metadata
+- importlib_metadata
 iniconfig:
 - iniconfig
 jinja2:
