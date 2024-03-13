@@ -606,10 +606,24 @@ def test_wheel_wrong_dist_info(tmp_pathplus: PathPlus):
 								]
 						),
 				pytest.param(
+						"3.7",
+						marks=[
+								only_version(3.7, reason="Output differs on Python 3.7"),
+								not_pypy("Output differs on PyPy")
+								]
+						),
+				pytest.param(
+						"3.7-pypy",
+						marks=[
+								only_version(3.7, reason="Output differs on Python 3.7"),
+								only_pypy("Output differs on PyPy")
+								]
+						),
+				pytest.param(
 						"cpython",
 						marks=[
 								pytest.mark.skipif(
-										not ((3, 7) <= sys.version_info[:2] <= (3, 10)),
+										not ((3, 8) <= sys.version_info[:2] <= (3, 10)),
 										reason="Output differs on Python 3.7"
 										),
 								not_pypy("Output differs on PyPy")
@@ -619,7 +633,7 @@ def test_wheel_wrong_dist_info(tmp_pathplus: PathPlus):
 						"pypy",
 						marks=[
 								pytest.mark.skipif(
-										not ((3, 7) <= sys.version_info[:2] <= (3, 10)),
+										not ((3, 8) <= sys.version_info[:2] <= (3, 10)),
 										reason="Output differs on Python 3.7"
 										),
 								only_pypy("Output differs on PyPy")
@@ -628,7 +642,7 @@ def test_wheel_wrong_dist_info(tmp_pathplus: PathPlus):
 				pytest.param("3.11", marks=only_version("3.11", reason="Output differs on Python 3.11")),
 				]
 		)
-def test_packages_distributions(advanced_data_regression: AdvancedDataRegressionFixture, version):
+def test_packages_distributions(advanced_data_regression: AdvancedDataRegressionFixture, version: str):
 
 	data = distributions.packages_distributions()
 	advanced_data_regression.check({k: list(v) for k, v in data.items()})
