@@ -127,8 +127,6 @@ sphinxcontrib:
 - sphinxcontrib-jsmath
 - sphinxcontrib-qthelp
 - sphinxcontrib-serializinghtml
-toml:
-- toml
 tomli:
 - tomli
 typing_extensions:
