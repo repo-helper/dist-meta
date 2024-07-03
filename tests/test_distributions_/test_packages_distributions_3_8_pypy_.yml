@@ -54,16 +54,14 @@ flake8:
 - flake8
 handy_archives:
 - handy-archives
-hpy:
-- hpy
 idna:
 - idna
 imagesize:
 - imagesize
 importlib_metadata:
-- importlib-metadata
+- importlib_metadata
 importlib_resources:
-- importlib-resources
+- importlib_resources
 iniconfig:
 - iniconfig
 jinja2:

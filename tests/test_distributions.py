@@ -608,20 +608,28 @@ def test_wheel_wrong_dist_info(tmp_pathplus: PathPlus):
 				pytest.param(
 						"3.7",
 						marks=[
-								pytest.mark.skipif(
-										not ((3, 7) <= sys.version_info[:2] <= (3, 8)),
-										reason="Output differs on Python 3.7 & 3.8"
-										),
+								only_version(3.7, reason="Output differs on Python 3.7"),
 								not_pypy("Output differs on PyPy")
 								]
 						),
 				pytest.param(
 						"3.7-pypy",
 						marks=[
-								pytest.mark.skipif(
-										not ((3, 7) <= sys.version_info[:2] <= (3, 8)),
-										reason="Output differs on Python 3.7 & 3.8"
-										),
+								only_version(3.7, reason="Output differs on Python 3.7"),
+								only_pypy("Output differs on PyPy")
+								]
+						),
+				pytest.param(
+						"3.8",
+						marks=[
+								only_version(3.8, reason="Output differs on Python 3.8"),
+								not_pypy("Output differs on PyPy")
+								]
+						),
+				pytest.param(
+						"3.8-pypy",
+						marks=[
+								only_version(3.8, reason="Output differs on Python 3.8"),
 								only_pypy("Output differs on PyPy")
 								]
 						),
