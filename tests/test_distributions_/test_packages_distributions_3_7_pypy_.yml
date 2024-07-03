@@ -60,6 +60,8 @@ imagesize:
 - imagesize
 importlib_metadata:
 - importlib-metadata
+importlib_resources:
+- importlib-resources
 iniconfig:
 - iniconfig
 jinja2:
