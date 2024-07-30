@@ -131,12 +131,16 @@ class RecordEntry(pathlib.PurePosixPath):
 			raise ValueError("RecordEntry paths cannot be absolute")
 
 		if isinstance(path, pathlib.PurePath):
-			if path.is_absolute():
-				# Catch absolute paths from other platform
-				raise ValueError("RecordEntry paths cannot be absolute")
-			path = path.as_posix()
-			if posixpath.isabs(path):
-				raise ValueError("RecordEntry paths cannot be absolute")
+			path_p = path
+		else:
+			path_p = pathlib.PurePath(path)
+
+		if path_p.is_absolute():
+			# Catch absolute paths from other platform
+			raise ValueError("RecordEntry paths cannot be absolute")
+		path = path_p.as_posix()
+		if posixpath.isabs(path):
+			raise ValueError("RecordEntry paths cannot be absolute")
 
 		return path
 
