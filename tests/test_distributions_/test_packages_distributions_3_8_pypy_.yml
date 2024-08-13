@@ -17,7 +17,7 @@ attr:
 attrs:
 - attrs
 babel:
-- Babel
+- babel
 certifi:
 - certifi
 charset_normalizer:
