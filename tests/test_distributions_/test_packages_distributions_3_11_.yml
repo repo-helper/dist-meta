@@ -45,7 +45,7 @@ docutils:
 dom_toml:
 - dom_toml
 domdf_python_tools:
-- domdf-python-tools
+- domdf_python_tools
 first:
 - first
 flake8:
