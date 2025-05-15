@@ -592,20 +592,6 @@ def test_wheel_wrong_dist_info(tmp_pathplus: PathPlus):
 		"version",
 		[
 				pytest.param(
-						"3.6",
-						marks=[
-								only_version(3.6, reason="Output differs on Python 3.6"),
-								not_pypy("Output differs on PyPy")
-								]
-						),
-				pytest.param(
-						"3.6-pypy",
-						marks=[
-								only_version(3.6, reason="Output differs on Python 3.6"),
-								only_pypy("Output differs on PyPy")
-								]
-						),
-				pytest.param(
 						"3.7",
 						marks=[
 								only_version(3.7, reason="Output differs on Python 3.7"),
