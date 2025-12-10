@@ -30,7 +30,7 @@ _wheels_glob = (PathPlus(__file__).parent / "wheels").glob("*.whl")
 
 @pytest.fixture(params=(param(w, key=lambda t: t[0].name) for w in _wheels_glob))
 def example_wheel(tmp_pathplus: PathPlus, request) -> PathPlus:
-	return shutil.copy2(request.param, tmp_pathplus)
+	return PathPlus(shutil.copy2(request.param, tmp_pathplus))
 
 
 def _name_param(params):  # noqa: MAN001,MAN002

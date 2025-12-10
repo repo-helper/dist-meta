@@ -161,6 +161,7 @@ def test_loads(package: str):
 
 			if "Description" not in stdlib_parser:
 				body = stdlib_parser.get_payload()
+				assert isinstance(body, str)
 				if body:
 					stdlib_parser["Description"] = body.strip() + '\n'
 			else:
@@ -222,6 +223,7 @@ def test_loads_sdist(package: str):
 
 			if "Description" not in stdlib_parser:
 				body = stdlib_parser.get_payload()
+				assert isinstance(body, str)
 				if body:
 					stdlib_parser["Description"] = body.strip() + '\n'
 			else:
