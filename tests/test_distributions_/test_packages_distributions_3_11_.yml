@@ -125,8 +125,6 @@ sphinxcontrib:
 - sphinxcontrib-jsmath
 - sphinxcontrib-qthelp
 - sphinxcontrib-serializinghtml
-tomli:
-- tomli
 typing_extensions:
 - typing_extensions
 urllib3:
