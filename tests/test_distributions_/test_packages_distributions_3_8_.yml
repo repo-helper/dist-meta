@@ -6,12 +6,12 @@ _yaml:
 - PyYAML
 alabaster:
 - alabaster
+anyio:
+- anyio
 apeye:
 - apeye
 apeye_core:
 - apeye-core
-atomicwrites:
-- atomicwrites
 attr:
 - attrs
 attrs:
@@ -52,10 +52,16 @@ first:
 - first
 flake8:
 - flake8
+h11:
+- h11
 handy_archives:
 - handy-archives
 hpy:
 - hpy
+httpcore:
+- httpcore
+httpx:
+- httpx
 idna:
 - idna
 imagesize:
@@ -120,6 +126,8 @@ setuptools:
 - setuptools
 shippinglabel:
 - shippinglabel
+sniffio:
+- sniffio
 snowballstemmer:
 - snowballstemmer
 sphinx:

@@ -1,6 +1,5 @@
 # Attrs is required here as pytest no longer depends upon it
 apeye>=1.0.1
-atomicwrites>=1.4.1
 attrs>=22.2.0
 coincidence>=0.2.0
 colorama>=0.4.5
@@ -10,6 +9,7 @@ coverage-pyver-pragma>=0.2.1
 first>=2.0.2
 flake8==3.9.2
 hpy==0.0.3; python_version >= "3.7" and implementation_name == "cpython" and python_version < "3.11"
+httpx>=0.22.0
 importlib-metadata>=3.6.0
 pypi-json>=0.2.1
 pytest>=6.0.0
