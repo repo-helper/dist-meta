@@ -117,6 +117,7 @@ These can be converted into :class:`packaging.requirements.Requirement` or
 	>>> list(map(Requirement, requirements))
 	[<Requirement('pytest>=3.0.0; extra == "test"')>, <Requirement('pytest-cov; extra == "test"')>]
 
+.. latex:clearpage::
 Some distributions have no requirements:
 
 .. code-block:: pycon
@@ -188,7 +189,6 @@ This returns a mapping of group names (as strings) to a mapping of entry point n
 	{'console_scripts': {'wheel': 'wheel.cli:main'},
 	 'distutils.commands': {'bdist_wheel': 'wheel.bdist_wheel:bdist_wheel'}}
 
-.. latex:clearpage::
 
 :class:`dist_meta.entry_points.EntryPoint` objects can be constructed as follows:
 
