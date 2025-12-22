@@ -301,7 +301,7 @@ class Distribution(DistributionType, Tuple[str, Version, PathPlus]):
 	__slots__ = ()
 	_fields = ("name", "version", "path")
 
-	def __new__(
+	def __new__(  # noqa: PRM002
 			cls: Type[_D],
 			name: str,
 			version: Version,
@@ -420,13 +420,13 @@ class WheelDistribution(DistributionType, Tuple[str, Version, PathPlus, handy_ar
 	__slots__ = ()
 	_fields = ("name", "version", "path", "wheel_zip")
 
-	def __new__(
-			cls: Type[_WD],
-			name: str,
-			version: Version,
-			path: PathPlus,
-			wheel_zip: handy_archives.ZipFile,
-			) -> _WD:
+	def __new__(  # noqa: PRM002
+		cls: Type[_WD],
+		name: str,
+		version: Version,
+		path: PathPlus,
+		wheel_zip: handy_archives.ZipFile,
+		) -> _WD:
 		"""
 		Construct a new :class:`~.WheelDistribution` object.
 
