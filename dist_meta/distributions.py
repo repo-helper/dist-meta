@@ -185,11 +185,11 @@ class DistributionType(abc.ABC):
 		return tuple(self)
 
 	def _replace(self: _DT, **kwargs) -> _DT:
-		"""
+		r"""
 		Make a new :class:`~.DistributionType` object, of the same type as this one,
 		replacing the specified fields with new values.
 
-		:param iterable:
+		:param \*\*kwargs:
 		"""  # noqa: D400
 
 		result = self._make(map(kwargs.pop, self._fields, self))
@@ -399,7 +399,6 @@ class WheelDistribution(DistributionType, Tuple[str, Version, PathPlus, handy_ar
 	Represents a Python distribution in :pep:`wheel <427>` form.
 
 	:param name: The name of the distribution.
-
 
 	A :class:`~.WheelDistribution` can be used as a contextmanager,
 	which will close the underlying :class:`zipfile.ZipFile` when exiting

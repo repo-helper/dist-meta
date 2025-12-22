@@ -262,6 +262,9 @@ class MetadataMapping(MutableMapping[str, str]):
 		"""
 		Replace the value of the first matching field, retaining header order and case.
 
+		:param name:
+		:param value:
+
 		:raises KeyError: If no matching field was found.
 		"""
 

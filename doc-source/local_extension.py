@@ -31,7 +31,15 @@ from domdf_python_tools.paths import PathPlus
 from sphinx.application import Sphinx
 from sphinx.errors import NoUri
 from sphinx.writers.latex import LaTeXTranslator
-from sphinx_inline_tabs._impl import TabContainer, TabDirective, TabHtmlTransform, _TabInput, _TabLabel
+from sphinx_inline_tabs._impl import TabContainer, TabDirective, TabHtmlTransform
+
+try:
+	# 3rd party
+	from sphinx_inline_tabs._impl import _TabInput as TabInput
+	from sphinx_inline_tabs._impl import _TabLabel as TabLabel
+except ImportError:
+	# 3rd party
+	from sphinx_inline_tabs._impl import TabInput, TabLabel
 
 
 def copy_asset_files(app: Sphinx, exception: Optional[Exception] = None) -> None:
@@ -65,24 +73,22 @@ def handle_missing_xref(app: Sphinx, env, node: nodes.Node, contnode: nodes.Node
 		raise NoUri
 
 
-def visit_tab_container(translator: LaTeXTranslator, node: _TabLabel):
+def visit_tab_container(translator: LaTeXTranslator, node: TabLabel):
 	# translator.visit_label
 	translator.body.append("\n\\begin{tcolorbox}[left=2pt,right=2pt]\n")
 	translator.body.append(f"\n\\textbf{{{node.children[0].children[0]}}}\n")
 
 
-def depart_tab_container(translator: LaTeXTranslator, node: _TabLabel):
+def depart_tab_container(translator: LaTeXTranslator, node: TabLabel):
 	translator.body.append("\n\\end{tcolorbox}")
 
 
 def setup(app: Sphinx):
-	# We do imports from Sphinx, after validating the Sphinx version
-
 	app.add_directive("inline-tab", TabDirective)
 	app.add_post_transform(TabHtmlTransform)
 	app.add_node(TabContainer, latex=(visit_tab_container, depart_tab_container))
-	app.add_node(_TabInput, html=(_TabInput.visit, _TabInput.depart))
-	app.add_node(_TabLabel, html=(_TabLabel.visit, _TabLabel.depart))
+	app.add_node(TabInput, html=(TabInput.visit, TabInput.depart))
+	app.add_node(TabLabel, html=(TabLabel.visit, TabLabel.depart))
 
 	# Include our static assets
 	app.connect("build-finished", copy_asset_files)
