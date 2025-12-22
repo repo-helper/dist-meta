@@ -122,7 +122,7 @@ class RecordEntry(pathlib.PurePosixPath):
 		return self
 
 	@classmethod
-	def _coerce_path(cls, path: PathLike) -> PathLike:
+	def _coerce_path(cls, path: PathLike) -> PathLike:  # noqa: PRM002
 		"""
 		Necessary to fix issue in Python 3.12 where path separators are no longer converted.
 		"""

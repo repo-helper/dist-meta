@@ -118,6 +118,7 @@ These can be converted into :class:`packaging.requirements.Requirement` or
 	[<Requirement('pytest>=3.0.0; extra == "test"')>, <Requirement('pytest-cov; extra == "test"')>]
 
 .. latex:clearpage::
+
 Some distributions have no requirements:
 
 .. code-block:: pycon
