@@ -42,6 +42,7 @@ known_third_party = [
     "flake8",
     "handy_archives",
     "hpy",
+    "httpx",
     "importlib_metadata",
     "packaging",
     "pypi_json",
