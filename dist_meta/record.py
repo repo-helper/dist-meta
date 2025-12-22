@@ -172,6 +172,7 @@ class RecordEntry(pathlib.PurePosixPath):
 		:return: The content of the file.
 
 		.. attention:: This operation requires a value for :attr:`self.distro <.RecordEntry.distro>`.
+		.. latex:clearpage::
 		"""
 
 		if self.distro is None:
