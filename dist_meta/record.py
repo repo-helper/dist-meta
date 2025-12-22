@@ -104,13 +104,13 @@ class RecordEntry(pathlib.PurePosixPath):
 		else:  # pragma: no cover (<py312)
 			super().__init__(self._coerce_path(path))
 
-	def __new__(
-			cls: Type[_RE],
-			path: PathLike,
-			hash: Optional["FileHash"] = None,  # noqa: A002  # pylint: disable=redefined-builtin
-			size: Optional[int] = None,
-			distro: Optional["Distribution"] = None,
-			) -> _RE:
+	def __new__(  # noqa: PRM002
+		cls: Type[_RE],
+		path: PathLike,
+		hash: Optional["FileHash"] = None,  # noqa: A002  # pylint: disable=redefined-builtin
+		size: Optional[int] = None,
+		distro: Optional["Distribution"] = None,
+		) -> _RE:
 		"""
 		Construct a :class:`RecordEntry` from one a string or an existing :class:`pathlib.PurePath` object.
 		"""
