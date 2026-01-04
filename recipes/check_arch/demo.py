@@ -10,10 +10,11 @@ from packaging.tags import parse_tag, platform_tags
 # this package
 from dist_meta.distributions import iter_distributions
 
-fake_venv = PathPlus("fake-venv/lib/python3.8/site-packages")
-fake_venv.maybe_make(parents=True)
+use_fake_venv: bool = True
 
-if True:
+if use_fake_venv:
+	venv_path = PathPlus("fake-venv/lib/python3.8/site-packages")
+	venv_path.maybe_make(parents=True)
 
 	for artifact in [
 			"https://files.pythonhosted.org/packages/92/06/41460a239909eb07023bc7ea18fbd0dcdb4e1ec4527b465d1e5b56380514/regex-2022.3.15-cp310-cp310-macosx_10_9_x86_64.whl",
@@ -21,14 +22,14 @@ if True:
 			]:
 		r = httpx.get(artifact)
 		z = zipfile.ZipFile(io.BytesIO(r.content))
-		z.extractall(fake_venv)
+		z.extractall(venv_path)
+else:
+	venv_path = "venv/lib/python3.8/site-packages/"
 
 supported_tags = set(platform_tags())
 supported_tags.add("any")
 
-# fake_venv = "venv/lib/python3.8/site-packages/"
-
 # 3rd party
 from check_arch import check
 
-check([fake_venv])
+check([venv_path])
