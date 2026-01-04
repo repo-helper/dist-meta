@@ -27,35 +27,6 @@ lines_between_types = 0
 use_parentheses = true
 remove_redundant_aliases = true
 default_section = "THIRDPARTY"
-known_third_party = [
-    "apeye",
-    "atomicwrites",
-    "attrs",
-    "cawdrey",
-    "coincidence",
-    "colorama",
-    "consolekit",
-    "coverage",
-    "coverage_pyver_pragma",
-    "domdf_python_tools",
-    "first",
-    "flake8",
-    "handy_archives",
-    "hpy",
-    "httpx",
-    "importlib_metadata",
-    "packaging",
-    "pypi_json",
-    "pytest",
-    "pytest_cov",
-    "pytest_randomly",
-    "pytest_rerunfailures",
-    "pytest_timeout",
-    "pytz",
-    "shippinglabel",
-    "sphinx",
-    "wheel",
-]
 known_first_party = [ "dist_meta",]
 
 [config]
