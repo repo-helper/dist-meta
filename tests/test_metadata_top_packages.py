@@ -116,7 +116,7 @@ top_packages: List[str] = [
 		"coverage",
 		"google-auth-httplib2",
 		"typed-ast",
-		"fsspec"
+		"fsspec",
 		]
 
 cache_dir = PathPlus(tempfile.gettempdir()) / "wheel-cache"
@@ -166,7 +166,8 @@ def test_loads(package: str):
 					stdlib_parser["Description"] = body.strip() + '\n'
 			else:
 				stdlib_parser.replace_header(
-						"Description", inspect.cleandoc(stdlib_parser["Description"]).rstrip() + '\n'
+						"Description",
+						inspect.cleandoc(stdlib_parser["Description"]).rstrip() + '\n',
 						)
 
 			parsed_with_stdlib = sorted(stdlib_parser.items(), key=itemgetter(0))
@@ -228,7 +229,8 @@ def test_loads_sdist(package: str):
 					stdlib_parser["Description"] = body.strip() + '\n'
 			else:
 				stdlib_parser.replace_header(
-						"Description", inspect.cleandoc(stdlib_parser["Description"]).rstrip() + '\n'
+						"Description",
+						inspect.cleandoc(stdlib_parser["Description"]).rstrip() + '\n',
 						)
 
 			parsed_with_stdlib = sorted(stdlib_parser.items(), key=itemgetter(0))

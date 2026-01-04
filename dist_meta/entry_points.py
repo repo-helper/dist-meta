@@ -240,7 +240,7 @@ def get_entry_points(
 				yield EntryPoint(name, epstr, group=group, distro=distro)
 
 
-def get_all_entry_points(path: Optional[Iterable[PathLike]] = None, ) -> Dict[str, List["EntryPoint"]]:
+def get_all_entry_points(path: Optional[Iterable[PathLike]] = None) -> Dict[str, List["EntryPoint"]]:
 	"""
 	Returns a mapping of entry point groups to entry points for all installed distributions.
 

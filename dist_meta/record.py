@@ -127,8 +127,10 @@ class RecordEntry(pathlib.PurePosixPath):
 		Necessary to fix issue in Python 3.12 where path separators are no longer converted.
 		"""
 
+		abs_error_msg = "RecordEntry paths cannot be absolute"
+
 		if os.path.isabs(path):
-			raise ValueError("RecordEntry paths cannot be absolute")
+			raise ValueError(abs_error_msg)
 
 		if isinstance(path, pathlib.PurePath):
 			path_p = path
@@ -137,10 +139,10 @@ class RecordEntry(pathlib.PurePosixPath):
 
 		if path_p.is_absolute():
 			# Catch absolute paths from other platform
-			raise ValueError("RecordEntry paths cannot be absolute")
+			raise ValueError(abs_error_msg)
 		path = path_p.as_posix()
 		if posixpath.isabs(path):
-			raise ValueError("RecordEntry paths cannot be absolute")
+			raise ValueError(abs_error_msg)
 
 		return path
 

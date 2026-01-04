@@ -142,13 +142,13 @@ def test_from_record_entry_string(record_string: str, advanced_data_regression: 
 		[
 				pytest.param(
 						"\napeye/py.typed,sha256=47DEQpj8HBSa-_TImW-5JCeuQeRkm5NMpJWZG3hSuFU,0",
-						id="newline_before"
+						id="newline_before",
 						),
 				pytest.
 				param("apeye/py.typed,sha256=47DEQpj8HBSa-_TImW-5JCeuQeRkm5NMpJWZG3hSuFU,0\n", id="newline_after"),
 				pytest.param(
 						"\napeye/py.typed,sha256=47DEQpj8HBSa-_TImW-5JCeuQeRkm5NMpJWZG3hSuFU,0\n",
-						id="newline_before_and_after"
+						id="newline_before_and_after",
 						),
 				]
 		)

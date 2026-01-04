@@ -142,10 +142,10 @@ def to_pure_dict(
 @pytest.mark.parametrize(
 		"ep_dict",
 		[
-				pytest.param({
-						"console_scripts": {"py.test": "pytest:console_main", "pytest": "pytest:console_main"}
-						},
-								id="short"),
+				pytest.param(
+						{"console_scripts": {"py.test": "pytest:console_main", "pytest": "pytest:console_main"}},
+						id="short",
+						),
 				pytest.param({
 						"console_scripts": {"spam-cli": "spam:main_cli", "foobar": "foomod:main_bar [bar,baz]"},
 						"gui_scripts": {"spam-gui": "spam.gui:main_gui"},
