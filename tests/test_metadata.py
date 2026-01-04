@@ -103,7 +103,7 @@ def test_load_no_version(tmp_pathplus: PathPlus):
 			"Home-page: https://github.com/domdfcoding/cawdrey",
 			])
 
-	with pytest.raises(MissingFieldError, match=f"No 'Metadata-Version' field was provided."):
+	with pytest.raises(MissingFieldError, match="No 'Metadata-Version' field was provided."):
 		metadata.load(tmp_pathplus / "METADATA")
 
 
@@ -190,7 +190,7 @@ def test_dump_no_meta_version(tmp_pathplus: PathPlus):
 	fields["Platform"] = "macOS"
 	fields["Platform"] = "Linux"
 
-	with pytest.raises(MissingFieldError, match=f"No 'Metadata-Version' field was provided."):
+	with pytest.raises(MissingFieldError, match="No 'Metadata-Version' field was provided."):
 		metadata.dump(fields, tmp_pathplus / "METADATA")
 
 	assert not (tmp_pathplus / "METADATA").exists()
