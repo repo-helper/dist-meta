@@ -128,10 +128,8 @@ def loads(rawtext: str) -> MetadataMapping:
 
 	if body.strip():
 		if "Description" in fields:
-			raise ValueError(
-					"A value was given for the 'Description' field "
-					"but the body of the file is not empty."
-					)
+			msg = "A value was given for the 'Description' field but the body of the file is not empty."
+			raise ValueError(msg)
 		else:
 			fields["Description"] = body.strip() + '\n'
 

@@ -62,7 +62,7 @@ def loads(rawtext: str) -> MetadataMapping:
 			fields[field_name] = field_value.lstrip()  # pylint: disable=loop-invariant-statement
 
 	if "Wheel-Version" not in fields:
-		raise MissingFieldError(f"No 'Wheel-Version' field was provided.")
+		raise MissingFieldError("No 'Wheel-Version' field was provided.")
 
 	return fields
 
@@ -93,7 +93,7 @@ def dumps(fields: Union[Mapping[str, Any], MetadataMapping]) -> str:
 	if "Wheel-Version" in fields:
 		output.append(f"Wheel-Version: {float(fields['Wheel-Version'])}")
 	else:
-		raise MissingFieldError(f"No 'Wheel-Version' field was provided.")
+		raise MissingFieldError("No 'Wheel-Version' field was provided.")
 
 	output.add_single("Generator")
 

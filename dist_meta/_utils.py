@@ -64,7 +64,7 @@ def _parse_wheel_filename(filename: pathlib.PurePath) -> Tuple[str, Version]:
 	# found in LICENSE.APACHE or LICENSE.BSD. Contributions to this software is made
 	# under the terms of *both* these licenses.
 
-	if not filename.suffix == ".whl":
+	if filename.suffix != ".whl":
 		raise InvalidWheelFilename(f"Invalid wheel filename (extension must be '.whl'): {filename}")
 
 	stem = filename.stem

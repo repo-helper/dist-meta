@@ -595,28 +595,28 @@ def test_wheel_wrong_dist_info(tmp_pathplus: PathPlus):
 						"3.7",
 						marks=[
 								only_version(3.7, reason="Output differs on Python 3.7"),
-								not_pypy("Output differs on PyPy")
+								not_pypy("Output differs on PyPy"),
 								]
 						),
 				pytest.param(
 						"3.7-pypy",
 						marks=[
 								only_version(3.7, reason="Output differs on Python 3.7"),
-								only_pypy("Output differs on PyPy")
+								only_pypy("Output differs on PyPy"),
 								]
 						),
 				pytest.param(
 						"3.8",
 						marks=[
 								only_version(3.8, reason="Output differs on Python 3.8"),
-								not_pypy("Output differs on PyPy")
+								not_pypy("Output differs on PyPy"),
 								]
 						),
 				pytest.param(
 						"3.8-pypy",
 						marks=[
 								only_version(3.8, reason="Output differs on Python 3.8"),
-								only_pypy("Output differs on PyPy")
+								only_pypy("Output differs on PyPy"),
 								]
 						),
 				pytest.param(
@@ -624,9 +624,9 @@ def test_wheel_wrong_dist_info(tmp_pathplus: PathPlus):
 						marks=[
 								pytest.mark.skipif(
 										not ((3, 9) <= sys.version_info[:2] <= (3, 10)),
-										reason="Output differs on Python 3.9 & 3.10"
+										reason="Output differs on Python 3.9 & 3.10",
 										),
-								not_pypy("Output differs on PyPy")
+								not_pypy("Output differs on PyPy"),
 								]
 						),
 				pytest.param(
@@ -634,9 +634,9 @@ def test_wheel_wrong_dist_info(tmp_pathplus: PathPlus):
 						marks=[
 								pytest.mark.skipif(
 										not ((3, 9) <= sys.version_info[:2] <= (3, 10)),
-										reason="Output differs on Python 3.9 & 3.10"
+										reason="Output differs on Python 3.9 & 3.10",
 										),
-								only_pypy("Output differs on PyPy")
+								only_pypy("Output differs on PyPy"),
 								]
 						),
 				pytest.param("3.11", marks=only_version("3.11", reason="Output differs on Python 3.11")),

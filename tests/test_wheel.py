@@ -57,7 +57,7 @@ def test_load_no_version(tmp_pathplus: PathPlus):
 			"Tag: py2-none-any",
 			])
 
-	with pytest.raises(MissingFieldError, match=f"No 'Wheel-Version' field was provided."):
+	with pytest.raises(MissingFieldError, match="No 'Wheel-Version' field was provided."):
 		wheel.load(tmp_pathplus / "WHEEL")
 
 
@@ -126,7 +126,7 @@ def test_dump_no_version(tmp_pathplus: PathPlus):
 	fields["Tag"] = "py3-none-any"
 	fields["Tag"] = "py2-none-any"
 
-	with pytest.raises(MissingFieldError, match=f"No 'Wheel-Version' field was provided."):
+	with pytest.raises(MissingFieldError, match="No 'Wheel-Version' field was provided."):
 		wheel.dump(fields, tmp_pathplus / "WHEEL")
 
 	assert not (tmp_pathplus / "WHEEL").exists()
