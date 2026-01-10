@@ -183,7 +183,7 @@ def check(path: Optional[Tuple[str, ...]] = None) -> int:
 		num_tags = len(wheel_platform_tags)
 		print(
 				f"{project_name} {version} is not supported by this platform.\n",
-				f"        {_supported_platforms(num_tags)} {word_join(sorted(wheel_platform_tags), use_repr=True)}."
+				f"        {_supported_platforms(num_tags)} {word_join(sorted(wheel_platform_tags), use_repr=True)}.",
 				)
 
 	if any((missing, conflicting, arch_mismatch, parsing_probs)):

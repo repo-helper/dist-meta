@@ -105,7 +105,7 @@ def test_metadata_emitter():
 		Platform: Windows
 		Platform: Windows
 		Platform: macOS
-		Platform: Linux"""
+		Platform: Linux""",
 			)
 
 	output.add_body("This is the body\n\nIt can have multiple lines\n\t\tand indents")
@@ -124,7 +124,7 @@ def test_metadata_emitter():
 
 		It can have multiple lines
 		\t\tand indents
-		"""
+		""",
 			)
 
 
