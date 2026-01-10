@@ -49,7 +49,7 @@ def check(path: Tuple[str, ...]) -> int:
 			num_tags = len(wheel_platform_tags)
 			print(
 					f"WARNING: {dist.name} {dist.version} is not supported by this platform.\n",
-					f"        {_supported_platforms(num_tags)} {word_join(sorted(wheel_platform_tags), use_repr=True)}."
+					f"        {_supported_platforms(num_tags)} {word_join(sorted(wheel_platform_tags), use_repr=True)}.",
 					)
 			ret = 1
 

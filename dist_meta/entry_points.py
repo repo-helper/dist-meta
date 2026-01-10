@@ -274,7 +274,7 @@ _entry_point_pattern = re.compile(
 (\[(?P<extras>.+)])?
 $
 """,
-		re.VERBOSE
+		re.VERBOSE,
 		)
 
 

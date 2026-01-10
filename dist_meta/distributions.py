@@ -426,7 +426,7 @@ class WheelDistribution(DistributionType, Tuple[str, Version, PathPlus, handy_ar
 		version: Version,
 		path: PathPlus,
 		wheel_zip: handy_archives.ZipFile,
-		) -> _WD:
+	) -> _WD:
 		"""
 		Construct a new :class:`~.WheelDistribution` object.
 
