@@ -27,7 +27,7 @@ def test_loads(advanced_data_regression: AdvancedDataRegressionFixture):
 			[console_scripts]
 			py.test = pytest:console_main
 			pytest = pytest:console_main
-			"""
+			""",
 			)
 
 	assert entry_points.loads(entry_points_content) == expected_load_output
@@ -72,7 +72,7 @@ def test_lazy_loads():
 			[console_scripts]
 			py.test = pytest:console_main
 			pytest = pytest:console_main
-			"""
+			""",
 			)
 
 	eps = entry_points.lazy_loads(entry_points_content)
@@ -146,31 +146,38 @@ def to_pure_dict(
 						{"console_scripts": {"py.test": "pytest:console_main", "pytest": "pytest:console_main"}},
 						id="short",
 						),
-				pytest.param({
-						"console_scripts": {"spam-cli": "spam:main_cli", "foobar": "foomod:main_bar [bar,baz]"},
-						"gui_scripts": {"spam-gui": "spam.gui:main_gui"},
-						"spam.magical": {"tomatoes": "spam:main_tomatoes"},
-						"pytest11": {"nbval": "nbval.plugin"},
-						},
-								id="complex"),
-				pytest.param({
-						"console_scripts": [
-								entry_points.EntryPoint("py.test", "pytest:console_main"),
-								entry_points.EntryPoint("pytest", "pytest:console_main"),
-								],
-						},
-								id="short_obj"),
-				pytest.param({
-						"console_scripts": [
-								entry_points.EntryPoint("spam-cli", "spam:main_cli"),
-								entry_points.EntryPoint("foobar", "foomod:main_bar [bar,baz]"),
-								],
-						"gui_scripts": [entry_points.EntryPoint("spam-gui", "spam.gui:main_gui")],
-						"spam.magical": [entry_points.EntryPoint("tomatoes", "spam:main_tomatoes")],
-						"pytest11": [entry_points.EntryPoint("nbval", "nbval.plugin")],
-						},
-								id="complex_obj"),
-				]
+				pytest.param(
+						{
+								"console_scripts":
+										{"spam-cli": "spam:main_cli", "foobar": "foomod:main_bar [bar,baz]"},
+								"gui_scripts": {"spam-gui": "spam.gui:main_gui"},
+								"spam.magical": {"tomatoes": "spam:main_tomatoes"},
+								"pytest11": {"nbval": "nbval.plugin"},
+								},
+						id="complex",
+						),
+				pytest.param(
+						{
+								"console_scripts": [
+										entry_points.EntryPoint("py.test", "pytest:console_main"),
+										entry_points.EntryPoint("pytest", "pytest:console_main"),
+										],
+								},
+						id="short_obj",
+						),
+				pytest.param(
+						{
+								"console_scripts": [
+										entry_points.EntryPoint("spam-cli", "spam:main_cli"),
+										entry_points.EntryPoint("foobar", "foomod:main_bar [bar,baz]"),
+										],
+								"gui_scripts": [entry_points.EntryPoint("spam-gui", "spam.gui:main_gui")],
+								"spam.magical": [entry_points.EntryPoint("tomatoes", "spam:main_tomatoes")],
+								"pytest11": [entry_points.EntryPoint("nbval", "nbval.plugin")],
+								},
+						id="complex_obj",
+						),
+				],
 		)
 def test_dumps(
 		advanced_file_regression: AdvancedFileRegressionFixture,
@@ -200,18 +207,21 @@ def test_dumps(
 @pytest.mark.parametrize(
 		"ep_dict",
 		[
-				pytest.param({
-						"console_scripts": {"py.test": "pytest:console_main", "pytest": "pytest:console_main"},
-						},
-								id="short"),
-				pytest.param({
-						"console_scripts": {"spam-cli": "spam:main_cli", "foobar": "foomod:main_bar [bar,baz]"},
-						"gui_scripts": {"spam-gui": "spam.gui:main_gui"},
-						"spam.magical": {"tomatoes": "spam:main_tomatoes"},
-						"pytest11": {"nbval": "nbval.plugin"},
-						},
-								id="complex"),
-				]
+				pytest.param(
+						{"console_scripts": {"py.test": "pytest:console_main", "pytest": "pytest:console_main"}},
+						id="short",
+						),
+				pytest.param(
+						{
+								"console_scripts":
+										{"spam-cli": "spam:main_cli", "foobar": "foomod:main_bar [bar,baz]"},
+								"gui_scripts": {"spam-gui": "spam.gui:main_gui"},
+								"spam.magical": {"tomatoes": "spam:main_tomatoes"},
+								"pytest11": {"nbval": "nbval.plugin"},
+								},
+						id="complex",
+						),
+				],
 		)
 def test_dump(
 		tmp_pathplus: PathPlus,

@@ -113,18 +113,19 @@ def test_record_entry_no_attributes(
 		[
 				pytest.param(
 						"apeye-1.0.1.dist-info/INSTALLER,sha256=zuuue4knoyJ-UwPPXg8fezS7VCrXJQrAP7zeNuwvFQg,4",
-						id="INSTALLER"
+						id="INSTALLER",
 						),
 				pytest.param("apeye/__pycache__/email_validator.cpython-38.pyc,,", id="__pycache__"),
 				pytest.param(
-						"apeye/cache.py,sha256=NIQAPrl-YG2wYo-xomLJhy9Iyq9NM6hMSeYoxJBtI28,4158", id="cache.py"
+						"apeye/cache.py,sha256=NIQAPrl-YG2wYo-xomLJhy9Iyq9NM6hMSeYoxJBtI28,4158",
+						id="cache.py",
 						),
 				pytest.param(
 						"apeye/public_suffix_list.dat,sha256=sIQS28R2dRmXsqHy1dLS2poPCw9luJPejevcHnhvCME,233455",
-						id="public_suffix_list.dat"
+						id="public_suffix_list.dat",
 						),
 				pytest.param("apeye/py.typed,sha256=47DEQpj8HBSa-_TImW-5JCeuQeRkm5NMpJWZG3hSuFU,0", id="py.typed"),
-				]
+				],
 		)
 def test_from_record_entry_string(record_string: str, advanced_data_regression: AdvancedDataRegressionFixture):
 	record = RecordEntry.from_record_entry(record_string)
@@ -144,13 +145,15 @@ def test_from_record_entry_string(record_string: str, advanced_data_regression: 
 						"\napeye/py.typed,sha256=47DEQpj8HBSa-_TImW-5JCeuQeRkm5NMpJWZG3hSuFU,0",
 						id="newline_before",
 						),
-				pytest.
-				param("apeye/py.typed,sha256=47DEQpj8HBSa-_TImW-5JCeuQeRkm5NMpJWZG3hSuFU,0\n", id="newline_after"),
+				pytest.param(
+						"apeye/py.typed,sha256=47DEQpj8HBSa-_TImW-5JCeuQeRkm5NMpJWZG3hSuFU,0\n",
+						id="newline_after",
+						),
 				pytest.param(
 						"\napeye/py.typed,sha256=47DEQpj8HBSa-_TImW-5JCeuQeRkm5NMpJWZG3hSuFU,0\n",
 						id="newline_before_and_after",
 						),
-				]
+				],
 		)
 def test_from_record_entry_string_multiline(record_string: str):
 	record = RecordEntry.from_record_entry(record_string)
@@ -171,7 +174,7 @@ def test_from_record_entry_multiline_error():
 				'\n'.join([
 						"apeye-1.0.1.dist-info/INSTALLER,sha256=zuuue4knoyJ-UwPPXg8fezS7VCrXJQrAP7zeNuwvFQg,4,",
 						"apeye/public_suffix_list.dat,sha256=sIQS28R2dRmXsqHy1dLS2poPCw9luJPejevcHnhvCME,233455,",
-						])
+						]),
 				)
 
 
@@ -183,7 +186,7 @@ def test_from_record_entry_multiline_error():
 				pathlib.PurePosixPath("/etc/apt/sources.list"),
 				pathlib.Path("/etc/apt/sources.list"),
 				"/etc/apt/sources.list",
-				]
+				],
 		)
 def test_record_entry_absolute(path: PathLike):
 	with pytest.raises(ValueError, match="RecordEntry paths cannot be absolute"):

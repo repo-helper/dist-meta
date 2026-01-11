@@ -110,7 +110,7 @@ class RecordEntry(pathlib.PurePosixPath):
 		hash: Optional["FileHash"] = None,  # noqa: A002  # pylint: disable=redefined-builtin
 		size: Optional[int] = None,
 		distro: Optional["Distribution"] = None,
-		) -> _RE:
+	) -> _RE:
 		"""
 		Construct a :class:`RecordEntry` from one a string or an existing :class:`pathlib.PurePath` object.
 		"""

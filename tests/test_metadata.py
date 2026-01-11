@@ -18,10 +18,13 @@ def example_metadata() -> str:
 
 
 # Symbols ensure the reference file is the same for both cases
-@pytest.mark.parametrize("newline", [
-		pytest.param('\n', id='#'),
-		pytest.param("\r\n", id='/'),
-		])
+@pytest.mark.parametrize(
+		"newline",
+		[
+				pytest.param('\n', id='#'),
+				pytest.param("\r\n", id='/'),
+				],
+		)
 def test_loads(
 		example_metadata: str,
 		advanced_data_regression: AdvancedDataRegressionFixture,
@@ -236,7 +239,7 @@ def test_loads_description_as_key_pipe():
 					"        |    >>> sum(1, 2)",
 					"        |    3",
 					"        |",
-					])
+					]),
 			)
 
 	assert fields["Metadata-Version"] == "2.1"
@@ -269,7 +272,7 @@ def test_loads_description_as_key_spaces():
 					"            >>> sum(1, 2)",
 					"            3",
 					"        ",
-					])
+					]),
 			)
 
 	assert fields["Metadata-Version"] == "2.1"
@@ -301,7 +304,7 @@ def test_loads_description_as_key_spaces():
 				(["|hello", "|world"], '|', ["hello", "world"]),
 				(["hello", "|world"], '|', ["hello", "world"]),
 				(["|hello", "world"], '|', ["|hello", "world"]),
-				]
+				],
 		)
 def test_clean_desc(lines: List[str], wsp: str, expected: List[str]):
 	assert (metadata._clean_desc(lines, wsp) == expected)

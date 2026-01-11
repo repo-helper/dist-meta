@@ -394,7 +394,7 @@ class TestCustomSubclass(TestWheelDistribution):
 		wd = CustomSubclass.from_path(wheel_directory / "domdf_python_tools-2.9.1-py3-none-any.whl")
 
 		wd2 = distributions.WheelDistribution.from_path(
-				wheel_directory / "domdf_python_tools-2.9.1-py3-none-any.whl"
+				wheel_directory / "domdf_python_tools-2.9.1-py3-none-any.whl",
 				)
 
 		assert wd[:2] == wd2[:2]
@@ -463,7 +463,7 @@ def test_iter_distributions_pip_tmpdir(
 				("sphinxcontrib_applehelp", "sphinxcontrib_applehelp"),
 				("sphinxcontrib-applehelp", "sphinxcontrib_applehelp"),
 				("sphinxcontrib.applehelp", "sphinxcontrib_applehelp"),
-				]
+				],
 		)
 def test_get_distribution(name: str, expected: str, fake_virtualenv: List[PathPlus]):
 	assert distributions.get_distribution(name, path=fake_virtualenv).name == expected
@@ -596,28 +596,28 @@ def test_wheel_wrong_dist_info(tmp_pathplus: PathPlus):
 						marks=[
 								only_version(3.7, reason="Output differs on Python 3.7"),
 								not_pypy("Output differs on PyPy"),
-								]
+								],
 						),
 				pytest.param(
 						"3.7-pypy",
 						marks=[
 								only_version(3.7, reason="Output differs on Python 3.7"),
 								only_pypy("Output differs on PyPy"),
-								]
+								],
 						),
 				pytest.param(
 						"3.8",
 						marks=[
 								only_version(3.8, reason="Output differs on Python 3.8"),
 								not_pypy("Output differs on PyPy"),
-								]
+								],
 						),
 				pytest.param(
 						"3.8-pypy",
 						marks=[
 								only_version(3.8, reason="Output differs on Python 3.8"),
 								only_pypy("Output differs on PyPy"),
-								]
+								],
 						),
 				pytest.param(
 						"cpython",
@@ -627,7 +627,7 @@ def test_wheel_wrong_dist_info(tmp_pathplus: PathPlus):
 										reason="Output differs on Python 3.9 & 3.10",
 										),
 								not_pypy("Output differs on PyPy"),
-								]
+								],
 						),
 				pytest.param(
 						"pypy",
@@ -637,10 +637,10 @@ def test_wheel_wrong_dist_info(tmp_pathplus: PathPlus):
 										reason="Output differs on Python 3.9 & 3.10",
 										),
 								only_pypy("Output differs on PyPy"),
-								]
+								],
 						),
 				pytest.param("3.11", marks=only_version("3.11", reason="Output differs on Python 3.11")),
-				]
+				],
 		)
 def test_packages_distributions(advanced_data_regression: AdvancedDataRegressionFixture, version: str):
 

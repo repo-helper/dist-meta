@@ -21,7 +21,7 @@ def test_loads():
 	Root-Is-Purelib: true
 	Tag: py3-none-any
 	Tag: py2-none-any
-	\r"""
+	\r""",
 			)
 
 	fields = wheel.loads(wheel_content)
@@ -95,7 +95,7 @@ fields_dict_no_root_is_purelib = {
 				pytest.param(fields_no_root_is_purelib, id="fields_no_root_is_purelib"),
 				pytest.param(fields_dict, id="fields_dict"),
 				pytest.param(fields_dict_no_root_is_purelib, id="fields_dict_no_root_is_purelib"),
-				]
+				],
 		)
 def test_dumps(fields: MetadataMapping, advanced_file_regression: AdvancedFileRegressionFixture):
 	advanced_file_regression.check(wheel.dumps(fields), extension='')
@@ -108,7 +108,7 @@ def test_dumps(fields: MetadataMapping, advanced_file_regression: AdvancedFileRe
 				pytest.param(fields_no_root_is_purelib, id="fields_no_root_is_purelib"),
 				pytest.param(fields_dict, id="fields_dict"),
 				pytest.param(fields_dict_no_root_is_purelib, id="fields_dict_no_root_is_purelib"),
-				]
+				],
 		)
 def test_dump(
 		fields: MetadataMapping,
@@ -147,7 +147,7 @@ def test_dump_no_version(tmp_pathplus: PathPlus):
 				("act (2.2)", ("act", "2.2")),
 				("foo", ("foo", None)),
 				("pdm-pep517 0.12.7", ("pdm-pep517", "0.12.7")),
-				]
+				],
 		)
 def test_parse_generator_string(generator: str, expected: Tuple[str, str]):
 	assert wheel.parse_generator_string(generator) == expected
