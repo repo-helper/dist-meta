@@ -113,7 +113,7 @@ dist-meta
 	:alt: Maintenance
 
 .. |pypi-downloads| image:: https://img.shields.io/pypi/dm/dist-meta
-	:target: https://pypi.org/project/dist-meta/
+	:target: https://pypistats.org/packages/dist-meta
 	:alt: PyPI - Downloads
 
 .. end shields
