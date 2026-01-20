@@ -44,12 +44,6 @@ Homepage = "https://github.com/repo-helper/dist-meta"
 "Source Code" = "https://github.com/repo-helper/dist-meta"
 Documentation = "https://dist-meta.readthedocs.io/en/latest"
 
-[tool.mkrecipe]
-conda-channels = [ "conda-forge", "domdfcoding",]
-extras = "all"
-license-key = "MIT"
-package = "dist_meta"
-
 [tool.sphinx-pyproject]
 github_username = "repo-helper"
 github_repository = "dist-meta"

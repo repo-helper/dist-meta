@@ -90,12 +90,12 @@ dist-meta
 		:wheel:
 		:alt: PyPI - Wheel
 
-	.. |conda-version| image:: https://img.shields.io/conda/v/domdfcoding/dist-meta?logo=anaconda
-		:target: https://anaconda.org/domdfcoding/dist-meta
+	.. |conda-version| image:: https://img.shields.io/conda/v/conda-forge/dist-meta?logo=anaconda
+		:target: https://anaconda.org/conda-forge/dist-meta
 		:alt: Conda - Package Version
 
-	.. |conda-platform| image:: https://img.shields.io/conda/pn/domdfcoding/dist-meta?label=conda%7Cplatform
-		:target: https://anaconda.org/domdfcoding/dist-meta
+	.. |conda-platform| image:: https://img.shields.io/conda/pn/conda-forge/dist-meta?label=conda%7Cplatform
+		:target: https://anaconda.org/conda-forge/dist-meta
 		:alt: Conda - Platform
 
 	.. |license| github-shield::
@@ -133,7 +133,7 @@ Installation
 	:pypi:
 	:github:
 	:anaconda:
-	:conda-channels: conda-forge, domdfcoding
+	:conda-channels: conda-forge
 
 .. end installation
 
