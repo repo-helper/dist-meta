@@ -43,7 +43,7 @@ dist_meta:
 docutils:
 - docutils
 dom_toml:
-- dom_toml
+- dom-toml
 domdf_python_tools:
 - domdf_python_tools
 exceptiongroup:
