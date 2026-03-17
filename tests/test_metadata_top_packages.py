@@ -4,6 +4,7 @@ import tempfile
 from email.parser import HeaderParser
 from operator import itemgetter
 from typing import List
+from zipfile import BadZipFile
 
 # 3rd party
 import handy_archives
@@ -151,40 +152,46 @@ def test_loads(package: str):
 
 		release_url.session.close()
 
-		with handy_archives.ZipFile(wheel_filename, 'r') as wheel_zip:
-			metadata_filename = first(wheel_zip.namelist(), key=lambda x: x.endswith(".dist-info/METADATA"))
-			assert metadata_filename is not None
-			metadata_file_content = wheel_zip.read_text(metadata_filename).replace("\r\n", '\n')
+		try:
+			with handy_archives.ZipFile(wheel_filename, 'r') as wheel_zip:
+				metadata_filename = first(wheel_zip.namelist(), key=lambda x: x.endswith(".dist-info/METADATA"))
+				assert metadata_filename is not None
+				metadata_file_content = wheel_zip.read_text(metadata_filename).replace("\r\n", '\n')
 
-			stdlib_parser = HeaderParser().parsestr(metadata_file_content)
-			dist_meta_parser = metadata.loads(metadata_file_content)
+				stdlib_parser = HeaderParser().parsestr(metadata_file_content)
+				dist_meta_parser = metadata.loads(metadata_file_content)
 
-			if "Description" not in stdlib_parser:
-				body = stdlib_parser.get_payload()
-				assert isinstance(body, str)
-				if body:
-					stdlib_parser["Description"] = body.strip() + '\n'
-			else:
-				stdlib_parser.replace_header(
-						"Description",
-						inspect.cleandoc(stdlib_parser["Description"]).rstrip() + '\n',
-						)
-
-			parsed_with_stdlib = sorted(stdlib_parser.items(), key=itemgetter(0))
-			parsed_with_dist_meta = sorted(dist_meta_parser.items(), key=itemgetter(0))
-
-			# Check keys
-			assert list(map(itemgetter(0), parsed_with_stdlib)) == list(map(itemgetter(0), parsed_with_dist_meta))
-
-			# Check values
-			for stdlib_field, dist_meta_field in zip(parsed_with_stdlib, parsed_with_dist_meta):
-				assert stdlib_field[0] == dist_meta_field[0]
-
-				if stdlib_field[0] == "License":
-					# remove newlines to match dist-meta output
-					assert stdlib_field[1].replace('\n', '') == dist_meta_field[1]
+				if "Description" not in stdlib_parser:
+					body = stdlib_parser.get_payload()
+					assert isinstance(body, str)
+					if body:
+						stdlib_parser["Description"] = body.strip() + '\n'
 				else:
-					assert stdlib_field[1] == dist_meta_field[1]
+					stdlib_parser.replace_header(
+							"Description",
+							inspect.cleandoc(stdlib_parser["Description"]).rstrip() + '\n',
+							)
+
+				parsed_with_stdlib = sorted(stdlib_parser.items(), key=itemgetter(0))
+				parsed_with_dist_meta = sorted(dist_meta_parser.items(), key=itemgetter(0))
+
+				# Check keys
+				stdlib_keys = list(map(itemgetter(0), parsed_with_stdlib))
+				assert stdlib_keys == list(map(itemgetter(0), parsed_with_dist_meta))
+
+				# Check values
+				for stdlib_field, dist_meta_field in zip(parsed_with_stdlib, parsed_with_dist_meta):
+					assert stdlib_field[0] == dist_meta_field[0]
+
+					if stdlib_field[0] == "License":
+						# remove newlines to match dist-meta output
+						assert stdlib_field[1].replace('\n', '') == dist_meta_field[1]
+					else:
+						assert stdlib_field[1] == dist_meta_field[1]
+		except BadZipFile:
+			# Problem with file; perhaps download interrupted
+			wheel_filename.unlink()
+			raise
 
 
 @pytest.mark.parametrize("package", top_packages)
