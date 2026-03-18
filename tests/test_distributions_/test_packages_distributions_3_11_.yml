@@ -80,8 +80,6 @@ packaging:
 - packaging
 pip:
 - pip
-pkg_resources:
-- setuptools
 platformdirs:
 - platformdirs
 pluggy:
