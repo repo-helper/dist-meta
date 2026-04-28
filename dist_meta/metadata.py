@@ -122,6 +122,12 @@ def loads(rawtext: str) -> MetadataMapping:
 			description_lines = _clean_desc(description_lines, '|')
 			# pylint: enable=loop-global-usage
 
+			# Remove any trailing or leading blank lines.
+			while description_lines and not description_lines[-1]:
+				description_lines.pop()
+			while description_lines and not description_lines[0]:
+				description_lines.pop(0)
+
 			# pylint: disable=loop-invariant-statement
 			fields["Description"] = '\n'.join(description_lines).strip() + '\n'
 			# pylint: enable=loop-invariant-statement
