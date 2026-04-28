@@ -268,14 +268,13 @@ def get_all_entry_points(path: Optional[Iterable[PathLike]] = None) -> Dict[str,
 
 _entry_point_pattern = re.compile(
 		r"""
-(?P<modulename>\w+(\.\w+)*)
-(:(?P<objectname>\w+(\.\w+)*))?
-\s*
-(\[(?P<extras>.+)])?
-$
+(?P<modulename>[\w.]+\s*)
+(:\s*(?P<objectname>[\w.]+)\s*)?
+(\[(?P<extras>.*)]\s*)?$
 """,
 		re.VERBOSE,
 		)
+# Updated per https://github.com/python/importlib_metadata/issues/361
 
 
 class EntryPoint(NamedTuple):
