@@ -657,7 +657,6 @@ def packages_distributions(path: Optional[Iterable[PathLike]] = None) -> Mapping
 		>>> pkgs = packages_distributions()
 		>>> all(isinstance(dist, collections.abc.Sequence) for dist in pkgs.values())
 		True
-
 	"""
 
 	if path is None:  # pragma: no cover
