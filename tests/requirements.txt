@@ -6,6 +6,7 @@ colorama>=0.4.5
 consolekit>=1.2.3
 coverage>=5.1
 coverage-pyver-pragma>=0.2.1
+deprecation-alias>=0.4.0
 first>=2.0.2
 flake8==3.9.2
 hpy==0.0.3; python_version >= "3.7" and implementation_name == "cpython" and python_version < "3.11"
