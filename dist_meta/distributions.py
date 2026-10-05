@@ -76,7 +76,7 @@ _tuplegetter = lambda index, doc: property(itemgetter(index), doc=doc)
 
 if not TYPE_CHECKING:
 	with suppress(ImportError):
-		# 3rd party
+		# stdlib
 		from _collections import _tuplegetter
 
 __all__ = (
