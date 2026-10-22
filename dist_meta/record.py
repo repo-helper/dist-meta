@@ -47,11 +47,11 @@ if TYPE_CHECKING:
 	from dist_meta.distributions import Distribution
 else:
 	try:
-		# 3rd party
+		# stdlib
 		from _hashlib import HASH as _Hash
 	except ImportError:  # pragma: no cover
 		try:
-			# 3rd party
+			# stdlib
 			from _hashlib import Hash as _Hash
 		except ImportError:
 			pass
