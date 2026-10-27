@@ -188,8 +188,12 @@ exclude = [
     "doc-source",
 ]
 
-[tool.hatch.build.sdist]
-include = [ "dist_meta", "requirements.txt",]
+[tool.hatch.build.targets.sdist]
+include = [ "dist_meta", "requirements.txt", "tests", "tox.ini",]
+exclude = []
+
+[tool.hatch.build.targets.sdist.force-include]
+"tests/wheels" = "tests/wheels"
 
 [tool.hatch.build.wheel]
 include = [ "dist_meta",]
