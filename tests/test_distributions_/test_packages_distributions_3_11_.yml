@@ -45,7 +45,7 @@ docutils:
 dom_toml:
 - dom-toml
 domdf_python_tools:
-- domdf_python_tools
+- domdf-python-tools
 first:
 - first
 flake8:
@@ -68,6 +68,8 @@ iniconfig:
 - iniconfig
 jinja2:
 - Jinja2
+lazy_importer:
+- lazy-importer
 markupsafe:
 - MarkupSafe
 mccabe:
